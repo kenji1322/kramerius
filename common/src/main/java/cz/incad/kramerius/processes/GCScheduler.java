@@ -20,29 +20,31 @@ import java.util.List;
 
 /**
  * Scheduler finds all killed process
+ * 
  * @author pavels
  */
 public interface GCScheduler {
-    
+
     /**
      * Initialization
      */
-	public void init();
+    public void init();
 
-	/**
-	 * Schedule finding all process which are propably not running
-	 */
-	void scheduleFindGCCandidates();
-	
-	/**
-	 * Schedule checking and changing states of the processes
-	 * @param procUuids
-	 */
-	void scheduleCheckFoundGCCandidates(List<String> procUuids);
-	
-	/**
-	 * Shutdown gc scheduler
-	 */
-	public void shutdown();
+    /**
+     * Schedule finding all process which are propably not running
+     */
+    void scheduleFindGCCandidates();
+
+    /**
+     * Schedule checking and changing states of the processes
+     * 
+     * @param procUuids
+     */
+    void scheduleCheckFoundGCCandidates(List<String> procUuids);
+
+    /**
+     * Shutdown gc scheduler
+     */
+    public void shutdown();
 
 }

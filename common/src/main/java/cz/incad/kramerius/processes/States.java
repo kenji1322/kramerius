@@ -46,6 +46,12 @@ public enum States {
      */
     WARNING(9),
     
+    
+    /**
+     * Represents started state
+     */
+    STARTED(11),
+    
     /*
      * WARNING(10)
      */

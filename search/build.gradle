@@ -14,12 +14,12 @@ sourceSets {
         }
     }
     test {
-	java {
+        java {
             srcDir 'src/test'
-	}
-	resources {
-	    srcDir 'src/test'
-	}
+        }
+        resources {
+            srcDir 'src/test'
+        }
     }
 }
 
@@ -58,7 +58,6 @@ dependencies {
 }
 
 war {
-    from 'src/web' 
+    from 'web' 
 }
 
- 

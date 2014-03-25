@@ -79,7 +79,12 @@ public class ProcessStarter {
         PrintStream outStream = null;
         PrintStream errStream = null;
         try {
+            updateStatus(States.RUNNING); // process already running
+            // update pid
+            String pid = getPID();
+            updatePID(pid);
 
+            
             String mainClass = System.getProperty(MAIN_CLASS_KEY);
             outStream = createPrintStream(System.getProperty(SOUT_FILE));
             errStream = createPrintStream(System.getProperty(SERR_FILE));
@@ -106,8 +111,6 @@ public class ProcessStarter {
             
             Class<?> clz = Class.forName(mainClass);
             
-            String pid = getPID();
-            updatePID(pid);
             
 
             MethodType processMethod = annotatedMethodType(clz);

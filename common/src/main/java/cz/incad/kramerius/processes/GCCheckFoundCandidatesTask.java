@@ -34,8 +34,26 @@ public class GCCheckFoundCandidatesTask extends TimerTask {
             try {
                 lock.lock();
                 for (String uuid : this.uuids) {
-                    LRProcess lr = this.lrProcessManager
-                            .getLongRunningProcess(uuid);
+                    LRProcess lr = this.lrProcessManager.getLongRunningProcess(uuid);
+                    // started .. check pid 
+                    if (lr.getProcessState().equals(States.STARTED)) {
+                        if (lr.getPid() == null) {
+                            // started but no pid associated
+                            LOGGER.severe("cannot find pid for process '" + lr.getUUID() + "' -> change state to NOT_RUNNING");
+                            lr.setProcessState(States.NOT_RUNNING);
+                            lr.setFinishedTime(System.currentTimeMillis());
+                            this.lrProcessManager
+                                    .updateLongRunningProcessState(lr);
+                            this.lrProcessManager
+                                    .updateLongRunningProcessFinishedDate(lr);
+                            updateMasterState(lr);
+                        } else {
+                            // error state, 
+                            LOGGER.log(Level.SEVERE, "process started but no pid has been associated");
+                        }
+                    }
+                    
+                    // running .. check whether pid is active pids list
                     if (lr.getProcessState().equals(States.RUNNING)) {
                         if (lr.getPid() != null) {
                             if (!pids.contains(lr.getPid())) {
@@ -45,31 +63,16 @@ public class GCCheckFoundCandidatesTask extends TimerTask {
                                 lr.setFinishedTime(System.currentTimeMillis());
                                 this.lrProcessManager
                                         .updateLongRunningProcessState(lr);
-                                this.lrProcessManager
-                                        .updateLongRunningProcessFinishedDate(lr);
-
+                                this.lrProcessManager.updateLongRunningProcessFinishedDate(lr);
                                 updateMasterState(lr);
-
                             }
-                        } else {
-                            LOGGER.severe("cannot find pid for process '"
-                                    + lr.getUUID() + "' -> change state to NOT_RUNNING");
-                            lr.setProcessState(States.NOT_RUNNING);
-                            lr.setFinishedTime(System.currentTimeMillis());
-                            this.lrProcessManager
-                                    .updateLongRunningProcessState(lr);
-                            this.lrProcessManager
-                                    .updateLongRunningProcessFinishedDate(lr);
-                            updateMasterState(lr);
                         }
                     }
                 }
             } finally {
                 lock.unlock();
             }
-
             this.gcScheduler.scheduleFindGCCandidates();
-
         } catch (Throwable e) {
             this.gcScheduler.shutdown();
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
