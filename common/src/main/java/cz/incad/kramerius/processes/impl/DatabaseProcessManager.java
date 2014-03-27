@@ -67,8 +67,6 @@ public class DatabaseProcessManager implements LRProcessManager {
 
     public static final java.util.logging.Logger LOGGER = java.util.logging.Logger.getLogger(DatabaseProcessManager.class.getName());
     
-    
-    
     @Inject
     @Named("kramerius4")
     private Provider<Connection> connectionProvider;
@@ -287,7 +285,6 @@ public class DatabaseProcessManager implements LRProcessManager {
         } finally {
             DatabaseUtils.tryClose(connection);
         }
-
     }
 
     public void updateLongRunningProcessStartedDate(LRProcess lrProcess) {
@@ -319,14 +316,19 @@ public class DatabaseProcessManager implements LRProcessManager {
 
     @Override
     public void updateLongRunningProcessState(LRProcess lrProcess) {
+        States previousState = getLongRunningProcess(lrProcess.getUUID()).getProcessState();
         try {
             Connection connection = connectionProvider.get();
             if (connection == null)
                 throw new NotReadyException("connection not ready");
-            int val = lrProcess.getProcessState().getVal();
-            String processUuid = lrProcess.getUUID();
-            LOGGER.fine("params is "+val+","+processUuid);
-            new JDBCUpdateTemplate(connection).executeUpdate("update processes set STATUS = ? where UUID = ?", val, processUuid);
+            if (States.isPossible(previousState, lrProcess.getProcessState())) {
+                int val = lrProcess.getProcessState().getVal();
+                String processUuid = lrProcess.getUUID();
+                LOGGER.fine("params is "+val+","+processUuid);
+                new JDBCUpdateTemplate(connection).executeUpdate("update processes set STATUS = ? where UUID = ?", val, processUuid);
+            } else {
+                throw new IllegalArgumentException("cannot change state from "+previousState+" to "+lrProcess.getProcessState());
+            }
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
@@ -339,7 +341,7 @@ public class DatabaseProcessManager implements LRProcessManager {
         try {
             Connection connection = connectionProvider.get();
             if (connection == null)
-                throw new NotReadyException("connection not ready");
+                    throw new NotReadyException("connection not ready");
             int val = lrProcess.getBatchState().getVal();
             String processUuid = lrProcess.getUUID();
             LOGGER.fine("params is "+val+","+processUuid);
@@ -350,25 +352,44 @@ public class DatabaseProcessManager implements LRProcessManager {
         
     }
 
-    public List<LRProcess> getPlannedProcess(int howMany) {
+    public List<LRProcess> getPlannedProcess(final int howMany) {
         Connection connection = connectionProvider.get();
         if (connection == null)
             throw new NotReadyException("connection not ready");
-        
-        StringBuffer buffer = new StringBuffer("select "+ProcessDatabaseUtils.printQueryProcessColumns()+ " from processes p where status = ? ORDER BY PLANNED LIMIT ? ");
+        // first select all child processes 
+        final List<LRProcess> plannedProcesses = new ArrayList<LRProcess>();
+        StringBuffer childProcessesBuffer = new StringBuffer("select "+ProcessDatabaseUtils.printQueryProcessColumns()+ " from processes p where status = ? "
+                + " and token in (select token from processes where batch_status != ? ) "
+                + " "
+                + " ORDER BY PLANNED LIMIT ? ");
 
-        List<LRProcess> processes = new JDBCQueryTemplate<LRProcess>(connection){
-
+        List<LRProcess> childProcesses = new JDBCQueryTemplate<LRProcess>(connection, false){
             @Override
             public boolean handleRow(ResultSet rs, List<LRProcess> returnsList) throws SQLException {
                 LRProcess processFromResultSet = processFromResultSet(rs);
                 returnsList.add(processFromResultSet);
                 return super.handleRow(rs, returnsList);
             }
-            
-        }.executeQuery(buffer.toString(),  States.PLANNED.getVal(), howMany);
+        }.executeQuery(childProcessesBuffer.toString(), States.PLANNED.getVal(), BatchStates.NO_BATCH.getVal(), howMany);
         
-        return processes;
+        plannedProcesses.addAll(childProcesses);
+
+        // can start any simple process
+        if (plannedProcesses.size() < howMany) {
+            StringBuffer buffer = new StringBuffer("select "+ProcessDatabaseUtils.printQueryProcessColumns()+ " from processes p where status = ? ORDER BY PLANNED ");
+            new JDBCQueryTemplate<LRProcess>(connection){
+                @Override
+                public boolean handleRow(ResultSet rs, List<LRProcess> returnsList) throws SQLException {
+                    LRProcess processFromResultSet = processFromResultSet(rs);
+                    if (!plannedProcesses.contains(processFromResultSet)) {
+                        plannedProcesses.add(processFromResultSet);
+                    }
+                    boolean ret = plannedProcesses.size() < howMany;
+                    return ret;
+                }
+            }.executeQuery(buffer.toString(),  States.PLANNED.getVal());
+        }
+        return plannedProcesses;
     }
 
     @Override

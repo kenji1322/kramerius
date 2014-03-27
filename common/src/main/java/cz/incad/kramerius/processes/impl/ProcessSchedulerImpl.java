@@ -30,60 +30,62 @@ import cz.incad.kramerius.utils.conf.KConfiguration;
 
 public class ProcessSchedulerImpl implements ProcessScheduler {
 
-	public static final Logger LOGGER = Logger.getLogger(ProcessScheduler.class.getName());
-	
-	private LRProcessManager lrProcessManager;
-	private DefinitionManager definitionManager;
-	
-	private int interval;
-	private String applicationLib;
-	private String[]jarFiles;
-	
-	private Timer timer;
-	
-	
-	@Inject
-	public ProcessSchedulerImpl(LRProcessManager lrProcessManager,
-			DefinitionManager definitionManager) {
-		super();
-		this.lrProcessManager = lrProcessManager;
-		this.definitionManager = definitionManager;
-		this.timer = new Timer(ProcessSchedulerImpl.class.getName()+"-thread",true);
-		
-	}
+    public static final Logger LOGGER = Logger.getLogger(ProcessScheduler.class
+            .getName());
 
-	@Override
-	public String getApplicationLib() {
-		return this.applicationLib;
-	}
+    private LRProcessManager lrProcessManager;
+    private DefinitionManager definitionManager;
 
+    private int interval;
+    private String applicationLib;
+    private String[] jarFiles;
 
-	
-	@Override
-	public void init(String applicationLib, String... jarFiles) {
-		// Jak to vyresit ??? 
-		this.applicationLib = applicationLib;
-		this.jarFiles = jarFiles;
-		String sinterval  = KConfiguration.getInstance().getProperty("processQueue.checkInterval","10000");
-		this.interval =  Integer.parseInt(sinterval);
-		//this.scheduleNextTask();
-	}
+    private Timer timer;
 
-	@Override
-	public void scheduleNextTask() {
-		this.timer.purge();
-		NextSchedulerTask schedulerTsk = new NextSchedulerTask(this.lrProcessManager, this.definitionManager,this, this.interval);
-		this.timer.schedule(schedulerTsk, this.interval);
-	}
+    @Inject
+    public ProcessSchedulerImpl(LRProcessManager lrProcessManager,
+            DefinitionManager definitionManager) {
+        super();
+        this.lrProcessManager = lrProcessManager;
+        this.definitionManager = definitionManager;
+        this.timer = new Timer(
+                ProcessSchedulerImpl.class.getName() + "-thread", true);
+
+    }
+
+    @Override
+    public String getApplicationLib() {
+        return this.applicationLib;
+    }
+
+    @Override
+    public void init(String applicationLib, String... jarFiles) {
+        // Jak to vyresit ???
+        this.applicationLib = applicationLib;
+        this.jarFiles = jarFiles;
+        String sinterval = KConfiguration.getInstance().getProperty(
+                "processQueue.checkInterval", "10000");
+        this.interval = Integer.parseInt(sinterval);
+        // this.scheduleNextTask();
+    }
+
+    @Override
+    public void scheduleNextTask() {
+        this.timer.purge();
+        NextSchedulerTask schedulerTsk = new NextSchedulerTask(
+                this.lrProcessManager, this.definitionManager, this,
+                this.interval);
+        this.timer.schedule(schedulerTsk, this.interval);
+    }
 
     @Override
     public String[] getAdditionalJarFiles() {
         return this.jarFiles;
     }
 
-	@Override
-	public void shutdown() {
-		LOGGER.info("canceling process scheduler");
-		this.timer.cancel();
-	}
+    @Override
+    public void shutdown() {
+        LOGGER.info("canceling process scheduler");
+        this.timer.cancel();
+    }
 }

@@ -579,8 +579,8 @@ $(document).ready(function(){
                 </c:choose>
 
 
-                    <td title="${childLrProc.start}">${childLrProc.start}</td>
                     <td title="${childLrProc.planned}">${childLrProc.planned}</td>
+                    <td title="${childLrProc.start}">${childLrProc.start}</td>
                     <td title="${childLrProc.finished} ( ${childLrProc.duration} )">${childLrProc.finished}</td>
 
                     <td>${childLrProc.startedBy}</td>

@@ -14,43 +14,43 @@ public enum States {
     /**
      * Not running process
      */
-    NOT_RUNNING(0),
+    NOT_RUNNING(0, true, "NOT_RUNNING","RUNNING"),
 
     /**
      * Running proces
      */
-    RUNNING(1),
+    RUNNING(1, false ,"RUNNING","FINISHED","FAILED","KILLED","WARNING"),
 
     /**
      * Correct finished proces
      */
-    FINISHED(2),
+    FINISHED(2, true,"FINISHED"),
 
     /**
      * FAiled with some errors
      */
-    FAILED(3),
+    FAILED(3,true,"FAILED"),
 
     /**
      * Killed process
      */
-    KILLED(4),
+    KILLED(4, true,"KILLED"),
 
     /**
      * Planned (process is waiting to start)
      */
-    PLANNED(5),
+    PLANNED(5,false,"PLANNED","STARTED"),
 
     /**
      * Finished with some errors
      */
-    WARNING(9),
+    WARNING(9, true,"WARNING"),
     
     
     /**
      * Represents started state
      */
-    STARTED(11),
+    STARTED(11, false, "STARTED","RUNNING","NOT_RUNNING"),
     
     /*
      * WARNING(10)
@@ -61,21 +61,39 @@ public enum States {
      * PLANNED or RUNNING).
      */
     @Deprecated
-    BATCH_STARTED(6),
+    BATCH_STARTED(6, false),
 
     
     /**
      * Batch process failed (some of child process FAILED)
      */
     @Deprecated
-    BATCH_FAILED(7),
+    BATCH_FAILED(7, false),
 
     /**
      * Batch process finished (all child processes finished with state FINISH)
      */
     @Deprecated
-    BATCH_FINISHED(8);
+    BATCH_FINISHED(8,false);
 
+        
+    
+    /**
+     * Returns possible next states
+     * @return
+     */
+    public String[] getNextState() {
+        return this.nextStates;
+    }
+    
+    
+    /**
+     * Returns true if this state is final state
+     * @return
+     */
+    public boolean isFinalState() {
+        return this.finalState;
+    }
     
 
     /**
@@ -92,31 +110,33 @@ public enum States {
     }
 
     private int val;
-
-    private States(int val) {
+    private String[] nextStates;
+    private boolean finalState;
+    
+    private States(int val, boolean finalState, String ... nextStates) {
         this.val = val;
+        this.nextStates = nextStates;
+        this.finalState = finalState;
     }
 
     public int getVal() {
         return val;
     }
 
-//    /**
-//     * Calculate master batch process state
-//     * @param childStates Child process states
-//     * @return
-//     */
-//    public static States calculateBatchState(List<States> childStates) {
-//        // ve stavu planned nebo running
-//        if (one(childStates, FAILED)) {
-//            return BATCH_FAILED;
-//        } else {
-//            if (one(childStates, PLANNED, RUNNING)) {
-//                return BATCH_STARTED;
-//            }
-//            return BATCH_FINISHED;
-//        }
-//    }
+    /**
+     * Returns true if given transition (predecessor -> successor) is possible
+     * @param predecessor The predecessor state
+     * @param successor The successor state
+     * @return
+     */
+    public static boolean isPossible(States predecessor, States successor) {
+        String[] nextStateNames = predecessor.getNextState();
+        for (String stName : nextStateNames) {
+            if (successor.name().equals(stName)) return true;
+        }
+        return false;
+    }
+    
 
     /**
      * Returns true if one of given childStates contains any expecting state

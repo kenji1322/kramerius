@@ -190,11 +190,4 @@ public class ProcessesClient {
     }
 
     
-    
-    public static void main(String[] args) throws InterruptedException {
-    	//planAndStop();
-        
-        String procs = getProcesses();
-        System.out.println(procs);
-    }
 }

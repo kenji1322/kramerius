@@ -29,6 +29,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -110,8 +111,8 @@ public class ProcessStarter {
             });
             
             Class<?> clz = Class.forName(mainClass);
-            
-            
+
+
 
             MethodType processMethod = annotatedMethodType(clz);
             if (processMethod == null) processMethod = mainMethodType(clz);
@@ -124,7 +125,7 @@ public class ProcessStarter {
                 objs[0] = args;
                 processMethod.getMethod().invoke(null, objs);
             }
-            
+
             checkErrorFile();
             updateStatus(States.FINISHED);
         }catch(WarningException e) {
@@ -180,14 +181,14 @@ public class ProcessStarter {
     }
 
     private static void checkErrorFile() {
-    	if (Boolean.getBoolean(ProcessStarter.SHOULD_CHECK_ERROR_STREAM)) {
-        	String serrFileName = System.getProperty(SERR_FILE);
-        	File serrFile = new File(serrFileName);
-        	if (serrFile.length() > 0) throw new WarningException("system error file contains errors");
-    	}
+        if (Boolean.getBoolean(ProcessStarter.SHOULD_CHECK_ERROR_STREAM)) {
+                String serrFileName = System.getProperty(SERR_FILE);
+                File serrFile = new File(serrFileName);
+                if (serrFile.length() > 0) throw new WarningException("system error file contains errors");
+        }
     }
 
-	private static void setDefaultLoggingIfNecessary() {
+    private static void setDefaultLoggingIfNecessary() {
         String classProperty = System.getProperty(LOGGING_CLASS_PROPERTY);
         String fileProperty = System.getProperty(LOGGING_FILE_PROPERTY);
         if ((classProperty == null) && (fileProperty == null)) {
@@ -228,26 +229,44 @@ public class ProcessStarter {
     }
 
     public static byte[] httpGet(String restURL) throws MalformedURLException, IOException {
+        URL url = new URL(restURL);
+        URLConnection connection = url.openConnection();
         try {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            URL url = new URL(restURL);
-            URLConnection connection = url.openConnection();
             // authentication token -> identify user
             connection.addRequestProperty("auth-token",System.getProperty(AUTH_TOKEN_KEY));
 
             InputStream inputStream = connection.getInputStream();
-            byte[] buffer = new byte[1 << 12];
-            int read = -1;
-            while ((read = inputStream.read(buffer)) > 0) {
-                bos.write(buffer,0,read);
-            }
-            ;
+            byte[] buffer = byteArray(inputStream);
             
             return buffer;
+        } catch(IOException ex) {
+            LOGGER.severe("Problem connecting to REST URL: " + restURL + " - " + ex);
+            HttpURLConnection httpConn = (HttpURLConnection) connection;
+            int statusCode = httpConn.getResponseCode();
+            if (statusCode != 200) {
+                InputStream is = httpConn.getErrorStream();
+                byte[] bytes = byteArray(is);
+                System.err.println(new String(bytes));
+            }
+            throw new RuntimeException(ex);
         } catch (Exception ex) {
             LOGGER.severe("Problem connecting to REST URL: " + restURL + " - " + ex);
             throw new RuntimeException(ex);
         }
+        
+    }
+
+    public static byte[] byteArray(
+            InputStream inputStream) throws IOException {
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1 << 12];
+        int read = -1;
+        while ((read = inputStream.read(buffer)) > 0) {
+            bos.write(buffer,0,read);
+        }
+        ;
+        return buffer;
     }
 
     /**
