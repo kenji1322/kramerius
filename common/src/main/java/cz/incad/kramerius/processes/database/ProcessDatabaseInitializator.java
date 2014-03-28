@@ -29,6 +29,8 @@ import cz.incad.kramerius.security.database.InitSecurityDatabaseMethodIntercepto
 import cz.incad.kramerius.users.database.LoggedUserDatabaseInitializator;
 import cz.incad.kramerius.utils.DatabaseUtils;
 import cz.incad.kramerius.utils.IOUtils;
+import cz.incad.kramerius.utils.database.JDBCCommand;
+import cz.incad.kramerius.utils.database.JDBCTransactionTemplate;
 
 /**
  * Database initialization - processes table
@@ -47,60 +49,77 @@ public class ProcessDatabaseInitializator {
             } else if (v.equals("4.5.0") ||  v.equals("4.6.0") ||  v.equals("4.7.0") || v.equals("4.8.0") ||  v.equals("4.9.0")) {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","PARAMS_MAPPING")) {
                     alterProcessTableParamsMappingToken(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","BATCH_STATUS")) {
                     alterProcessTableBatchState(connection);
                     updateProcessTableBatchStates(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","FINISHED")) {
                     alterProcessTableFinished(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","TOKEN_ACTIVE")) {
                     alterProcessTableTokenActive(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
+                    createIndexesOnProcessTable(connection);
                 }
             } else if ((v.equals("5.0.0")) || (v.equals("5.1.0")))  {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","BATCH_STATUS")) {
                     alterProcessTableBatchState(connection);
                     updateProcessTableBatchStates(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","FINISHED")) {
                     alterProcessTableFinished(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","TOKEN_ACTIVE")) {
                     alterProcessTableTokenActive(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
+                    createIndexesOnProcessTable(connection);
                 }
             } else if (v.equals("5.1.0"))  {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","FINISHED")) {
                     alterProcessTableFinished(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","TOKEN_ACTIVE")) {
                     alterProcessTableTokenActive(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
+                    createIndexesOnProcessTable(connection);
                 }
             } else if (v.equals("5.2.0"))  {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","TOKEN_ACTIVE")) {
                     alterProcessTableTokenActive(connection);
+                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
+                    createIndexesOnProcessTable(connection);
                 }
             } else if (v.equals("5.3.0"))  {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
+                    createIndexesOnProcessTable(connection);
                 }
+            } else if (v.equals("6.5.0"))  {
+                createIndexesOnProcessTable(connection);
             }
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE,e.getMessage(),e);
@@ -149,6 +168,7 @@ public class ProcessDatabaseInitializator {
             alterProcessTableAuthToken(connection);
             alterProcessTableProcess2TokenAuthToken(connection);
         }
+        createIndexesOnProcessTable(connection);
     }
 
     public static void createToken2SessionkeysMapping(Connection connection) throws SQLException, IOException {
@@ -230,7 +250,63 @@ public class ProcessDatabaseInitializator {
             DatabaseUtils.tryClose(prepareStatement);
         }
     }    
-    
+
+    public static void createIndexesOnProcessTable (Connection con) throws SQLException {
+
+//        2) create index IDX_PROCESSES_TOKENBATCH on PROCESSES(token, batch_status, planned)
+//        3) create index IDX_PROCESSES_TOKEN on PROCESSES(token)
+//        4) create index IDX_PROCESSES_AUTHTOKEN on PROCESSES(token_active, auth_token)
+//        5) create index IDX_PROCESSES_PARAMS on PROCESSES(params_mapping, token)
+
+        
+        JDBCCommand tokenBatchIndex = new JDBCCommand() {
+            
+            @Override
+            public Object executeJDBCCommand(Connection con) throws SQLException {
+                PreparedStatement prepareStatement = con.prepareStatement(
+                        "create index IDX_PROCESSES_TOKENBATCH on PROCESSES(token, batch_status, planned)");
+                prepareStatement.executeUpdate();
+                return null;
+            }
+        };
+
+        JDBCCommand tokenIndex = new JDBCCommand() {
+            
+            @Override
+            public Object executeJDBCCommand(Connection con) throws SQLException {
+                PreparedStatement prepareStatement = con.prepareStatement(
+                        "create index IDX_PROCESSES_TOKEN on PROCESSES(token)");
+                prepareStatement.executeUpdate();
+                return null;
+            }
+        };
+
+        JDBCCommand tokenActiveAuthTokenIndex = new JDBCCommand() {
+            
+            @Override
+            public Object executeJDBCCommand(Connection con) throws SQLException {
+                PreparedStatement prepareStatement = con.prepareStatement(
+                        "create index IDX_PROCESSES_AUTHTOKEN on PROCESSES(token_active, auth_token)");
+                prepareStatement.executeUpdate();
+                return null;
+            }
+        };
+
+
+        JDBCCommand paramsIndex = new JDBCCommand() {
+
+            @Override
+            public Object executeJDBCCommand(Connection con) throws SQLException {
+                PreparedStatement prepareStatement = con.prepareStatement(
+                        "create index IDX_PROCESSES_PARAMS on PROCESSES(params_mapping, token)");
+                prepareStatement.executeUpdate();
+                return null;
+            }
+        };
+
+        new JDBCTransactionTemplate(con,true).updateWithTransaction(null, new JDBCCommand[] {tokenBatchIndex,tokenIndex,tokenActiveAuthTokenIndex,paramsIndex});
+    }    
+
     public static void alterProcessTableAuthToken(Connection con) throws SQLException {
         PreparedStatement prepareStatement = con.prepareStatement(
             "ALTER TABLE PROCESSES ADD COLUMN AUTH_TOKEN VARCHAR(255);");

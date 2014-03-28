@@ -356,6 +356,7 @@ public class DatabaseProcessManager implements LRProcessManager {
         Connection connection = connectionProvider.get();
         if (connection == null)
             throw new NotReadyException("connection not ready");
+        long start = System.currentTimeMillis();
         // first select all child processes 
         final List<LRProcess> plannedProcesses = new ArrayList<LRProcess>();
         StringBuffer childProcessesBuffer = new StringBuffer("select "+ProcessDatabaseUtils.printQueryProcessColumns()+ " from processes p where status = ? "
@@ -371,11 +372,14 @@ public class DatabaseProcessManager implements LRProcessManager {
                 return super.handleRow(rs, returnsList);
             }
         }.executeQuery(childProcessesBuffer.toString(), States.PLANNED.getVal(), BatchStates.NO_BATCH.getVal(), howMany);
+        long stop = System.currentTimeMillis();
+        LOGGER.fine("First select took :"+(stop - start));
         
         plannedProcesses.addAll(childProcesses);
 
         // can start any simple process
         if (plannedProcesses.size() < howMany) {
+            long startsub = System.currentTimeMillis();
             StringBuffer buffer = new StringBuffer("select "+ProcessDatabaseUtils.printQueryProcessColumns()+ " from processes p where status = ? ORDER BY PLANNED ");
             new JDBCQueryTemplate<LRProcess>(connection){
                 @Override
@@ -388,6 +392,8 @@ public class DatabaseProcessManager implements LRProcessManager {
                     return ret;
                 }
             }.executeQuery(buffer.toString(),  States.PLANNED.getVal());
+            long stopsub = System.currentTimeMillis();
+            LOGGER.fine("Second select took :"+(stopsub - startsub));
         }
         return plannedProcesses;
     }
