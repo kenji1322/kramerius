@@ -24,7 +24,9 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
+import junit.framework.Assert;
 import cz.incad.kramerius.database.VersionService;
+import cz.incad.kramerius.database.cond.ConditionsInterpretHelper;
 import cz.incad.kramerius.security.database.InitSecurityDatabaseMethodInterceptor;
 import cz.incad.kramerius.users.database.LoggedUserDatabaseInitializator;
 import cz.incad.kramerius.utils.DatabaseUtils;
@@ -49,76 +51,66 @@ public class ProcessDatabaseInitializator {
             } else if (v.equals("4.5.0") ||  v.equals("4.6.0") ||  v.equals("4.7.0") || v.equals("4.8.0") ||  v.equals("4.9.0")) {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","PARAMS_MAPPING")) {
                     alterProcessTableParamsMappingToken(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","BATCH_STATUS")) {
                     alterProcessTableBatchState(connection);
                     updateProcessTableBatchStates(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","FINISHED")) {
                     alterProcessTableFinished(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","TOKEN_ACTIVE")) {
                     alterProcessTableTokenActive(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
-                    createIndexesOnProcessTable(connection);
                 }
+                createIndexesOnProcessTable(connection);
             } else if ((v.equals("5.0.0")) || (v.equals("5.1.0")))  {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","BATCH_STATUS")) {
                     alterProcessTableBatchState(connection);
                     updateProcessTableBatchStates(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","FINISHED")) {
                     alterProcessTableFinished(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","TOKEN_ACTIVE")) {
                     alterProcessTableTokenActive(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
-                    createIndexesOnProcessTable(connection);
                 }
+                createIndexesOnProcessTable(connection);
             } else if (v.equals("5.1.0"))  {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","FINISHED")) {
                     alterProcessTableFinished(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","TOKEN_ACTIVE")) {
                     alterProcessTableTokenActive(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
-                    createIndexesOnProcessTable(connection);
                 }
+                createIndexesOnProcessTable(connection);
             } else if (v.equals("5.2.0"))  {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","TOKEN_ACTIVE")) {
                     alterProcessTableTokenActive(connection);
-                    createIndexesOnProcessTable(connection);
                 }
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
-                    createIndexesOnProcessTable(connection);
                 }
+                createIndexesOnProcessTable(connection);
             } else if (v.equals("5.3.0"))  {
                 if (!DatabaseUtils.columnExists(connection, "PROCESSES","AUTH_TOKEN")) {
                     alterProcessTableAuthToken(connection);
                     alterProcessTableProcess2TokenAuthToken(connection);
-                    createIndexesOnProcessTable(connection);
                 }
-            } else if (v.equals("6.5.0"))  {
+                createIndexesOnProcessTable(connection);
+            } else if (ConditionsInterpretHelper.versionCondition(v, ">","5.3.0"))  {
                 createIndexesOnProcessTable(connection);
             }
         } catch (SQLException e) {
