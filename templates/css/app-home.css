@@ -1,0 +1,68 @@
+/*** ---/ HOME STYLES /--- ***/
+
+body {
+  background-image: url(../img/bg-img-design-2.png);
+ /* background-repeat: no-repeat;
+  background-color: #000;*/
+}
+
+/*** Home dialog ***/
+.app-home-dialog {
+  width: 700px;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+  border-radius: 0 0 4px 4px;
+}
+
+/*** Img desc ***/
+.app-img-desc {
+  margin-top: 30px;
+  background-color: #000;
+  border-radius: 4px;
+  zoom: 1;
+	filter: alpha(opacity=70);
+	opacity: 0.7;
+}
+
+.app-img-desc h4 {
+  padding: 20px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 100;
+  line-height: 24px;
+}
+
+
+/************************/
+/**** MEDIA QUERIES ****/
+/************************/
+
+/*** Min 768 ***/
+@media (min-width: 768px) {
+ .app-img-desc {
+    width: 500px;
+  }
+}
+
+/*** Max 767 ***/
+@media (max-width: 767px) {
+  .app-home-dialog {
+    width: 100%;
+  }
+  .app-home-dialog .checkbox {
+    margin-bottom: 0;
+  }
+  .app-home-dialog hr,
+  .app-home-dialog p {
+    display: none !important;
+  }
+}
+
+/*** Min 1650 ***/
+@media (min-width: 1650px) {
+  .app-img-desc {
+    position: absolute;
+    right: 30px;
+    bottom: 0;
+  }
+}

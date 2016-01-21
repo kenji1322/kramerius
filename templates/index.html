@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Kramerius</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font awesome CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Open sean fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'  type='text/css'>
+    
+    <!-- App CSS -->
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/app-home.css" rel="stylesheet">
+    <link href="css/app-sidebar-home.css" rel="stylesheet">
+    <link href="css/app-footerbar.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-fixed-top app-navbar app-clean-border">
+      <!-- Container -->
+      <div class="container-fluid">
+        <!-- Navbar header -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand app-color-white" href="index.html">Kramerius</a>
+        </div><!--/.navbar header -->
+        <!-- Nav -->
+        <div id="navbar" class="navbar-collapse collapse">
+          <!-- Nav left -->
+          <ul class="nav navbar-nav navbar-left app-nav-pipe">
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="browse.html">Procházet</a></li>
+            <li><a href="timeline.html">Časová osa</a></li>
+          </ul><!--/.nav left -->
+          <!-- Nav right -->
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Přihlášení / Registrace</a></li>
+            <li><a href="#">Nápověda</a></li>
+            <li class="dropdown app-navbar-item-lang">
+              <a href="#" data-toggle="dropdown">Cs <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">En</a></li>
+                <li><a href="#">Es</a></li>
+                <li><a href="#">Fr</a></li>
+              </ul>
+            </li>
+          </ul><!--/.nav right -->
+        </div><!--/.nav -->
+      </div><!--/.container -->
+    </nav><!--/.navbar -->
+    
+    
+    <!-- Wrapper -->
+    <div id="app-wrapper">
+      <!-- Sidebar -->
+      <div id="app-sidebar-wrapper">
+        <!-- Sidebar nav -->
+        <ul class="nav app-sidebar-nav">
+          <li>
+            <strong>Typ dokumentu</strong><span class="app-color-gray-light app-cursor-pointer" data-toggle="collapse" data-target="#app-collapse-type"> </span>
+            <ul class="list-unstyled app-color-gray collapse in" id="app-collapse-type">
+              <li><a href="#">Monografie</a><span class="pull-right app-color-gray-light">24677320</span></li>
+              <li><a href="#">Periodikum</a><span class="pull-right app-color-gray-light">6730857</span></li>
+              <li><a href="#">Rukopis</a><span class="pull-right app-color-gray-light">203804</span></li>
+              <li><a href="#">Archiv</a><span class="pull-right app-color-gray-light">22250</span></li>
+              <li><a href="#">Ročník</a><span class="pull-right app-color-gray-light">5992</span></li>
+              <li><a href="#">Mapa</a><span class="pull-right app-color-gray-light">4916</span></li>
+              <li><a href="#">Výtisk</a><span class="pull-right app-color-gray-light">3291</span></li>
+              <li><a href="#">Článek</a><span class="pull-right app-color-gray-light">1496</span></li>
+              <li><a href="#">Kolekce nahrávek</a><span class="pull-right app-color-gray-light">2157</span></li>
+              <li><a href="#">Stránka</a><span class="pull-right app-color-gray-light">891</span></li>
+              <li><a href="#">Hudebnina</a><span class="pull-right app-color-gray-light">144</span></li>
+              <li><a href="#">Příloha</a><span class="pull-right app-color-gray-light">77</span></li>
+            </ul>
+          </li>
+          <hr />
+          <li>
+            <strong>Dostupnost</strong><span class="app-color-gray-light app-cursor-pointer collapsed" data-toggle="collapse" data-target="#app-collapse-avaibility"> </span>
+            <ul class="list-unstyled app-color-gray collapse" id="app-collapse-avaibility">
+              <li><a href="#">neveřejné</a><span class="pull-right app-color-gray-light">27811225</span></li>
+              <li><a href="#">veřejné</a><span class="pull-right app-color-gray-light">3678298</span></li>
+              <li><a href="#">neuvedeno</a><span class="pull-right app-color-gray-light">1</span></li>
+              <li><a href="#">dostupnost.:private"</a><span class="pull-right app-color-gray-light">1</span></li>
+              <li><a href="#">dostupnost.:public"</a><span class="pull-right app-color-gray-light">1</span></li>
+            </ul>
+          </li>
+          <hr />
+          <li>
+            <strong>Virtuální sbírky</strong><span class="app-color-gray-light app-cursor-pointer collapsed" data-toggle="collapse" data-target="#app-collapse-virtual"> </span>
+            <ul class="list-unstyled app-color-gray collapse" id="app-collapse-virtual">
+              <li><a href="#">Rok smíření</a><span class="pull-right app-color-gray-light">101985</span></li>
+              <li><a href="#">První světová válka</a><span class="pull-right app-color-gray-light">76876</span></li>
+              <li><a href="#">Muzeum Brněnska</a><span class="pull-right app-color-gray-light">74907</span></li>
+              <li><a href="#">Zednářská literatura</a><span class="pull-right app-color-gray-light">67573</span></li>
+              <li><a href="#">První světová válka</a><span class="pull-right app-color-gray-light">50759</span></li>
+              <li><a href="#">Komeniana</a><span class="pull-right app-color-gray-light">29964</span></li>
+              <li><a href="#">Historické dokumenty</a><span class="pull-right app-color-gray-light">25831</span></li>
+              <li><a href="#">Regionální muzeum v Mikulově</a><span class="pull-right app-color-gray-light">25411</span></li>
+              <li><a href="#">Řemesla a dovednosti</a><span class="pull-right app-color-gray-light">7884</span></li>
+              <li><a href="#">Vinařství</a><span class="pull-right app-color-gray-light">941</span></li>
+              <li><a href="#">Sborníky ELAG</a><span class="pull-right app-color-gray-light">334</span></li>
+              <li><a href="#">Povinná četba</a><span class="pull-right app-color-gray-light">271</span></li>
+              <li><a href="#">Atlasy</a><span class="pull-right app-color-gray-light">267</span></li>
+              <li><a href="#">EOD</a><span class="pull-right app-color-gray-light">171</span></li>
+              <li><a href="#">Mapy</a><span class="pull-right app-color-gray-light">125</span></li>
+              <li><a href="#">Academia</a><span class="pull-right app-color-gray-light">19</span></li>
+              <li><a href="#">Knihy Academia</a><span class="pull-right app-color-gray-light">5</span></li>
+              <li><a href="#">ANL</a><span class="pull-right app-color-gray-light">2</span></li>
+            </ul>
+          </li>
+          <hr />
+          <li class="app-sidebar-pushdown"> </li>
+        </ul><!--/.sidebar nav -->
+      </div><!--/.sidebar -->
+      
+      <!-- Content -->
+      <div class="container-fluid">
+        <!-- Row -->
+        <div class="row">
+          <!-- Container -->
+          <div class="col-md-12 app-home-container">
+            <!-- Dialog window -->
+            <div class="app-home-dialog">
+              <!-- Form -->
+              <form class="app-search-form">
+                <div class="input-group app-clean-border">
+                  <input type="text" placeholder="Hledej v digitální knihovně ..." class="form-control app-clean-radius">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default app-clean-radius" onclick="location.href = 'results.html';"><i class="fa fa-search"></i></button>
+                  </span>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Pouze veřejné
+                  </label>
+                </div>
+              </form><!--/.form -->
+              <hr />
+              <!-- Text -->
+              <p>
+                Hlavním cílem projektu je vytvoření České digitální knihovny, která bude agregátorem digitálních knihoven provozovaných 
+                v České republice. Bude nabízet jednotné rozhraní pro koncové uživatele a zároveň bude sloužit jako hlavní poskytovatel 
+                dat pro mezinárodní projekty, zejména pro projekt evropské digitální knihovny Europeana. Bude také významným zdrojem 
+                digitálních dat a jedním z hlavních pilířů potřebných pro zajištění centralizovaných služeb v rámci České republiky 
+                definovaných v Koncepci rozvoje knihoven ČR na léta 2011 – 2014.
+              </p>
+              <p>
+                Výchozím softwarovým řešením pro Českou digitální knihovnu (dále též ČDK) bude systém Kramerius 4, jehož jádrem 
+                je repozitář Fedora. Bude nutné zajistit interoperabilitu s různými typy digitálních knihoven a případně i instituciálních 
+                repozitářů. Kromě sklízení dat z různých instancí systému Kramerius bude nutné řešit i propojení s dalšími systémy 
+                (např. DSpace, Eprints, Digitool) a případně i proprietárními řešeními využívanými v ČR pro zpřístupnění digitálních 
+                dokumentů (např. Ústav pro českou literaturu AV ČR). Pro sklízení dokumentů bude využit především komunikační 
+                protokol OAI-PMH. Česká digitální knihovna bude fungovat zároveň jako OAI-PMH provider s podporou setu ESE 
+                pro projekt Europeana a případně i dalších metadatových setů vyžadovaných významnými nadnárodními projekty 
+                (např. World Digital Library).
+              </p><!--/.text -->
+            </div><!--/.dialog window -->
+            
+            <!-- Img desc -->
+            <div class="app-img-desc">
+              <h4 class="app-color-white">
+                <a href="#" title="">
+                Weypis oné žalostné Cesty Gežjsse, Marye, a Jozeffa, do Egipta z Nazaretu : kterak welké Zármutky, Strach, Hlad, Žjžeň, ty tři Swaté Osoby zakusili, a gak welicý Zázrakowé na té Cestě se dáli : Wytažený z                   Žiwota Krysta Pána, a Panny Marye, a nynj w Pjseň vwedeno
+                </a>
+              </h4>
+            </div><!--/.img desc -->
+            
+            <!-- Sidebar btn -->
+            <a href="#app-btn-sidebar-toggle" class="btn app-sidebar-btn" id="app-btn-sidebar-toggle" title="Skryt sidebar">
+              <span></span>
+            </a><!--/.sidebar btn -->
+            
+          </div><!--/.container -->
+        </div><!--/.row -->
+      </div><!--/.content -->
+    </div><!--/.wrapper -->
+    
+    
+    <!-- Footerbar -->
+    <div class="collapse app-footerbar" id="app-footerbar-choosen">
+      <div class="col-md-12">
+        <i class="fa fa-angle-left fa-3x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+        <span><a href="#" title="#"><img src="img/thumb-1.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-2.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-3.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-4.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-5.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-6.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-7.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-8.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-9.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-10.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-11.jpg" alt="#" /></a></span>
+        <i class="fa fa-angle-right fa-3x app-pd-left-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+      </div>
+    </div>
+    <div class="collapse app-footerbar" id="app-footerbar-newest">
+      <div class="col-md-12"> 
+        <br /><br /><br />Bottom bar newest ...<br /><br /><br /><br />
+      </div>
+    </div>
+    <div class="collapse app-footerbar" id="app-footerbar-favorite">
+      <div class="col-md-12"> 
+        <br /><br /><br />Bottom bar favorite<br /><br /><br /><br />
+      </div>
+    </div><!--/.footerbar -->
+
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+          <li>
+            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-choosen">
+              Vybrané
+            </a>
+          </li>
+          <li>
+            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-newest">
+              Nejnovější
+            </a>
+          <li>
+            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-favorite">
+              Nejžádanější
+            </a>
+          </li>
+        </ul>
+        <p class="navbar-text navbar-right">
+          <small>©2015. Developed under GNU GPL by Incad, NKČR, KNAV and MZK</small>
+        </p>
+      </div>
+    </footer><!--/.footer -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/ie10-viewport-bug-workaround.js"></script>
+    
+    <!-- Custom js -->
+    <script type="text/javascript">
+      // Sidebar toggle script
+      $("#app-btn-sidebar-toggle").click(function(e) {
+        e.preventDefault();
+        $("#app-wrapper").toggleClass("toggled");
+      });
+      
+      // Footerbar - collapse modification
+      $('.app-footerbar-btn').on('click',function(){
+        var isActive = $(this).parent().hasClass('active'); // set var to recognize if the parent element contains class 'active'
+        $('.app-footerbar').collapse('hide'); // hide when some other element is collapsed
+        $('.app-footerbar-btn').parent().removeClass('active'); // remove class 'active' from all parent elements 
+        if(!isActive){ // condition for adding class 'active' to the parent element
+          $(this).parent().addClass('active');
+        }
+      })
+    </script>
+  </body>
+</html>

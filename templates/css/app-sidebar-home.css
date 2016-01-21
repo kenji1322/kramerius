@@ -1,0 +1,143 @@
+/*** ---/ SIDEBAR STYLES /--- ***/
+
+/*** Wrapper ***/
+#app-wrapper {
+  position: relative;
+  padding-right: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#app-wrapper.toggled {
+  padding-right: 370px;
+}
+
+/*** Sidebar ***/
+#app-sidebar-wrapper {
+  z-index: 100;
+  position: fixed;
+  right: 370px;
+  width: 0;
+  height: 100%;
+  margin-right: -370px;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+  background-color: #f3f2f2;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.4);
+  border-left: 1px solid #cccccc;
+}
+
+#app-wrapper.toggled #app-sidebar-wrapper {
+  width: 370px;
+  -ms-overflow-style: none; /* IE fix behavior of scrollbar */
+}
+
+/*** Sidebar nav ***/
+.app-sidebar-nav {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 315px;
+}
+
+.app-sidebar-nav > hr {
+  border-top: 1px solid #cccccc;
+  border-bottom: 1px solid #fff;
+  margin: 15px 0 15px 0;
+}
+
+.app-sidebar-nav > li > ul {
+  padding-top: 5px;
+  font-size: 13px;
+  line-height: 24px;
+  margin-left: 15px;
+}
+
+.app-sidebar-nav > li ul > li > span {
+  font-size: 13px;
+}
+
+.app-sidebar-nav > li > span:after {
+  font-family: FontAwesome;
+  cursor: pointer;
+  content: "\f068";
+  float: right;
+}
+
+.app-sidebar-nav > li > span.collapsed:after {
+  content: "\f067";
+}
+
+/*** Sidebar btn ***/
+.app-sidebar-btn {
+  display: block;
+  position: absolute;
+  padding: 10px 2px;
+  top:150px;
+  right: 0;
+  z-index: 1001;
+  background-color: #ffffff;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border: 1px solid #d9d9d9;
+  border-right: 0;
+ /*-webkit-box-shadow: -15px 0 10px -12px #333;
+  box-shadow: -2px 0 8px -3px silver;*/
+  color: #0073B2;
+}
+
+#app-wrapper .app-sidebar-btn span:after {
+  font-family: "Glyphicons Halflings";
+  content:"\e258";
+}
+
+#app-wrapper.toggled .app-sidebar-btn span:after {
+  content:"\e257";
+}
+
+.app-sidebar-pushdown {
+  height: 100px;
+}
+
+
+/************************/
+/**** MEDIA QUERIES *****/
+/************************/
+
+/*** Min 1110 ***/
+@media(min-width:1110px) {
+  #app-wrapper {
+    padding-right: 370px;
+  }
+  #app-wrapper.toggled {
+    padding-right: 0;
+  }
+  #app-sidebar-wrapper {
+    width: 370px;
+  }
+  #app-wrapper.toggled #app-sidebar-wrapper {
+    width: 0;
+  }
+}
+
+/*** Max 1110 ***/
+@media(max-width:1110px) {
+  #app-wrapper .app-sidebar-btn span:after {
+    content:"\e257";
+  }
+  #app-wrapper.toggled .app-sidebar-btn span:after {
+    content:"\e258" !important;
+  }
+  #app-wrapper.toggled #app-sidebar-wrapper { /* IE fix behavior of scrollbar */
+    -ms-overflow-style: scrollbar;
+  }
+  #app-wrapper #app-sidebar-wrapper { /* IE fix behavior of scrollbar */
+    -ms-overflow-style: none;
+  }
+}
