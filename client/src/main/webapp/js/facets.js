@@ -1,9 +1,9 @@
 /* global K5, _ */
 
-K5.eventsHandler.addHandler(function (type, configuration) {
+K5.eventsHandler.addHandler(function (type, data) {
     if (type === "results/loaded") {
         if (!K5.gui["facets"]) {
-            K5.gui["facets"] = new Facets(configuration);
+            K5.gui["facets"] = new Facets(data);
         }
     }
 });
@@ -16,9 +16,19 @@ var Facets = function (data) {
 
 Facets.prototype = {
     _init: function () {
-        this.addContextButtons();
+        
         var facets = this.data.facet_counts.facet_fields;
-        this.render($("#facets>div.unused"), facets);
+        
+        
+        this.facetsContainer = $("#app-sidebar-wrapper>ul.app-sidebar-nav");
+        this.facetTemplate = $("#app-sidebar-wrapper>ul.app-sidebar-nav>li.facet").clone();
+        this.facetValueTemplate = this.facetTemplate.find('.facet-value').clone();
+        
+        this.facetsContainer.empty();
+        this.hasUsed = false;
+        this.renderUsed();
+        this.render(facets);
+        
         $("#facets div.used").click(_.partial(function (facets, event) {
             event.preventDefault();
             var val = $(this).data("key");
@@ -26,20 +36,15 @@ Facets.prototype = {
             facets.removeFilter(facet, val);
         }, this));
 
-        K5.i18n.k5translate("div.used");
-
-        this.show(1000);
     },
-    addContextButtons: function () {
-        var text = $("#facets_menu").html();
-        $("#contextbuttons").append(text);
-    },
-    addFilter: function (facet, val) {
+    
+    addFilter: function (facet, val) {        
         if (val === "") {
             val = "none";
         }
         var input = $("<input>", {type: "hidden", value: val, name: facet, class: "facet"});
         $("#search_form").append(input);
+        $('#search_form input[name="page"]').val("search");
         $("#start").val("0");
         $("#search_form").submit();
     },
@@ -71,71 +76,21 @@ Facets.prototype = {
         return ret;
     },
     removeFilter: function (facet, val) {
-
         $("input[name='" + facet + "']").each(function () {
             if ($(this).val() === val) {
                 $(this).remove();
             }
         });
+        $('#search_form input[name="page"]').val("search");
         $("#search_form").submit();
     },
     removeAllFilters: function () {
         $("#search_form input.facet").remove();
+        $('#search_form input[name="page"]').val("search");
         $("#search_form").submit();
     },
-    hide: function () {
-        var l = -55 - $("#facets").width();
-        $("#facets").animate({'opacity': '0.5', 'right': l}, 200, function () {
-            $("#facets").removeClass("showing");
-            $("#facets svg.filter").show();
-            $("#facets svg.pin").hide();
-        });
-    },
-    show: function (speed) {
-        if (!$("#facets").hasClass("showing")) {
-            $("#facets").addClass("showing");
-            $("#facets svg.filter").hide();
-            $("#facets svg.pin").show();
-            $("#facets").animate({'opacity': '1.0', 'right': '1px'}, speed);
-        }
-    },
-    addFacetValue: function (div, key, val, count, more) {
-        
-        if(this.isUsed(key, val)){
-            return;
-        }
-        var div2 = $('<div/>', {class: 'res'});
-        var a = $('<a/>', {class: 'res'});
-
-        a.data("key", val);
-        a.data("facet", key);
-        a.attr('href', '');
-        a.click(_.partial(function (facets, event) {
-            event.preventDefault();
-            facets.addFilter($(this).data('facet'), $(this).data('key'));
-        }, this));
-        if (more) {
-            div2.addClass("more");
-        }
-        if (key === "collection") {
-            if(!K5.i18n.hasKey(val)){
-                return;
-            }
-            a.html(K5.i18n.translatable(val));
-            //a.text(arr[i]);
-        } else if (key === "typ_titulu" || key === "fedora.model" || key === "model_path") {
-            a.html(K5.i18n.translatable("fedora.model." + val));
-        } else if (key === "dostupnost") {
-            a.html(K5.i18n.translatable("dostupnost." + val));
-        } else {
-            a.text(val);
-        }
-        var span = $('<span/>', {class: 'count'});
-        span.text(" (" + count + ")");
-        div2.append(a);
-        div2.append(span);
-        div.append(div2);
-    },
+    
+    
     rokFacet: function (div, minv, maxv) {
         var facetName = 'rok';
         var sel = $("<div/>", {class: 'sel'});
@@ -179,31 +134,80 @@ Facets.prototype = {
             this.addRokFilter();
         }, this));
     },
-    render: function (obj, json) {
-        var facets = this;
+    
+    
+    renderUsed: function(){
+        if($("#search_form input.facet").length === 0) return;
+            this.hasUsed = true;
+        var facetLi = this.facetTemplate.clone();
+        facetLi.attr("id", "used-filters");
+        var facetList = facetLi.find('.facet-list');
+        facetList.attr("id", "app-collapse-used");
+        facetList.empty();
+        facetLi.find(".facet-name").html(K5.i18n.translatable('facets.used'));
+        facetLi.find(".app-cursor-pointer").data("target", "#app-collapse-used");
+        facetLi.find(".app-cursor-pointer").attr("data-target", "#app-collapse-used");
+        facetList.addClass("in");
+        this.facetsContainer.append(facetLi);
+        
+        $("#search_form input.facet").each(_.partial(function(facets){
+            
+            var val = $(this).data("key");
+            var facet = $(this).data("facet");
+            
+            var facetValue = facets.facetValueTemplate.clone();
+            var text = "";
+            if (facet === "collection") {
+                if(!K5.i18n.hasKey(val)){
+                    // ignorujeme sbirky, pro ktere nemame nazev
+                    return;
+                }
+                text = (K5.i18n.translatable(val));
+            } else if (facet === "typ_titulu" || facet === "fedora.model" || facet === "model_path") {
+                text = (K5.i18n.translatable("fedora.model." + val));
+            } else if (facet === "dostupnost") {
+                text = (K5.i18n.translatable("dostupnost." + val));
+            } else {
+                text = (val);
+            }
+
+            facetValue.data('facet', facet);
+            facetValue.data('val', val);
+            facetValue.click(_.partial(function (facets, event) {
+                event.preventDefault();
+                facets.removeFilter($(this).data('facet'), $(this).data('val'));
+            }, facets));
+            
+            facetValue.find(".facet-value-text").html(text);
+            facetValue.find(".facet-value-count").remove();
+            facetList.append(facetValue);
+            
+                            
+        }, this));
+    },
+    render: function (json) {
         var moreCount = 10;
         var root_models = {};
-        $.each(json, function (key, arr) {
+        $.each(json, _.bind(function (key, arr) {
             if (arr.length > 2) {
-                var div = $('<div/>', {class: 'facet'});
-                if (key === "rok") {
-                    div.addClass("range");
-                    div.html("<h3>" + K5.i18n.translatable('facet.' + key) + "</h3>");
-                    obj.prepend(div);
-                    var min = parseInt(arr[0]);
-                    if (min === 0 && arr.length > 2) {
-                        min = parseInt(arr[2]);
-                    }
-                    var max = parseInt(arr[arr.length - 2]);
-                    facets.rokFacet(div, min, max);
-                } else {
-                    if (key !== "model_path") {
-                        div.html("<h3>" + K5.i18n.translatable('facet.' + key) + "</h3>");
-                        obj.append(div);
-                    }
-                    for (var i = 0; i < arr.length; i++) {
-                        var val = arr[i];
-                        var count = parseInt(arr[++i]);
+                
+                var facetLi = this.facetTemplate.clone();
+                var facetList = facetLi.find('.facet-list');
+                facetList.attr("id", "app-collapse-"+key);
+                facetList.empty();
+                facetLi.find(".facet-name").html(K5.i18n.translatable('facet.' + key));
+                facetLi.find(".app-cursor-pointer").data("target", "#app-collapse-"+key);
+                facetLi.find(".app-cursor-pointer").attr("data-target", "#app-collapse-"+key);
+                
+                
+                for (var i = 0; i < arr.length; i++) {
+                    var val = arr[i];
+                    var count = parseInt(arr[++i]);
+                    
+                    if(count > 0){
+                
+                        var facetValue = this.facetValueTemplate.clone();
+
                         if (key === "model_path") {
                             val = val.split("/")[0];
                             if (root_models[val]) {
@@ -212,34 +216,81 @@ Facets.prototype = {
                                 root_models[val] = count;
                             }
                         } else {
-                            facets.addFacetValue(div, key, val, count, i > moreCount);
+                            var text = "";
+                            if (key === "collection") {
+                                if(!K5.i18n.hasKey(val)){
+                                    // ignorujeme sbirky, pro ktere nemame nazev
+                                    continue;
+                                }
+                                text = (K5.i18n.translatable(val));
+                            } else if (key === "typ_titulu" || key === "fedora.model" || key === "model_path") {
+                                text = (K5.i18n.translatable("fedora.model." + val));
+                            } else if (key === "dostupnost") {
+                                text = (K5.i18n.translatable("dostupnost." + val));
+                            } else {
+                                text = (val);
+                            }
+                            
+                            facetValue.data('facet', key);
+                            facetValue.data('val', val);
+                            facetValue.click(_.partial(function (facets, event) {
+                                event.preventDefault();
+                                facets.addFilter($(this).data('facet'), $(this).data('val'));
+                            }, this));
+
+                            facetValue.find(".facet-value-text").html(text);
+                            facetValue.find(".facet-value-count").text(count);
+                            facetList.append(facetValue);
                         }
                     }
-                    if (arr.length > moreCount) {
-                        var moreDiv = $('<div class="moreButton">...</div>');
-                        moreDiv.click(function () {
-                            $(this).parent().find(".more").toggle();
-                        });
-                        div.append(moreDiv);
-                    }
                 }
+                
+                if (key !== "model_path") {
+                    this.facetsContainer.append(facetLi);
+                }
+                
             }
-        });
-        if (!jQuery.isEmptyObject(root_models)) {
-            var div = $('<div/>', {class: 'facet'});
-            div.html("<h3>" + K5.i18n.translatable('facet.model_path') + "</h3>");
-            obj.prepend(div);
-            $.each(root_models, function (val, count) {
-                facets.addFacetValue(div, "typ_titulu", val, count, false);
-            });
+        }, this));
+        if (!jQuery.isEmptyObject(root_models) && Object.keys(root_models).length > 1) {
+            
+            var facetLi = this.facetTemplate.clone();
+            var facetList = facetLi.find('.facet-list');
+            facetList.attr("id", "app-collapse-type");
+            facetList.empty();
+            facetLi.find(".facet-name").html(K5.i18n.translatable('facet.model_path'));
+            facetLi.find(".app-cursor-pointer").data("target", "#app-collapse-type");
+            facetLi.find(".app-cursor-pointer").attr("data-target", "#app-collapse-type");
+            $.each(root_models, _.bind(function (val, count) {
+                
+                if(count > 0){
+                
+                    var facetValue = this.facetValueTemplate.clone();
+                    var text = (K5.i18n.translatable("fedora.model." + val));
+                    facetValue.data('facet', 'typ_titulu');
+                    facetValue.data('key', val);
+                    facetValue.click(_.partial(function (facets, event) {
+                        event.preventDefault();
+                        facets.addFilter($(this).data('facet'), $(this).data('key'));
+                    }, this));
+                    
+                    facetValue.find(".facet-value-text").html(text);
+                    facetValue.find(".facet-value-count").text(count);
+                    facetList.append(facetValue);
+                    
+                }
+            }, this));
+
+            if(!this.hasUsed){
+                
+                facetLi.find(".app-cursor-pointer").removeClass("collapsed");
+                facetList.addClass("in");
+                this.facetsContainer.prepend(facetLi);
+            }else{
+                $("#used-filters").after(facetLi);
+            }
+            
+            
+                            
         }
-        K5.gui.vc.translate(K5.i18n.ctx.language);
     }
 };
-
-
-
-function togglePin() {
-    $("#facets").toggleClass("pin");
-}
-

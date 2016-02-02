@@ -1,20 +1,23 @@
-/* global _, K5 */
-
 K5.eventsHandler.addHandler(function(type, data) {
-    
+    if (!K5.gui.currasels) {
+        K5.gui["currasels"] = {};
+    }
+
     if (type === "api/feed/newest") {
-        K5.gui.home.fillFooter("#app-footerbar-newest div.home-thumbs", K5.api.ctx.feed.newest.data);
+        K5.gui.currasels["newest"] = new Carousel("#yearRows>div.latest", {"json": K5.api.ctx.feed.newest});
+        K5.gui.currasels["newest"].setName("newest");
     }
 
     if (type === "api/feed/mostdesirable") {
-        K5.gui.home.fillFooter("#app-footerbar-favorite div.home-thumbs", K5.api.ctx.feed.mostdesirable.data);
+        K5.gui.currasels["mostdesirable"] = new Carousel("#yearRows>div.popular", {"json": K5.api.ctx.feed.mostdesirable});
+        K5.gui.currasels["mostdesirable"].setName("mostdesirable");
     }
 
     if (type === "api/feed/cool") {
-        
-        K5.gui.home.fillFooter("#app-footerbar-choosen div.home-thumbs", K5.api.ctx.feed.cool.data);
+        K5.gui.currasels["cool"] = new Carousel("#yearRows>div.cool", {"json": K5.api.ctx.feed.cool});
+        K5.gui.currasels["cool"].setName("cool");
         if (K5.gui.home) {
-            K5.gui.home.displayBackground();
+                K5.gui.home.displayBackground();
         }
     }
 
@@ -53,9 +56,10 @@ HomeEffects.prototype = {
     ctx: {},
     _init: function() {
         
-        this.hasFacets = false;
-        
         this.setSizes();
+        if (K5.gui.currasels["cool"]) {
+                this.displayBackground();
+        }
         this.infoHidden = false;
         if (isTouchDevice()) {
             $("#buttons").swipe({
@@ -65,6 +69,19 @@ HomeEffects.prototype = {
                 threshold: 2
             });
         }
+            
+        $('#buttons>div.button').click(_.partial(function(he) {
+            he.selBand(this);
+        }, this));
+
+        $('#buttons>div.button').mouseenter(_.partial(function(he) {
+            he.selBand(this);
+            $("#band").animate({'bottom': 41}, 200);
+        }, this));
+        $('#band').mouseleave(function() {
+            $("#band").animate({'bottom': -147}, 200);
+            $('#buttons>div.button').removeClass('sel');
+        });
         
         //podle #153 mame otevrene "vybrane" a po 5 sec schovame
         $("#band").animate({'bottom': 41}, 200);
@@ -73,6 +90,20 @@ HomeEffects.prototype = {
             $('#buttons>div.button').removeClass('sel');
         }.bind(this), 5000);
         
+        /* Komentovane podle issue 199
+         * 
+        $("#home>div.infobox").mouseenter(_.bind(function() {
+            clearTimeout(this.hiddingInfo);
+            this.showInfo();
+            
+        }, this));
+        $("#home>div.infobox").mouseleave(_.bind(function() {
+            this.hiddingInfo = setTimeout(function() {
+                this.hideInfo();
+            }.bind(this), 3000);
+        }, this));
+        
+        */
         this.addContextButtons();
     },
     
@@ -109,32 +140,25 @@ HomeEffects.prototype = {
 
         image.onload = _.bind(function() {
             
-
-            this.backgroundDisplayed = true;
-            $("body").css("background-image", "url(" + src + ")");
+            $("#home div.img").css("background-image", "url(" + src + ")");
             this.showInfo();
-            $("body").animate({'backgroundPosition': '50%'}, 600);
+            $("#home div.img").animate({'backgroundPosition': '50%'}, 600);
             
             
-            var a = $("<a/>");
+            var a = $("<div/>", {class: "a"});
             if(srcs[index].root_title !== srcs[index].title){
-                a.text(srcs[index].root_title + " [" + srcs[index].title + "]");
+                a.append(srcs[index].root_title + " [" + srcs[index].title + "]");
             }else{
-                a.text(srcs[index].root_title);
+                a.append(srcs[index].root_title);
             }
-            
-            a.attr("href", "");
             
             a.click(function(){
                 K5.api.gotoDisplayingItemPage(pid);
             });
             $("#pidinfo").append(a);
-            $("#pidinfo").show();
-            
-//            $("#pidinfo").append(a);
-//            if(srcs[index].author){
-//                $("#pidinfo").append('<div class="details">' + srcs[index].author + '</div>');
-//            }
+            if(srcs[index].author){
+                $("#pidinfo").append('<div class="details">' + srcs[index].author + '</div>');
+            }
             
             /* Komentovane podle issue 199
              * 
@@ -144,6 +168,8 @@ HomeEffects.prototype = {
             }.bind(this), 3000);
             
             */
+
+            this.backgroundDisplayed = true;
         }, this);
 
         image.onerror = _.bind(function() {
@@ -173,40 +199,9 @@ HomeEffects.prototype = {
         
     },
     getDocs: function() {
-        if(this.hasFacets){
-            return;
-        }
-        
         $.get("raw_results.vm?page=home", _.bind(function(data) {
             var json = jQuery.parseJSON(data);
             K5.eventsHandler.trigger("results/loaded", json);
-            
-            this.hasFacets = true;
-            //this.fillFacets(json.facet_counts.facet_fields);
         }, this));
     },
-    fillFooter: function(elem, docs){
-        var c = $(elem);
-        var t = c.find("span").clone();
-        c.empty();
-        for(var i=0; i<docs.length; i++){
-            var thumb = $(t).clone();
-            var pid = docs[i].pid;
-            var imgsrc = "api/item/" + pid + "/thumb";
-            var title = docs[i].title;
-            
-            var img = thumb.find("img");
-            img.attr("src", imgsrc);
-            var a = thumb.find("a");
-            a.attr("title", title);
-            img.data("pid", pid);
-            
-            
-            img.click(function(){
-                K5.api.gotoDisplayingItemPage($(this).data('pid'));
-            });
-            c.append(thumb);
-        }
-    }
-    
 };

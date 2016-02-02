@@ -13,7 +13,8 @@
         #foreach($filter in $filters.value)   
             #set($fq = $search.getAdvFilter($filters.key))
             <input class="facet" type="hidden" name="$filters.key" value="$esc.html($filter)" 
-                    data-fq="$esc.html($fq)" />
+                data-key="$esc.html($filter)" data-facet="$filters.key"
+                data-fq="$esc.html($fq)" />
         #end
     #end
     #if(!$params.page || $params.page == 'home')

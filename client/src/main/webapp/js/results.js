@@ -15,6 +15,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* global K5 */
+
 K5.eventsHandler.addHandler(function(type, configuration) {
     if (type === "i18n/dictionary") {
         $(document).prop('title', K5.i18n.ctx.dictionary['application.title'] +
@@ -27,7 +29,7 @@ K5.eventsHandler.addHandler(function(type, configuration) {
 
 var Results = function(elem) {
     
-    this.elem = elem;
+    this.container = $("#app-results-container");
     this.displayStyle = "display";
     this._init();
 };
@@ -40,42 +42,13 @@ Results.prototype = {
         
         K5.eventsHandler.addHandler(_.bind(function(type, data) {
             if (type === "window/resized") {
-                this.srResize();
+                
             }
         }, this));
+        
+        this.itemTemplate = $(".app-result-item").clone();
 
         this.getDocs();
-        var hash = hashParser();
-        if (hash.hasOwnProperty(this.displayStyle) > 1) {
-            if (hash[this.displayStyle] === "asrow")
-                this.setRowStyle();
-        }
-        this.touchStart = 0;
-        var obj = this;
-        if (isTouchDevice()) {
-            $("#search_results_docs").swipe({
-                swipeStatus: function(event, phase, direction, distance, duration, fingers) {
-
-                    if (phase === "start") {
-                        this.touchStart = $("#search_results_docs").scrollTop();
-                        this.startDir = null;
-                    }
-
-
-                    if (direction === "down") {
-                        this.startDir = -1;
-                    } else if (direction === "up") {
-                        this.startDir = 1;
-                    }
-
-                    var idist = this.touchStart + distance * this.startDir;
-                    $("#search_results_docs").scrollTop(idist);
-
-                },
-                //Default is 75px, set to 0 for demo so any distance triggers swipe
-                threshold: 2
-            });
-        }
         
         $("#search_results_docs").scroll(_.bind(function() {
             this.onScroll();
@@ -94,16 +67,14 @@ Results.prototype = {
     },
     getDocs: function() {
         $('.opacityloading').show();
-        this.srResize();
+        this.container.empty();
         $.get("raw_results.vm?" + $("#search_form").serialize(), _.bind(function(data) {
             //console.log(data);
             $('#search_results_docs .more_docs').remove();
             var json = jQuery.parseJSON(data);
             K5.eventsHandler.trigger("results/loaded", json);
             this.loadDocs(json);
-            if (!this.resultsLoaded) {
-                this.srResize();
-            }
+            
             $('.opacityloading').hide();
             this.resultsLoaded = true;
         }, this));
@@ -119,10 +90,13 @@ Results.prototype = {
             for (var i = 0; i < groups.length; i++) {
                 var doc = groups[i].doclist.docs[0];
                 var pid = doc.PID;
-                var r = new Result("#search_results_docs",
+                
+                var elem = this.itemTemplate.clone();
+                var r = new Result(elem,
                         {"json": doc,
                             "collapsed": groups[i].doclist.numFound,
                             "hl": res.highlighting[pid]});
+                this.container.append(elem);
             }
             if (numFound > parseInt(res.responseHeader.params.rows) + parseInt(res.responseHeader.params.start)) {
                 addMore = true;
@@ -131,13 +105,16 @@ Results.prototype = {
             numFound = res.response.numFound;
             docs = res.response.docs;
             for (var i = 0; i < docs.length; i++) {
+                var elem = this.itemTemplate.clone();
                 var pid = docs[i].PID;
-                var r = new Result("#search_results_docs", {
+                var r = new Result(elem, {
                     "json": docs[i],
                     "hl": res.highlighting[pid]
                 });
+                this.container.append(elem);
             }
         }
+        
         if (addMore) {
             var start = parseInt(res.responseHeader.params.rows) + parseInt(res.responseHeader.params.start);
             $("#search_results_docs").append('<div class="more_docs" data-start="' + start + '">more...</div>');
@@ -158,23 +135,6 @@ Results.prototype = {
         var text = $("#results_menu").html();
         $("#contextbuttons").append(text);
     },
-    srResize: function() {
-        var h = window.innerHeight - $('#header').height() - $('#footer').height();
-        $('#search_results').css('height', h);
-        var h2 = h - $('#search_results_header').height() - 5;
-        $('#search_results_docs').css('height', h2);
-        $('#facets').css('height', h2 - 30); //30 = 2x15 padding 
-    },
-    setRowStyle: function() {
-        $('#search_results').addClass('as_row');
-        $('.as_row>.search_result>div.thumb>div.info').each(function() {
-            var w = $(this).parent().width() - $(this).prev().width() - 20;
-            $(this).css('width', w);
-        });
-        var hash = hashParser();
-        hash[this.displayStyle] = "asrow";
-        window.location.hash = jsonToHash(hash);
-    },
     setHeader: function(numFound) {
         var key = 'common.title.plural_2';
         if (numFound > 4) {
@@ -187,23 +147,16 @@ Results.prototype = {
         $("#search_results_header>div.totals>span.totaltext").data('key', key);
         $("#search_results_header>div.totals>span.totaltext").text(K5.i18n.ctx.dictionary[key]);
         $("#search_results_header>div.totals>span.total").text(numFound);
-    },
-    setThumbsStyle: function() {
-        $('#search_results').removeClass('as_row');
-        $('.search_result>div.thumb>div.info').css('width', '');
-        
-        var hash = hashParser();
-        hash[this.displayStyle] = "asthumb";
-        window.location.hash = jsonToHash(hash);
     }
 };
 
 
 
-var Result = function(parent, options) {
-    this.parent = parent;
-    this.$parent = $(parent);
+var Result = function(elem, options) {
+    
     this.json = options.json;
+    this.elem = elem;
+    
     this.hl = options.hl;
     this.collapsed = options.collapsed;
     this.init();
@@ -214,12 +167,8 @@ var Result = function(parent, options) {
 Result.prototype = {
     background: "silver",
     thumbHeight: 128,
-    maxInfoLength: 80,
+    maxInfoLength: 50,
     init: function() {
-
-        this.elem = $('<div/>', {class: 'search_result'});
-
-        this.$parent.append(this.elem);
 
         this.render();
 
@@ -228,7 +177,97 @@ Result.prototype = {
         this.panelHeight = this.$elem.height();
         this.panelWidth = this.$elem.width();
     },
+    
     render: function() {
+        
+        var doc = this.json;
+        var pid = doc.PID;
+        var imgsrc = "api/item/" + pid + "/thumb";
+        
+        var fedora_model = doc[fieldMappings.fedora_model];
+        var typtitulu = doc["model_path"][0].split("/")[0];
+
+        var title = doc[fieldMappings.title];
+        
+        if (title.length > this.maxInfoLength) {
+            title = title.substring(0, this.maxInfoLength) + "...";
+        }
+            
+        var rootTitle = doc["root_title"];
+        
+        
+        var info = {short: "", full: ""};
+        info.full = '<div class="title">' + rootTitle + '</div>';
+        info.short = "";
+
+
+        if (rootTitle.length > this.maxInfoLength) {
+            rootTitle = rootTitle.substring(0, this.maxInfoLength) + '...';
+        }
+        this.getDetails(info);
+        
+        
+        this.elem.find(".app-result-item-title").html(rootTitle);
+        this.elem.find("img").attr("src", imgsrc);
+        this.elem.data("pid", pid);
+        this.elem.click(function(){
+            K5.api.gotoDisplayingItemPage($(this).data('pid'));
+        });
+        
+        if (doc[fieldMappings.autor]) {
+            var cre = doc[fieldMappings.autor].toString();
+        
+            info.full += '<div class="author">' + cre + '</div>';
+            if (cre.length > 40) {
+                cre = cre.substring(0, 40) + "...";
+            }
+            
+            this.elem.find(".app-result-item-author").html(cre);
+        }
+
+        if (doc["datum_str"]) {
+            info.full += '<div class="datum">' + doc["datum_str"] + '</div>';
+            this.elem.find(".app-result-item-rok").html(doc["datum_str"]);
+        }
+        
+        if (doc['dostupnost']) {
+            this.elem.find(".policy").addClass(doc['dostupnost']);
+        }
+        
+        
+        if (this.hl && this.hl["text_ocr"]) {
+            var tx = "";
+            for (var j = 0; j < this.hl.text_ocr.length; j++) {
+                tx += '<div class="hl">' + this.hl.text_ocr[j] + '</div>';
+            }
+            this.elem.find(".app-result-item-teaser").html(tx).show();
+        }
+        
+        var linkpid;
+        if ((this.collapsed && this.collapsed > 1)) {
+            linkpid = doc['root_pid'];
+            var key = 'common.hits.plural_1';
+            if (this.collapsed > 4) {
+                key = 'common.hits.plural_2';
+            }
+            var tx = K5.i18n.translatable(key);
+            this.elem.find(".app-result-item-found").html(this.collapsed + ' ' + tx + ' ' + K5.i18n.translatable('model.locativ.' + typtitulu));
+        } else if (fedora_model === typtitulu) {
+            this.elem.find(".app-result-item-found").html(K5.i18n.translatable('fedora.model.' + typtitulu));
+        } else {
+            this.elem.find(".app-result-item-found").html(K5.i18n.translatable('fedora.model.' + fedora_model) + ' ' +
+                    K5.i18n.translatable('model.locativ.' + typtitulu));
+        }
+
+        this.elem.find(".fa-info").attr("title", info.full).tooltip({html:true});
+//        this.elem.find(".fa-info").on("mouseover", function(){
+//            $(this).parents(".app-result-item").data("pid");
+//        });
+        
+        
+    },
+    
+    render2: function() {
         var doc = this.json;
         var pid = doc.PID;
         var imgsrc = "api/item/" + pid + "/thumb";

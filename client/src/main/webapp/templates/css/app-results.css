@@ -1,0 +1,176 @@
+/*** ---/ RESULTS STYLES /--- ***/
+
+/*** Placeholder of search box ***/
+.app-color-placeholder::-webkit-input-placeholder { color: #99bed2; } /* Safari, Chrome and Opera */
+.app-color-placeholder:-moz-placeholder { color: #99bed2; } /* Firefox 18- */
+.app-color-placeholder::-moz-placeholder { color: #99bed2; } /* Firefox 19+ */
+.app-color-placeholder:-ms-input-placeholder { color: #99bed2; } /* IE 10+ */
+.app-color-placeholder::-ms-input-placeholder { color: #99bed2; } /* Edge */
+.app-color-placeholder:placeholder-shown { color: #99bed2; } /* Standard one last! */
+
+
+/*** Search form ***/
+.app-search-form .form-control,
+.app-search-form .btn {
+  border-color: #99bed2;
+  background-color: #005c8e;
+  color: #99bed2;
+}
+
+
+/*** Toolbar ***/
+.app-toolbar {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-bottom: 1px solid #DCDCDC;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.100);
+}
+
+.app-toolbar-left {
+  display: none;
+  width: 370px;
+  float: left;
+  margin-left: 15px;
+}
+
+.app-toolbar-left .nav > li {
+  float: left;
+}
+
+.app-toolbar-right .breadcrumb {
+  margin: 0 !important;
+  padding: 10px 15px;
+}
+
+.app-toolbar-right .breadcrumb.navbar-right > li + li:before {
+  content: "";
+}
+
+
+/*** Results ***/
+.app-result-container {
+  padding: 30px 15px 0 30px;
+  position: relative;
+}
+
+.app-result-item {
+  padding-left: 0;
+}
+
+.app-result-item-row {
+  width: 100% !important;
+}
+
+.app-result-item-wrapper {
+  position: relative;
+  min-height: 185px;
+  margin-bottom: 15px;
+  padding: 15px 0 30px 15px;
+  border-top: 5px solid #b22201;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  background-color: #fff;
+}
+
+
+.app-result-item-wrapper.public {
+  border-top-color: #55b2af;
+}
+.app-result-item-wrapper > p {
+  font-size: 12px;
+}
+
+.app-result-item-wrapper > p > strong {
+  display: block;
+}
+
+.app-result-item-wrapper > img {
+  padding: 0 15px 15px 0;
+}
+
+.app-result-item-wrapper > div.app-result-footer {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #e5e5e5;
+  padding: 3px 15px 3px 15px;
+  font-size: 11px;
+}
+
+
+/************************/
+/**** MEDIA QUERIES ****/
+/************************/
+
+/*** Min 768 ***/
+@media (min-width: 768px) {
+  .app-toolbar-left {
+    display: block;
+  }
+  .app-toolbar-right {
+    margin-left: 370px;
+  }
+}
+
+/*** Max 767 ***/
+@media (max-width: 767px) {
+  .app-navbar .navbar-form {
+    border-bottom: none;
+    margin-top: 0;
+    padding: 15px 15px 5px 15px;
+    background-color: #0073B2;
+  }
+  .app-toolbar-right .breadcrumb.navbar-left {
+    float: left;
+  }
+  .app-toolbar-right .breadcrumb.navbar-right {
+    float: right;
+  }
+}
+
+/*** Max 1090 and Min 768 ***/
+@media (max-width: 1090px) and (min-width: 768px) {
+  .app-navbar .navbar-right {
+    display: none;
+  }
+}
+
+/*** Resize behavior of the result item  ***/
+@media (max-width: 1760px) {
+  .app-result-item {
+    width: 33.3333%;
+  }
+}
+
+@media (max-width: 1430px) {
+  .app-result-item {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1090px) {
+  .app-result-item {
+    width: 100%;
+  }
+}
+
+
+/*** Commented styles to delete ***/
+/*.app-toolbar-left .nav > li + li > a {
+  border-left: 1px solid #F3F2F2;
+}
+
+.app-toolbar-left .nav > li > a {
+  padding-left: 0;
+  padding-right: 8px;
+  
+}
+
+.app-toolbar-left .nav > li + li > a:before {
+  color: #ccc;
+  content: "| ";
+  padding-right: 5px;
+}*/

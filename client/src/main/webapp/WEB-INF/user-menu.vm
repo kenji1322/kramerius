@@ -1,0 +1,29 @@
+<ul class="nav navbar-nav navbar-right">
+    #if($logControl.logged)
+        <li><a href="#" onclick="K5.authentication.profileDisplay.toggle()">$logControl.loggedName</a></li>
+    #end
+
+    #if(!$logControl.logged)
+        <li><a href="#" onclick="K5.authentication.options()">#translatable('application.login')</a></li>
+    #end
+    
+    <li><a href="#" onclick="link('$conf.getString('k5client.help')', 'help')" >#translatable('application.help')</a></li>
+    <li class="dropdown app-navbar-item-lang" id="lang-selector">
+      <a href="#" data-toggle="dropdown"><span class="lang-selected">$i18n.language</span> <span class="caret"></span></a>
+      <ul class="dropdown-menu">
+        <li data-lang="en" data-country="EN"><a href="#">en</a></li>
+        <li data-lang="cs" data-country="CZ"><a href="#">cs</a></li>
+      </ul>
+    </li>
+</ul>
+
+<script>
+$(document).ready(function(){
+    var langSelector = $("#lang-selector");
+    langSelector.find("li").click(function(){
+        K5.i18n.changeLanguage($(this).data("lang"), $(this).data("country"));
+        langSelector.find(".lang-selected").text($(this).data("lang"));
+    });
+});   
+        
+</script>

@@ -1,0 +1,242 @@
+
+  <head>
+    #parse("new-common-header.vm")
+    <link href="templates/css/app-results.css" rel="stylesheet">
+    <link href="templates/css/app-sidebar.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-fixed-top app-navbar app-clean-border">
+      <!-- Container -->
+      <div class="container-fluid">
+        <!-- Navbar header -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand app-color-white" href=".">Kramerius</a>
+        </div><!--/.navbar header -->
+        <!-- Nav -->
+        <div id="navbar" class="navbar-collapse collapse">
+          <!-- Form -->
+          <form class="navbar-form navbar-left app-search-form" id="search_form">
+            <div class="input-group app-clean-border">
+              <input id="q" name="q" type="text" 
+                    placeholder="$i18n.query.placeholder" 
+                    data-key="query.placeholder"
+                    value="$!esc.html(${params.q})"
+                    class="translate_placeholder form-control app-clean-radius app-color-white app-color-placeholder">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default app-clean-radius" onclick="location.href = 'results.html';"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> #translatable("only.public")
+              </label>
+            </div>
+
+    <input type="hidden" name="page" value="search" />
+    <input type="hidden" name="start" id="start" value="$!{params.start}" />
+    <input type="hidden" name="rows" id="rows" value="$!{params.rows}" />
+    #foreach($filters in $search.usedFilters.entrySet())
+        #foreach($filter in $filters.value)   
+            #set($fq = $search.getAdvFilter($filters.key))
+            <input class="facet" type="hidden" name="$filters.key" value="$esc.html($filter)" 
+                data-key="$esc.html($filter)" data-facet="$filters.key"  data-fq="$esc.html($fq)" />
+        #end
+    #end
+
+
+
+          </form><!--/.form -->
+          <!-- Nav left -->
+          #parse('app-menu.vm')<!--/.nav left -->
+          <!-- Nav right -->
+          #parse('user-menu.vm')
+          <!--/.nav right -->
+        </div><!--/.nav -->
+      </div><!--/.container -->
+    </nav><!--/.navbar -->
+    
+    
+    <!-- App toolbar -->
+    <div class="container-fluid app-toolbar">
+      <!-- Row -->
+      <div class="row">
+        <!-- App toolbar left -->
+        <div class="app-toolbar-left">
+          <ul class="nav">
+            <li><a href="#" title=""><i class="fa fa-reply"></i></a></li>
+            <li><a href="#" title=""><i class="fa fa-chevron-left"></i></a></li>
+            <li><a href="#" title=""><i class="fa fa-chevron-right"></i></a></li>
+            <li><a href="#" title=""><i class="fa fa-search"></i></a></li>
+            <li><a href="#" title=""><i class="fa fa-share-alt"></i></a></li>
+            <li><a href="#" title=""><i class="fa fa-eye"></i></a></li>
+            <li><a href="#" title=""><i class="fa fa-info"></i></a></li>
+            <li><a href="#" title=""><i class="fa fa-star"></i></a></li>
+          </ul>
+        </div><!--/.app toolbar left -->
+        <!-- App toolbar right -->
+        <div class="app-toolbar-right">
+          <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-left">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+          </ol>
+          <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-right">
+            <li><a href="#" onclick="setItemView('col')"><i class="fa fa-columns"></i></a></li>
+            <li><a href="#" onclick="setItemView('row')"><i class="fa fa-list"></i></a></li>
+          </ol>
+          <div class="clearfix"></div>
+        </div><!--/.app toolbar right -->
+      </div><!--/.row -->
+    </div><!--/.app toolbar -->
+    
+    
+    <!-- Wrapper -->
+    <div id="app-wrapper">
+      <!-- Sidebar -->
+      <div id="app-sidebar-wrapper">
+        <!-- Sidebar nav -->
+        <ul class="nav app-sidebar-nav">
+              
+          <li class="facet">
+            <strong class="facet-name">loading...</strong><span class="app-color-gray-light app-cursor-pointer collapsed" data-toggle="collapse" data-target="#app-collapse-type"> </span>
+            <ul class="list-unstyled app-color-gray collapse facet-list" id="app-collapse-type">
+              <li class="facet-value"><a href="#" class="facet-value-text"></a><span class="pull-right app-color-gray-light facet-value-count">77</span></li>
+            </ul>
+          <hr />
+          </li>
+
+
+          <li class="app-sidebar-pushdown"> </li>
+        </ul><!--/.sidebar nav -->
+      </div><!--/.sidebar -->
+
+      <!-- Content -->
+      <div class="container-fluid">
+        <!-- Row -->
+        <div class="row">
+          <!-- Result area -->
+          <div class="app-result-container clearfix" id="app-results-container">
+            <!-- Result item -->
+            <div class="col-md-3 app-result-item">
+              <div class="app-result-item-wrapper policy">
+                <img class="img-responsive pull-left" src="" alt="...">
+                <p class="app-clean-mg app-pd-right-15">
+                  <strong class="app-result-item-title"></strong>
+                  <div class="app-result-item-author"></div> 
+                  <div class="app-result-item-rok"></div>
+                  <div class="app-result-item-teaser" style="display: none;"></div>
+                </p>
+                <div class="app-color-gray app-result-footer">
+                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer" data-toggle="tooltip"></i></span>
+                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;<span class="app-result-item-found"></span></span>
+                </div>
+              </div>
+            </div><!--/.result item -->
+
+            <!-- Sidebar btn -->
+            <a href="#app-btn-sidebar-toggle" class="btn app-sidebar-btn" id="app-btn-sidebar-toggle" title="Skryt sidebar">
+              <span> </span>
+            </a><!--/.sidebar btn -->
+            
+          </div><!--/.result area -->
+        </div><!--/.row -->
+      </div><!--/.content -->
+    </div><!--/.wrapper -->
+    
+    
+    <!-- Footerbar -->
+    <div class="collapse app-footerbar" id="app-footerbar-choosen">
+      <div class="col-md-12">
+        <i class="fa fa-angle-left fa-3x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+            <div class="home-thumbs">
+                    <span><a href="#" title="#"><img src="" alt="#" /></a></span>
+            </div>
+        <i class="fa fa-angle-right fa-3x app-pd-left-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+      </div>
+    </div>
+    <div class="collapse app-footerbar" id="app-footerbar-newest">
+      <div class="col-md-12"> 
+        <div class="home-thumbs">
+                <span><a href="#" title="#"><img src="" alt="#" /></a></span>
+        </div>
+      </div>
+    </div>
+    <div class="collapse app-footerbar" id="app-footerbar-favorite">
+      <div class="col-md-12"> 
+        <div class="home-thumbs">
+                <span><a href="#" title="#"><img src="" alt="#" /></a></span>
+        </div>
+      </div>
+    </div><!--/.footerbar -->
+
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-left">
+          <li>
+            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-choosen">
+              Vybrané
+            </a>
+          </li>
+          <li>
+            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-newest">
+              Nejnovější
+            </a>
+          <li>
+            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-favorite">
+              Nejžádanější
+            </a>
+          </li>
+        </ul>
+        <p class="navbar-text navbar-right">
+          <small>©2015. Developed under GNU GPL by Incad, NKČR, KNAV and MZK</small>
+        </p>
+      </div>
+    </footer><!--/.footer -->
+
+
+
+    
+    <!-- Custom js -->
+    <script src="js/facets.js" type="text/javascript" ></script>
+    <script src="js/results.js" type="text/javascript" ></script>
+    <script>
+
+        var fieldMappings = $search.mappings;
+
+      // Sidebar toggle script
+      $("#app-btn-sidebar-toggle").click(function(e) {
+        e.preventDefault();
+        $("#app-wrapper").toggleClass("toggled");
+      });
+      
+      // View of result items
+      function setItemView(state) {
+        if(state == 'row'){
+          $('.app-result-container .app-result-item').addClass('app-result-item-row');
+        }
+        else {
+          $('.app-result-container .app-result-item').removeClass('app-result-item-row');
+        }
+      }
+      
+      // Footerbar - collapse modification
+      $('.app-footerbar-btn').on('click',function(){
+        var isActive = $(this).parent().hasClass('active'); // set var to recognize if the parent element contains class 'active'
+        $('.app-footerbar').collapse('hide'); // hide when some other element is collapsed
+        $('.app-footerbar-btn').parent().removeClass('active'); // remove class 'active' from all parent elements 
+        if(!isActive){ // condition for adding class 'active' to the parent element
+          $(this).parent().addClass('active');
+        }
+      })
+    </script>
+  </body>

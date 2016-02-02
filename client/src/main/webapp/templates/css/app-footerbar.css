@@ -1,0 +1,34 @@
+/*** ---/ FOOTERBAR STYLES /--- ***/
+
+/*** Footerbar ***/
+.app-footerbar {
+  position: absolute;
+  left: 0;
+  bottom: 44px;
+  width: 100%;
+  z-index: 1002;
+  background-color: #fff;
+  box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.100);
+}
+
+.app-footerbar img {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.app-footerbar span + span > a {
+  padding-left: 15px;
+}
+
+
+/************************/
+/**** MEDIA QUERIES ****/
+/************************/
+
+/*** Max 767 ***/
+@media (max-width: 767px) {
+  footer .navbar-nav,
+  .app-footerbar {
+    display: none !important;
+  }
+}

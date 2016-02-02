@@ -55,7 +55,7 @@ I18N.prototype= {
         });
         this.askForDictionary(lang,country, whenready);
     },
-
+        
     /** 
      * Sends request for new dictionary. It fires "i18n/dictionary" event.
      * @param {string} lang - Requesting language
@@ -184,6 +184,18 @@ I18N.prototype= {
             $('.translate_placeholder').each(function() {
                     var key = $(this).data("key");
                     $(this).attr('placeholder', K5.i18n.ctx.dictionary[key]);
+            });
+            
+            
+            $('.translate_text').each(function() {
+                    var key = $(this).data("key");
+                    
+                    K5.i18n.askForText(key,K5.i18n.ctx.language, _.bind(function(data) {
+                        var text = data[key];
+                        $(this).html(text);
+                     }, this)); 
+
+        
             });
         }
 }

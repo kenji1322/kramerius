@@ -1,0 +1,17 @@
+<ul class="nav navbar-nav navbar-left app-nav-pipe">
+
+#if($params.page && $params.page != 'home')
+
+#else
+    <li class="active"><a href=".">Home</a></li>
+#end    
+#if($conf.getBoolean('k5client.showbrowse'))
+    <li #if($params.page == 'browse')class="active"#end><a href="?page=browse">#translatable('common.browse')</a></li>
+#end
+#if($conf.getBoolean('k5client.showtimeline'))
+    <li #if($params.page == 'timeline')class="active"#end><a href="?page=timeline">#translatable('common.timeline')</a></li>
+#end
+#if($conf.getBoolean('k5client.showcollections'))
+    <li #if($params.page == 'collections')class="active"#end><a href="?page=collections">#translatable('common.collections')</a></li>
+#end
+</ul>
