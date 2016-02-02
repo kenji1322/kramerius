@@ -1,9 +1,5 @@
 [
 
-
-    "http://code.jquery.com/jquery-2.1.1.min.js",
-    "http://code.jquery.com/ui/1.11.1/jquery-ui.min.js",
-    
     "js/underscore-min.js",   
     "js/jquery.cookie.js",
     "js/jquery.mousewheel.min.js",
