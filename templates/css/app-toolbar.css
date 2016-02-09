@@ -1,0 +1,57 @@
+/*** ---/ APP TOOLBAR STYLES /--- ***/
+
+/*** Toolbar ***/
+.app-toolbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  background: #fff;
+  border-bottom: 1px solid #DCDCDC;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.100);
+}
+
+.app-toolbar-left {
+  display: none;
+  width: 370px;
+  float: left;
+  margin-left: 15px;
+}
+
+.app-toolbar-left .nav > li {
+  float: left;
+}
+
+.app-toolbar-right .breadcrumb {
+  margin: 0 !important;
+  padding: 10px 15px;
+}
+
+.app-toolbar-right .breadcrumb.navbar-right > li + li:before {
+  content: "";
+}
+
+
+
+/************************/
+/**** MEDIA QUERIES ****/
+/************************/
+
+/*** Min 768 ***/
+@media (min-width: 768px) {
+  .app-toolbar-left {
+    display: block;
+  }
+  .app-toolbar-right {
+    margin-left: 370px;
+  }
+}
+
+/*** Max 767 ***/
+@media (max-width: 767px) {
+  .app-toolbar-right .breadcrumb.navbar-left {
+    float: left;
+  }
+  .app-toolbar-right .breadcrumb.navbar-right {
+    float: right;
+  }
+}

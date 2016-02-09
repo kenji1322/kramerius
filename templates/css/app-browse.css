@@ -1,0 +1,106 @@
+/*** ---/ BROWSE STYLES /--- ***/
+
+body {
+ /* overflow: hidden;*/
+}
+
+/*** Toolbar ***/
+.app-toolbar .form-control {
+  width: 600px;
+} 
+
+
+/*** Navbar abc ***/
+.app-navbar-abc {
+  margin-top: 50px;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 0;
+}
+
+.app-navbar-abc > .nav {
+  float: none !important;
+  text-align: center;
+}
+
+.app-navbar-abc > .nav > li {
+  float: none !important;
+  display:inline-block;
+}
+
+
+/*** Content ***/
+.app-container,
+.app-container > .row,
+.app-container > .row > .app-col-title,
+.app-container > .row > .app-col-title > .row,
+.app-container > .row > .app-col-author,
+.app-container > .row > .app-col-author > .row {
+  height:100%
+}
+
+.app-container {
+  height:calc(100% - 150px);
+}
+
+.app-col-title-label,
+.app-col-author-label {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.app-col-title {
+  border-right: 1px solid #e5e5e5;
+}
+
+.app-col-title ul,
+.app-col-author ul {
+  height:calc(100% - 40px);
+  overflow:auto;
+  padding-top: 15px;
+}
+
+.app-col-title ul > li {
+  margin-bottom: 15px;
+  border-left: 3px solid #55b2af;
+  min-height: 80px;
+}
+
+.app-col-title ul > li.app-item-private {
+  border-color: #c3171d;
+}
+
+.app-col-author ul > li {
+  margin-bottom: 15px;
+  min-height: 40px;
+}
+
+
+/************************/
+/**** MEDIA QUERIES ****/
+/************************/
+
+/*** Min 1200 ***/
+@media (min-width: 1200px) {
+  .app-toolbar .form-control {
+    margin-left: 500px;
+  } 
+}
+
+/*** Max 1199 ***/
+@media (max-width: 1199px) {
+  .app-toolbar .navbar-form {
+    text-align: center !important;
+  } 
+}
+
+/*** Max 768 ***/
+@media (max-width: 768px) {
+  .app-toolbar .navbar-form {
+    padding: 0 15px;
+  }
+  .app-toolbar .form-control {
+    width: 100%;
+  } 
+}

@@ -20,8 +20,8 @@
     <!-- App CSS -->
     <link href="css/app.css" rel="stylesheet">
     <link href="css/app-results.css" rel="stylesheet">
+    <link href="css/app-toolbar.css" rel="stylesheet">
     <link href="css/app-sidebar.css" rel="stylesheet">
-    <link href="css/app-footerbar.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -34,7 +34,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body class="app-page-result">
     <!-- Navbar -->
     <nav class="navbar navbar-fixed-top app-navbar app-clean-border">
       <!-- Container -->
@@ -52,9 +52,9 @@
         <!-- Nav -->
         <div id="navbar" class="navbar-collapse collapse">
           <!-- Form -->
-          <form class="navbar-form navbar-left app-search-form">
+          <form class="navbar-form navbar-left app-search-form app-search-form-colored">
             <div class="input-group app-clean-border">
-              <input type="text" placeholder="Hledej v digitální knihovně ..." class="form-control app-clean-radius app-color-white app-color-placeholder">
+              <input type="text" placeholder="Hledej v digitální knihovně ..." class="form-control app-clean-radius app-color-white">
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default app-clean-radius" onclick="location.href = 'results.html';"><i class="fa fa-search"></i></button>
               </span>
@@ -325,61 +325,17 @@
               <span> </span>
             </a><!--/.sidebar btn -->
             
+            <!-- Push down -->
+            <div class="col-md-12 app-result-pushdown"> </div><!--/.push down -->
           </div><!--/.result area -->
         </div><!--/.row -->
       </div><!--/.content -->
     </div><!--/.wrapper -->
-    
-    
-    <!-- Footerbar -->
-    <div class="collapse app-footerbar" id="app-footerbar-choosen">
-      <div class="col-md-12">
-        <i class="fa fa-angle-left fa-3x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-        <span><a href="#" title="#"><img src="img/thumb-1.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-2.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-3.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-4.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-5.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-6.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-7.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-8.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-9.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-10.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-11.jpg" alt="#" /></a></span>
-        <i class="fa fa-angle-right fa-3x app-pd-left-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-      </div>
-    </div>
-    <div class="collapse app-footerbar" id="app-footerbar-newest">
-      <div class="col-md-12"> 
-        <br /><br /><br />Bottom bar newest ...<br /><br /><br /><br />
-      </div>
-    </div>
-    <div class="collapse app-footerbar" id="app-footerbar-favorite">
-      <div class="col-md-12"> 
-        <br /><br /><br />Bottom bar favorite<br /><br /><br /><br />
-      </div>
-    </div><!--/.footerbar -->
 
     
     <!-- Footer -->
     <footer class="footer">
       <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-left">
-          <li>
-            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-choosen">
-              Vybrané
-            </a>
-          </li>
-          <li>
-            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-newest">
-              Nejnovější
-            </a>
-          <li>
-            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-favorite">
-              Nejžádanější
-            </a>
-          </li>
-        </ul>
         <p class="navbar-text navbar-right">
           <small>©2015. Developed under GNU GPL by Incad, NKČR, KNAV and MZK</small>
         </p>
