@@ -1,0 +1,35 @@
+
+    <div class="container-fluid app-toolbar">
+      <!-- Row -->
+      <div class="row">
+        <!-- App toolbar left -->
+        <div class="app-toolbar-left">
+          <ul class="nav">
+            <li ><a href="#" class="translate_title" data-ctx="all" data-key="buttons.back" title="$i18n.buttons.outofdocument" onclick="backToResults();"><i class="fa fa-reply"></i></a></li>
+            <li ><a href="#" class="translate_title" data-ctx="all" data-key="buttons.prev" title="$i18n.buttons.prev" onclick="K5.gui.selected.prev();" ><i class="fa fa-chevron-left"></i></a></li>
+            <li ><a href="#" class="translate_title" data-ctx="all" data-key="buttons.next" title="$i18n.buttons.next" onclick="K5.gui.selected.next();"><i class="fa fa-chevron-right"></i></a></li>
+            <li ><a href="#" class="translate_title" data-ctx="all" data-key="buttons.toggleview" title="$i18n.buttons.toggleview" onclick="K5.gui.selected.toggleView();"><i class="fa fa-bars"></i></a></li>
+            <li ><a href="#" class="translate_title" data-ctx="all" id="vwr_ctx_searchinside" data-key="searchinside.dialog" title="$i18n.searchinside.dialog" onclick="K5.gui.selected.searchInside();"><i class="fa fa-search"></i></a></li>
+            <li ><a href="#" class="translate_title" data-ctx="share" id="vwr_ctx_share" data-key="buttons.share" title="$i18n.buttons.share" onclick="K5.gui.selected.shares.open();"><i class="fa fa-share-alt"></i></a></li>
+            <li ><a href="#" class="translate_title" data-ctx="download" id="vwr_ctx_download" data-key="buttons.download" title="$i18n.buttons.download" onclick="K5.gui.selected.download.open();"><i class="fa fa-eye"></i></a></li>
+            <li ><a href="#" class="translate_title" data-ctx="all" id="vwr_ctx_metadata" data-key="buttons.showinfo" title="$i18n.buttons.showinfo" onclick="K5.gui.selected.toogleModsView();"><i class="fa fa-info"></i></a></li>
+            <li ><a href="#" class="translate_title" data-ctx="favorite" data-key="buttons.addtofavorite"  title="$i18n.buttons.addtofavorite" onclick="K5.authentication.askForAppendToProfile();"><i class="fa fa-star-o"></i></a></li>
+            <li ><a href="#" class="translate_title" data-ctx="notfavorite" data-key="buttons.removefromfavorite"  title="$i18n.buttons.removefromfavorite" onclick="K5.authentication.askForRemoveFromProfile();"><i class="fa fa-star"></i></a></li>
+
+          </ul>
+        </div><!--/.app toolbar left -->
+        <!-- App toolbar right -->
+        <div class="app-toolbar-right">
+          <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-left">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Library</a></li>
+            <li class="active">Data</li>
+          </ol>
+          <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-right">
+            <li><a href="#" onclick="setItemView('col')"><i class="fa fa-columns"></i></a></li>
+            <li><a href="#" onclick="setItemView('row')"><i class="fa fa-list"></i></a></li>
+          </ol>
+          <div class="clearfix"></div>
+        </div><!--/.app toolbar right -->
+      </div><!--/.row -->
+    </div>

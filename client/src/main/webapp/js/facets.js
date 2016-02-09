@@ -150,6 +150,10 @@ Facets.prototype = {
         facetList.addClass("in");
         this.facetsContainer.append(facetLi);
         
+        if($("#search_form input[name='dostupnost']").is(":visible")){
+            
+        }
+        
         $("#search_form input.facet").each(_.partial(function(facets){
             
             var val = $(this).data("key");

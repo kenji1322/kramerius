@@ -1,0 +1,30 @@
+
+            <div class="input-group app-clean-border">
+              <input id="q" name="q" type="text" 
+                    placeholder="$i18n.query.placeholder" 
+                    data-key="query.placeholder"
+                    value="$!esc.html(${params.q})"
+                    class="translate_placeholder form-control app-clean-radius app-color-white app-color-placeholder">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-default app-clean-radius" ><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" id="dostupnost" name="dostupnost" value="public" 
+                    #if($params.dostupnost == 'public')checked class="facet" data-key="public" data-facet="dostupnost"#end/> #translatable("only.public")
+              </label>
+            </div>
+
+    <input type="hidden" name="page" value="search" />
+    <input type="hidden" name="start" id="start" value="$!{params.start}" />
+    <input type="hidden" name="rows" id="rows" value="36" />
+    #foreach($filters in $search.usedFilters.entrySet())
+        #foreach($filter in $filters.value)   
+            #if($filters.key != 'dostupnost')
+                #set($fq = $search.getAdvFilter($filters.key))
+                <input class="facet" type="hidden" name="$filters.key" value="$esc.html($filter)" 
+                    data-key="$esc.html($filter)" data-facet="$filters.key"  data-fq="$esc.html($fq)" />
+            #end
+        #end
+    #end

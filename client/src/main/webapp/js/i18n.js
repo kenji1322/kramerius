@@ -48,9 +48,13 @@ I18N.prototype= {
     
     changeLanguage:function(lang,country, whenready) {
         $('.opacityloading').show();
+        $("body").css("cursor", "progress");
+        $("body").css("opacity", "0.5");
         K5.eventsHandler.addHandler(function(type, data) {
             if (type === "i18n/dictionary") {
                 $('.opacityloading').hide();
+                $("body").css("cursor", "");
+                $("body").css("opacity", "");
             }
         });
         this.askForDictionary(lang,country, whenready);

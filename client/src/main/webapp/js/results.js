@@ -72,9 +72,8 @@ Results.prototype = {
             //console.log(data);
             $('#search_results_docs .more_docs').remove();
             var json = jQuery.parseJSON(data);
-            K5.eventsHandler.trigger("results/loaded", json);
             this.loadDocs(json);
-            
+            K5.eventsHandler.trigger("results/loaded", json);
             $('.opacityloading').hide();
             this.resultsLoaded = true;
         }, this));
@@ -240,7 +239,8 @@ Result.prototype = {
             for (var j = 0; j < this.hl.text_ocr.length; j++) {
                 tx += '<div class="hl">' + this.hl.text_ocr[j] + '</div>';
             }
-            this.elem.find(".app-result-item-teaser").html(tx).show();
+            //this.elem.find(".app-result-item-teaser").html(tx).show();
+            info.full += tx;
         }
         
         var linkpid;
@@ -258,12 +258,21 @@ Result.prototype = {
             this.elem.find(".app-result-item-found").html(K5.i18n.translatable('fedora.model.' + fedora_model) + ' ' +
                     K5.i18n.translatable('model.locativ.' + typtitulu));
         }
-
-        this.elem.find(".fa-info").attr("title", info.full).tooltip({html:true});
-//        this.elem.find(".fa-info").on("mouseover", function(){
-//            $(this).parents(".app-result-item").data("pid");
-//        });
         
+        
+        if(doc.hasOwnProperty("collection") && doc.collection.length>0){
+            info.full += "<div>" + K5.i18n.translatable('harvested.from') + ":</div>";
+            for(var i=0; i< doc.collection.length; i++){
+                info.full += '<div class="collection">' + K5.i18n.translatable(doc.collection[i]) + '</div>';
+            }
+        }
+
+        this.elem.find(".app-result-footer").attr("title", info.full)
+                .popover({html:true, placement: "auto top"})
+                .click(function(e){
+                    e.preventDefault();
+                    e.stopPropagation(); 
+                });
         
     },
     

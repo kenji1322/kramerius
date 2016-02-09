@@ -36,19 +36,8 @@
     <!-- Wrapper -->
     <div id="app-wrapper">
       <!-- Sidebar -->
-      <div id="app-sidebar-wrapper">
-        <!-- Sidebar nav -->
-        <ul class="nav app-sidebar-nav">
-          <li class="facet">
-            <strong class="facet-name">loading...</strong><span class="app-color-gray-light app-cursor-pointer collapsed" data-toggle="collapse" data-target="#app-collapse-type"> </span>
-            <ul class="list-unstyled app-color-gray collapse facet-list" id="app-collapse-type">
-              <li class="facet-value"><a href="#" class="facet-value-text"></a><span class="pull-right app-color-gray-light facet-value-count">77</span></li>
-            </ul>
-          <hr />
-          </li>
-          <li class="app-sidebar-pushdown"> </li>
-        </ul><!--/.sidebar nav -->
-      </div><!--/.sidebar -->
+      #parse("facets.vm")
+      <!--/.sidebar -->
       
       <!-- Content -->
       <div class="container-fluid">
@@ -59,41 +48,10 @@
             <!-- Dialog window -->
             <div class="app-home-dialog">
               <!-- Form -->
-              <form class="app-search-form" id="search_form">
-                <div class="input-group app-clean-border">
-                  <input id="q" name="q" type="text" 
-                    placeholder="$i18n.query.placeholder" 
-                    data-key="query.placeholder"
-                    value="$!esc.html(${params.q})"
-                    class="translate_placeholder form-control app-clean-radius">
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-default app-clean-radius"><i class="fa fa-search"></i></button>
-                  </span>
-                </div>
-
-    #if(!$params.page || $params.page == 'home')
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> #translatable("only.public")
-                  </label>
-                </div>
-    #end
-
-
-
-    <input type="hidden" name="page" value="search" />
-    <input type="hidden" name="start" id="start" value="$!{params.start}" />
-    <input type="hidden" name="rows" id="rows" value="$!{params.rows}" />
-    #foreach($filters in $search.usedFilters.entrySet())
-        #foreach($filter in $filters.value)   
-            #set($fq = $search.getAdvFilter($filters.key))
-            <input class="facet" type="hidden" name="$filters.key" value="$esc.html($filter)" 
-                    data-fq="$esc.html($fq)" />
-        #end
-    #end
-
-
-              </form><!--/.form -->
+<form class="app-search-form" id="search_form">
+                #parse("new-form.vm")
+</form>
+              <!--/.form -->
               <hr />
               <!-- Text -->            
                 <div data-key="default_intro" class="translate_text">
