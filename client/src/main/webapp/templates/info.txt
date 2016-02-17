@@ -1,0 +1,8 @@
+TODO
+=========
+- presunout #app-wrapper do hlavnich css z app-sidebar.css a app-sidebar-home.css !!!!
+- presunout z app-results.css nize uvedene radky do hlavniho css
+	#app-wrapper > .container-fluid > .row,
+	#app-wrapper > .container-fluid > .row > .app-result-container {
+  		height: 100%;
+	}
