@@ -3,16 +3,16 @@
 K5.eventsHandler.addHandler(function(type, data) {
     
     if (type === "api/feed/newest") {
-        K5.gui.home.fillFooter("#app-footerbar-newest div.home-thumbs", K5.api.ctx.feed.newest.data);
+        K5.gui.home.fillFooter("#app-footerbar-newest", K5.api.ctx.feed.newest.data);
     }
 
     if (type === "api/feed/mostdesirable") {
-        K5.gui.home.fillFooter("#app-footerbar-favorite div.home-thumbs", K5.api.ctx.feed.mostdesirable.data);
+        K5.gui.home.fillFooter("#app-footerbar-favorite", K5.api.ctx.feed.mostdesirable.data);
     }
 
     if (type === "api/feed/cool") {
         
-        K5.gui.home.fillFooter("#app-footerbar-choosen div.home-thumbs", K5.api.ctx.feed.cool.data);
+        K5.gui.home.fillFooter("#app-footerbar-choosen", K5.api.ctx.feed.cool.data);
         if (K5.gui.home) {
             K5.gui.home.displayBackground();
         }
@@ -55,42 +55,12 @@ HomeEffects.prototype = {
         
         this.hasFacets = false;
         
-        this.setSizes();
-        this.infoHidden = false;
-        if (isTouchDevice()) {
-            $("#buttons").swipe({
-                swipeUp: function(event, direction, distance, duration, fingerCount) {
-                    $("#band").animate({'bottom': 20}, 200);
-                },
-                threshold: 2
-            });
-        }
-        
         //podle #153 mame otevrene "vybrane" a po 5 sec schovame
         $("#band").animate({'bottom': 41}, 200);
         setTimeout(function() {
             $("#band").animate({'bottom': -147}, 200);
             $('#buttons>div.button').removeClass('sel');
         }.bind(this), 5000);
-        
-        this.addContextButtons();
-    },
-    
-    addContextButtons: function(){
-        var text = $("#item_menu").html();
-        $("#contextbuttons").html(text);
-    },
-    
-    showInfo: function() {
-        $("#home>div.infobox").animate({'opacity': '1.0', 'left': '105px'}, 500);
-        this.infoHidden = false;
-    },
-    
-    hideInfo: function() {
-        $("#home>div.infobox").animate({'opacity': '0.2'}, 500, _.bind(function() {
-            this.infoHidden = true;
-        }, this));
-        
     },
     displayBackground: function() {
         if (this.backgroundDisplayed) return;
@@ -101,7 +71,7 @@ HomeEffects.prototype = {
                 //srcs = K5.cool.coolData.data;
                 srcs = K5.api.ctx.feed.cool["data"];
         }
-	if (srcs.length == 0) return;
+	if (srcs.length === 0) return;
 
         var index = Math.floor(Math.random() * (srcs.length - 1));
         var pid = srcs[index].pid;
@@ -112,7 +82,6 @@ HomeEffects.prototype = {
 
             this.backgroundDisplayed = true;
             $("body").css("background-image", "url(" + src + ")");
-            this.showInfo();
             $("body").animate({'backgroundPosition': '50%'}, 600);
             
             
@@ -131,10 +100,6 @@ HomeEffects.prototype = {
             $("#pidinfo").append(a);
             $("#pidinfo").show();
             
-//            $("#pidinfo").append(a);
-//            if(srcs[index].author){
-//                $("#pidinfo").append('<div class="details">' + srcs[index].author + '</div>');
-//            }
             
             /* Komentovane podle issue 199
              * 
@@ -152,26 +117,6 @@ HomeEffects.prototype = {
         }, this);
         image.src = src;
     },
-    selBand: function(obj) {
-        $('#buttons>div.button').removeClass('sel');
-
-        $("#yearRows>div.row").hide();
-        $(obj).addClass('sel');
-        var div = $(obj).data("row");
-        $("#yearRows>div." + div).show();
-    },
-    setSizes: function(){
-        $("#home div.container").show();
-        var h = window.innerHeight - $('#header').height() - $('#footer').height() - $('#buttons').height();
-        
-        $('#facets').css('top', 0);
-        $('#facets').css('overflow', 'auto');
-        $('#facets').css('left', 0);
-        $('#home div.container').css('height', h); //30 = 2x15 padding 
-
-        $('#facets').css('height', "100%");
-        
-    },
     getDocs: function() {
         if(this.hasFacets){
             return;
@@ -186,7 +131,8 @@ HomeEffects.prototype = {
         }, this));
     },
     fillFooter: function(elem, docs){
-        var c = $(elem);
+        var $elem = $(elem);
+        var c = $elem.find(".home-thumbs");
         var t = c.find(".item").clone();
         c.empty();
         for(var i=0; i<docs.length; i++){
@@ -206,6 +152,39 @@ HomeEffects.prototype = {
                 K5.api.gotoDisplayingItemPage($(this).data('pid'));
             });
             c.append(thumb);
+        }
+        
+        var left = $elem.find(".left");
+        left.click(_.bind(function(elem){
+            this.slide(elem, -1);
+        }, this, c));
+        
+        var right = $elem.find(".right");
+        right.click(_.bind(function(elem){
+            this.slide(elem, 1);
+        }, this, c));
+        
+    },
+    slide: function(elem, dx){
+        var speed = 500;
+        var w = elem.parent().width();
+        var finalPos = elem.scrollLeft() + w * 0.7 * dx;
+        this.scrolling = true;
+        elem.animate({scrollLeft:finalPos}, speed, _.bind(function() {
+                this.scrolling = false;
+        },this));
+        
+        if(finalPos <=0){
+            elem.parent().find(".left").hide();
+        }else{
+            elem.parent().find(".left").show();
+        }
+        
+        
+        if(finalPos >= w){
+            elem.parent().find(".right").hide();
+        }else{
+            elem.parent().find(".right").show();
         }
     }
     

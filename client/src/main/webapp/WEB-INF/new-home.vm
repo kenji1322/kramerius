@@ -3,6 +3,7 @@
     #parse("new-common-header.vm")
     <link href="templates/css/app-home.css" rel="stylesheet">
     <link href="templates/css/app-sidebar-home.css" rel="stylesheet">
+    <link href="templates/css/app-footerbar.css" rel="stylesheet">
   </head>
 
   <body>
@@ -80,25 +81,29 @@
     <!-- Footerbar -->
     <div class="collapse app-footerbar" id="app-footerbar-choosen">
       <div class="col-md-12">
-        <i class="fa fa-angle-left fa-3x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-<div class="home-thumbs">
-        <span><a href="#" title="#"><img src="templates/img/thumb-1.jpg" alt="#" /></a></span>
-</div>
-        <i class="fa fa-angle-right fa-3x app-pd-left-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+          <div class="home-thumbs" style="white-space: nowrap; overflow: hidden;">
+            <span class="item"><a href="#" title="#"><img src="" alt="#" /></a></span>
+          </div>
+        <a class="left carousel-control" href="#" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+        <a class="right carousel-control" href="#" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
       </div>
     </div>
     <div class="collapse app-footerbar" id="app-footerbar-newest">
-      <div class="col-md-12"> 
-<div class="home-thumbs">
-        <span><a href="#" title="#"><img src="templates/img/thumb-1.jpg" alt="#" /></a></span>
-</div>
+      <div class="col-md-12">
+          <div class="home-thumbs" style="white-space: nowrap; overflow: hidden;">
+            <span class="item"><a href="#" title="#"><img src="" alt="#" /></a></span>
+          </div>
+        <a class="left carousel-control" href="#" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+        <a class="right carousel-control" href="#" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
       </div>
     </div>
     <div class="collapse app-footerbar" id="app-footerbar-favorite">
-      <div class="col-md-12"> 
-<div class="home-thumbs">
-        <span><a href="#" title="#"><img src="templates/img/thumb-1.jpg" alt="#" /></a></span>
-</div>
+      <div class="col-md-12">
+          <div class="home-thumbs" style="white-space: nowrap; overflow: hidden;">
+            <span class="item"><a href="#" title="#"><img src="" alt="#" /></a></span>
+          </div>
+        <a class="left carousel-control" href="#" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+        <a class="right carousel-control" href="#" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
       </div>
     </div><!--/.footerbar -->
 
@@ -109,16 +114,16 @@
         <ul class="nav navbar-nav navbar-left">
           <li>
             <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-choosen">
-              Vybrané
+              #translatable('common.cool')
             </a>
           </li>
           <li>
             <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-newest">
-              Nejnovější
+              #translatable('common.latest')
             </a>
           <li>
             <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-favorite">
-              Nejžádanější
+              #translatable('common.popular')
             </a>
           </li>
         </ul>
@@ -129,10 +134,35 @@
     </footer><!--/.footer -->
 
     <script src="js/facets.js" type="text/javascript" ></script>
-    <script src="js/home.js" type="text/javascript" ></script>
+    <script src="js/new-home.js" type="text/javascript" ></script>
 
     <!-- Custom js -->
     <script type="text/javascript">
+
+
+      // Bootstrap carousel
+      $('#myCarousel').carousel({
+        interval: false
+      })
+
+      $('.carousel .item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+          next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (var i=0;i<2;i++) {
+          next=next.next();
+          if (!next.length) {
+            next = $(this).siblings(':first');
+          }
+
+          next.children(':first-child').clone().appendTo($(this));
+        }
+      });
+
+
       // Sidebar toggle script
       $("#app-btn-sidebar-toggle").click(function(e) {
         e.preventDefault();

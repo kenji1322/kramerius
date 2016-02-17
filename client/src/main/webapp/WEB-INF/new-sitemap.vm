@@ -5,7 +5,7 @@
         "da" : "rows.vm", 
         "collections" : "collections.vm",
         "search":"new-results.vm",
-        "doc":"viewer.vm" ,
+        "doc":"new-doc.vm" ,
         "zoom":"olimage.vm",
         "home":"new-home.vm",
         "browse":"new-browse.vm",

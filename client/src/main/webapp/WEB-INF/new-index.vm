@@ -6,8 +6,8 @@
 
 
 #if ($params.exists( "page" )) 
-#parse("new-sitemap.vm")
-#parse($site.Map.get($params.page))
+    #parse("new-sitemap.vm")
+    #parse($site.Map.get($params.page))
 #else
     #parse("new-home.vm")
 #end
