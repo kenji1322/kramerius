@@ -62,7 +62,31 @@
           </ul><!--/.nav left -->
           <!-- Nav right -->
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Přihlášení / Registrace</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Přihlášení / Registrace <span class="caret"></span></a>
+              <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                <li>
+                  <form class="form" role="form" action="login">
+                    <div class="input-group form-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Přihlašovací jméno">                                        
+                    </div>
+                    <div class="input-group form-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                      <input id="login-password" type="password" class="form-control" name="password" placeholder="Heslo">
+                    </div>
+                    <div class="form-group">
+                       <button type="submit" class="btn btn-success btn-block">Přihlášení</button>
+                    </div>
+                 </form>
+                </li>
+                <li class="divider"></li>
+                <li>
+                   <p class="app-color-gray"><small>Potřebujete účet? Registrujte se ! (účet Vám umožní přidávat si tituly do oblíbených)</small></p>
+                   <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Registrace nového uživatele">
+                </li>
+             </ul>
+            </li>
             <li><a href="#">Nápověda</a></li>
             <li class="dropdown app-navbar-item-lang">
               <a href="#" data-toggle="dropdown">Cs <span class="caret"></span></a>
@@ -207,7 +231,59 @@
     <!-- Footerbar -->
     <div class="collapse app-footerbar" id="app-footerbar-choosen">
       <div class="col-md-12">
-        <i class="fa fa-angle-left fa-3x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+        <div class="carousel slide" id="myCarousel">
+          <div class="carousel-inner">
+            <div class="item active">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-1.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-2.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-3.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-4.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-5.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-6.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-7.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-8.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-2.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-3.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-4.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-5.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-6.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-7.jpg" class="img-responsive"></a></div>
+            </div>
+            <div class="item">
+              <div class="col-xs-3"><a href="#"><img src="img/thumb-8.jpg" class="img-responsive"></a></div>
+            </div>
+          </div>
+          <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+          <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+        </div>
+       
+        <!--<i class="fa fa-angle-left fa-3x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
         <span><a href="#" title="#"><img src="img/thumb-1.jpg" alt="#" /></a></span>
         <span><a href="#" title="#"><img src="img/thumb-2.jpg" alt="#" /></a></span>
         <span><a href="#" title="#"><img src="img/thumb-3.jpg" alt="#" /></a></span>
@@ -219,7 +295,18 @@
         <span><a href="#" title="#"><img src="img/thumb-9.jpg" alt="#" /></a></span>
         <span><a href="#" title="#"><img src="img/thumb-10.jpg" alt="#" /></a></span>
         <span><a href="#" title="#"><img src="img/thumb-11.jpg" alt="#" /></a></span>
-        <i class="fa fa-angle-right fa-3x app-pd-left-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+        <span><a href="#" title="#"><img src="img/thumb-1.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-2.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-3.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-4.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-5.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-6.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-7.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-8.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-9.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-10.jpg" alt="#" /></a></span>
+        <span><a href="#" title="#"><img src="img/thumb-11.jpg" alt="#" /></a></span>
+        <i class="fa fa-angle-right fa-3x app-pd-left-15 app-color-gray-light app-cursor-pointer app-va-md"></i>-->
       </div>
     </div>
     <div class="collapse app-footerbar" id="app-footerbar-newest">
@@ -270,6 +357,29 @@
     
     <!-- Custom js -->
     <script type="text/javascript">
+      // Bootstrap carousel
+      $('#myCarousel').carousel({
+        interval: false
+      })
+
+      $('.carousel .item').each(function(){
+        var next = $(this).next();
+        if (!next.length) {
+          next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
+
+        for (var i=0;i<2;i++) {
+          next=next.next();
+          if (!next.length) {
+            next = $(this).siblings(':first');
+          }
+
+          next.children(':first-child').clone().appendTo($(this));
+        }
+      });
+      
+
       // Sidebar toggle script
       $("#app-btn-sidebar-toggle").click(function(e) {
         e.preventDefault();
