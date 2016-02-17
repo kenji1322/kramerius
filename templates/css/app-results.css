@@ -149,6 +149,27 @@
 }
 
 
+/*** Count of results ***/
+.app-result-count {
+  padding: 11px 10px;
+  font-size: 13px;
+}
+
+
+/*** Pagination ***/
+.app-pagination {
+  margin: 4px 0 0 5px;
+}
+
+.app-pagination > .active > a,
+.app-pagination > .active > a:hover,
+.app-pagination > .active > a:focus {
+  background-color: transparent;
+  color: #333;
+  font-weight: bold;
+}
+
+
 /************************/
 /**** MEDIA QUERIES ****/
 /************************/
