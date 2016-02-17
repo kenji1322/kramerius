@@ -2,6 +2,7 @@
   <head>
     #parse("new-common-header.vm")
     <link href="templates/css/app-results.css" rel="stylesheet">
+    <link href="templates/css/app-toolbar.css" rel="stylesheet">
     <link href="templates/css/app-sidebar.css" rel="stylesheet">
   </head>
 
@@ -23,7 +24,7 @@
         <!-- Nav -->
         <div id="navbar" class="navbar-collapse collapse">
           <!-- Form -->
-<form class="navbar-form navbar-left app-search-form" id="search_form">
+<form class="navbar-form navbar-left app-search-form app-search-form-colored" id="search_form">
           #parse("new-form.vm")
 </form>
           <!--/.form -->

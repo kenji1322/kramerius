@@ -1,8 +1,7 @@
 
   <head>
     #parse("new-common-header.vm")
-    <link href="templates/css/app-browse.css" rel="stylesheet">
-    <link href="templates/css/app-toolbar.css" rel="stylesheet">
+    <link href="templates/css/app-timeline.css" rel="stylesheet">
   </head>
 
   
@@ -29,10 +28,23 @@
 </form>
           <!--/.form -->
           <!-- Nav left -->
-          #parse('app-menu.vm')<!--/.nav left -->
+          <ul class="nav navbar-nav navbar-left app-nav-pipe">
+            <li class="active"><a href="browse.html">Procházet</a></li>
+            <li><a href="timeline.html">Časová osa</a></li>
+          </ul><!--/.nav left -->
           <!-- Nav right -->
-          #parse('user-menu.vm')
-          <!--/.nav right -->
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Přihlášení / Registrace</a></li>
+            <li><a href="#">Nápověda</a></li>
+            <li class="dropdown app-navbar-item-lang">
+              <a href="#" data-toggle="dropdown">Cs <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">En</a></li>
+                <li><a href="#">Es</a></li>
+                <li><a href="#">Fr</a></li>
+              </ul>
+            </li>
+          </ul><!--/.nav right -->
         </div><!--/.nav -->
       </div><!--/.container -->
     </nav><!--/.navbar -->
