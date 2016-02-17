@@ -118,24 +118,27 @@
       <div class="row">
         <!-- App toolbar left -->
         <div class="app-toolbar-left">
-          <ul class="nav">
-            <li><a href="#" title=""><i class="fa fa-reply"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-chevron-left"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-chevron-right"></i></a></li>
-            <li><a href="#" title="Search inside of this document" data-toggle="modal" data-target="#app-modal-search"><i class="fa fa-search"></i></a></li>
-            <li><a href="#" title="Share this document" data-toggle="modal" data-target="#app-modal-share"><i class="fa fa-share-alt"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-eye"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-info"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-star"></i></a></li>
-          </ul>
+          <div class="app-result-count app-color-gray">Počet nalezených výsledků: <strong class="app-color-black">2998</strong></div>
         </div><!--/.app toolbar left -->
         <!-- App toolbar right -->
         <div class="app-toolbar-right">
-          <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-left">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Library</a></li>
-            <li class="active">Data</li>
-          </ol>
+          <ul class="pagination app-pagination app-clean-radius app-clean-border app-clean-mg app-clean-bg app-right navbar-left">
+            <li>
+              <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+              <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
           <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-right">
             <li><a href="#" onclick="setItemView('col')"><i class="fa fa-columns"></i></a></li>
             <li><a href="#" onclick="setItemView('row')"><i class="fa fa-list"></i></a></li>
@@ -225,8 +228,10 @@
                   1989
                 </p>
                 <div class="app-color-gray">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-1"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National digital library"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  <div class="clearfix" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-1">
+                    <span class="pull-left"><i class="fa fa-info"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National digital library"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
                 <div class="item-1 hide">
                   <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
@@ -254,8 +259,10 @@
                   1989
                 </p>
                 <div class="app-color-gray">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-2"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National museum"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  <div class="clearfix" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-2">
+                    <span class="pull-left"><i class="fa fa-info"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National museum"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
                 <div class="item-2 hide">
                   <strong class="app-color-black app-display-block">Pestrý týden</strong>
