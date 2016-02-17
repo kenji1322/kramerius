@@ -2,12 +2,16 @@
 
 /*** Wrapper ***/
 #app-wrapper {
-  position: relative;
-  padding-left: 0;
   -webkit-transition: all 0.5s ease;
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  padding-top: 40px;
+}
+
+#app-wrapper > .container-fluid {
+  /*padding-bottom: 60px;*/ /* pusher for footer ***/
+  height: 100%;
 }
 
 #app-wrapper.toggled {

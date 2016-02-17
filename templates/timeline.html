@@ -19,9 +19,7 @@
     
     <!-- App CSS -->
     <link href="css/app.css" rel="stylesheet">
-    <link href="css/app-results.css" rel="stylesheet">
-    <link href="css/app-sidebar.css" rel="stylesheet">
-    <link href="css/app-footerbar.css" rel="stylesheet">
+    <link href="css/app-timeline.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -34,7 +32,7 @@
     <![endif]-->
   </head>
 
-  <body>
+  <body class="app-page-result">
     <!-- Navbar -->
     <nav class="navbar navbar-fixed-top app-navbar app-clean-border">
       <!-- Container -->
@@ -52,9 +50,9 @@
         <!-- Nav -->
         <div id="navbar" class="navbar-collapse collapse">
           <!-- Form -->
-          <form class="navbar-form navbar-left app-search-form">
+          <form class="navbar-form navbar-left app-search-form app-search-form-colored">
             <div class="input-group app-clean-border">
-              <input type="text" placeholder="Hledej v digitální knihovně ..." class="form-control app-clean-radius app-color-white app-color-placeholder">
+              <input type="text" placeholder="Hledej v digitální knihovně ..." class="form-control app-clean-radius app-color-white">
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default app-clean-radius" onclick="location.href = 'results.html';"><i class="fa fa-search"></i></button>
               </span>
@@ -88,172 +86,300 @@
     </nav><!--/.navbar -->
     
     
-    <!-- App toolbar -->
-    <div class="container-fluid app-toolbar">
-      <!-- Row -->
-      <div class="row">
-        <!-- App toolbar left -->
-        <div class="app-toolbar-left">
-          <ul class="nav">
-            <li><a href="#" title=""><i class="fa fa-reply"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-chevron-left"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-chevron-right"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-search"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-share-alt"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-eye"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-info"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-star"></i></a></li>
-          </ul>
-        </div><!--/.app toolbar left -->
-        <!-- App toolbar right -->
-        <div class="app-toolbar-right">
-          <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-left">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Library</a></li>
-            <li class="active">Data</li>
-          </ol>
-          <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-right">
-            <li><a href="#"><i class="fa fa-columns"></i></a></li>
-            <li><a href="#"><i class="fa fa-list"></i></a></li>
-          </ol>
-          <div class="clearfix"></div>
-        </div><!--/.app toolbar right -->
-      </div><!--/.row -->
-    </div><!--/.app toolbar -->
-    
-    
     <!-- Wrapper -->
     <div id="app-wrapper">
-      <!-- Sidebar -->
-      <div id="app-sidebar-wrapper">
-        <!-- Sidebar nav -->
-        <ul class="nav app-sidebar-nav">
-          <li>
-            <strong>Typ dokumentu</strong><span class="app-color-gray-light app-cursor-pointer" data-toggle="collapse" data-target="#app-collapse-type"> </span>
-            <ul class="list-unstyled app-color-gray collapse in" id="app-collapse-type">
-              <li><a href="#">Monografie</a><span class="pull-right app-color-gray-light">24677320</span></li>
-              <li><a href="#">Periodikum</a><span class="pull-right app-color-gray-light">6730857</span></li>
-              <li><a href="#">Rukopis</a><span class="pull-right app-color-gray-light">203804</span></li>
-              <li><a href="#">Archiv</a><span class="pull-right app-color-gray-light">22250</span></li>
-              <li><a href="#">Ročník</a><span class="pull-right app-color-gray-light">5992</span></li>
-              <li><a href="#">Mapa</a><span class="pull-right app-color-gray-light">4916</span></li>
-              <li><a href="#">Výtisk</a><span class="pull-right app-color-gray-light">3291</span></li>
-              <li><a href="#">Článek</a><span class="pull-right app-color-gray-light">1496</span></li>
-              <li><a href="#">Kolekce nahrávek</a><span class="pull-right app-color-gray-light">2157</span></li>
-              <li><a href="#">Stránka</a><span class="pull-right app-color-gray-light">891</span></li>
-              <li><a href="#">Hudebnina</a><span class="pull-right app-color-gray-light">144</span></li>
-              <li><a href="#">Příloha</a><span class="pull-right app-color-gray-light">77</span></li>
-            </ul>
-          </li>
-          <hr />
-          <li>
-            <strong>Dostupnost</strong><span class="app-color-gray-light app-cursor-pointer collapsed" data-toggle="collapse" data-target="#app-collapse-avaibility"> </span>
-            <ul class="list-unstyled app-color-gray collapse" id="app-collapse-avaibility">
-              <li><a href="#">neveřejné</a><span class="pull-right app-color-gray-light">27811225</span></li>
-              <li><a href="#">veřejné</a><span class="pull-right app-color-gray-light">3678298</span></li>
-              <li><a href="#">neuvedeno</a><span class="pull-right app-color-gray-light">1</span></li>
-              <li><a href="#">dostupnost.:private"</a><span class="pull-right app-color-gray-light">1</span></li>
-              <li><a href="#">dostupnost.:public"</a><span class="pull-right app-color-gray-light">1</span></li>
-            </ul>
-          </li>
-          <hr />
-          <li>
-            <strong>Virtuální sbírky</strong><span class="app-color-gray-light app-cursor-pointer collapsed" data-toggle="collapse" data-target="#app-collapse-virtual"> </span>
-            <ul class="list-unstyled app-color-gray collapse" id="app-collapse-virtual">
-              <li><a href="#">Rok smíření</a><span class="pull-right app-color-gray-light">101985</span></li>
-              <li><a href="#">První světová válka</a><span class="pull-right app-color-gray-light">76876</span></li>
-              <li><a href="#">Muzeum Brněnska</a><span class="pull-right app-color-gray-light">74907</span></li>
-              <li><a href="#">Zednářská literatura</a><span class="pull-right app-color-gray-light">67573</span></li>
-              <li><a href="#">První světová válka</a><span class="pull-right app-color-gray-light">50759</span></li>
-              <li><a href="#">Komeniana</a><span class="pull-right app-color-gray-light">29964</span></li>
-              <li><a href="#">Historické dokumenty</a><span class="pull-right app-color-gray-light">25831</span></li>
-              <li><a href="#">Regionální muzeum v Mikulově</a><span class="pull-right app-color-gray-light">25411</span></li>
-              <li><a href="#">Řemesla a dovednosti</a><span class="pull-right app-color-gray-light">7884</span></li>
-              <li><a href="#">Vinařství</a><span class="pull-right app-color-gray-light">941</span></li>
-              <li><a href="#">Sborníky ELAG</a><span class="pull-right app-color-gray-light">334</span></li>
-              <li><a href="#">Povinná četba</a><span class="pull-right app-color-gray-light">271</span></li>
-              <li><a href="#">Atlasy</a><span class="pull-right app-color-gray-light">267</span></li>
-              <li><a href="#">EOD</a><span class="pull-right app-color-gray-light">171</span></li>
-              <li><a href="#">Mapy</a><span class="pull-right app-color-gray-light">125</span></li>
-              <li><a href="#">Academia</a><span class="pull-right app-color-gray-light">19</span></li>
-              <li><a href="#">Knihy Academia</a><span class="pull-right app-color-gray-light">5</span></li>
-              <li><a href="#">ANL</a><span class="pull-right app-color-gray-light">2</span></li>
-            </ul>
-          </li>
-          <hr />
-          <li class="app-sidebar-pushdown"> </li>
-        </ul><!--/.sidebar nav -->
-      </div><!--/.sidebar -->
 
       <!-- Content -->
       <div class="container-fluid">
         <!-- Row -->
         <div class="row">
-          <!-- Result area -->
-          <div class="col-md-12 app-result-container">
-              <div class="col-md-12">
-                <h1>This is a timeline page, dude ...</h1>
-              </div>
-            <!-- Sidebar btn -->
-            <a href="#app-btn-sidebar-toggle" class="btn app-sidebar-btn" id="app-btn-sidebar-toggle" title="Skryt sidebar">
-              <span> </span>
-            </a><!--/.sidebar btn -->
+          <!-- Timeline area -->
+          <div class="clearfix app-timeline">
+            <!-- Timeline row -->
+            <div class="app-timeline-row">
+              <!-- Btn left -->
+              <div class="app-timeline-btn app-timeline-btn-left">
+                <strong>2000</strong>
+                <i class="fa fa-angle-up fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+              </div><!--/.btn left -->
+              
+              <!-- Timeline group -->
+              <div class="app-timeline-group">
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+              </div><!--/.timeline group -->
+              
+              <!-- Btn right -->
+              <div class="app-timeline-btn app-timeline-btn-right">
+                <strong>1964</strong>
+                <i class="fa fa-angle-down fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+              </div><!--/.btn right -->
+            </div><!--/.timeline row -->
             
-          </div><!--/.result area -->
+            
+            <!-- Timeline row -->
+            <div class="app-timeline-row">
+              <!-- Btn left -->
+              <div class="app-timeline-btn app-timeline-btn-left">
+                <strong>2000</strong>
+                <i class="fa fa-angle-up fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+              </div><!--/.btn left -->
+              
+              <!-- Timeline group -->
+              <div class="app-timeline-group">
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+              </div><!--/.timeline group -->
+              
+              <!-- Btn right -->
+              <div class="app-timeline-btn app-timeline-btn-right">
+                <strong>1964</strong>
+                <i class="fa fa-angle-down fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+              </div><!--/.btn right -->
+            </div><!--/.timeline row -->
+            
+             <!-- Timeline row -->
+            <div class="app-timeline-row">
+              <!-- Btn left -->
+              <div class="app-timeline-btn app-timeline-btn-left">
+                <strong>2000</strong>
+                <i class="fa fa-angle-up fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+              </div><!--/.btn left -->
+              
+              <!-- Timeline group -->
+              <div class="app-timeline-group">
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+              </div><!--/.timeline group -->
+              
+              <!-- Btn right -->
+              <div class="app-timeline-btn app-timeline-btn-right">
+                <strong>1964</strong>
+                <i class="fa fa-angle-down fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+              </div><!--/.btn right -->
+            </div><!--/.timeline row -->
+            
+            <!-- Timeline row -->
+            <div class="app-timeline-row">
+              <!-- Btn left -->
+              <div class="app-timeline-btn app-timeline-btn-left">
+                <strong>2000</strong>
+                <i class="fa fa-angle-up fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+              </div><!--/.btn left -->
+              
+              <!-- Timeline group -->
+              <div class="app-timeline-group">
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <div class="app-timeline-item-wrapper">
+                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg app-pd-right-15">
+                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                      468<br /> 
+                      1989
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+              </div><!--/.timeline group -->
+              
+              <!-- Btn right -->
+              <div class="app-timeline-btn app-timeline-btn-right">
+                <strong>1964</strong>
+                <i class="fa fa-angle-down fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+              </div><!--/.btn right -->
+            </div><!--/.timeline row -->
+            
+            <i class="fa fa-angle-up fa-3x app-color-gray-light app-cursor-pointer app-timeline-btn-up"></i>
+            <i class="fa fa-angle-down fa-3x app-color-gray-light app-cursor-pointer app-timeline-btn-down"></i>
+            
+          </div><!--/.timeline area -->
+          <!-- Push down -->
+          <div class="col-md-12 app-timeline-pushdown"> </div><!--/.push down -->
         </div><!--/.row -->
       </div><!--/.content -->
     </div><!--/.wrapper -->
     
     
-    <!-- Footerbar -->
-    <div class="collapse app-footerbar" id="app-footerbar-choosen">
-      <div class="col-md-12">
-        <i class="fa fa-angle-left fa-3x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-        <span><a href="#" title="#"><img src="img/thumb-1.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-2.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-3.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-4.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-5.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-6.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-7.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-8.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-9.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-10.jpg" alt="#" /></a></span>
-        <span><a href="#" title="#"><img src="img/thumb-11.jpg" alt="#" /></a></span>
-        <i class="fa fa-angle-right fa-3x app-pd-left-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-      </div>
-    </div>
-    <div class="collapse app-footerbar" id="app-footerbar-newest">
-      <div class="col-md-12"> 
-        <br /><br /><br />Bottom bar newest ...<br /><br /><br /><br />
-      </div>
-    </div>
-    <div class="collapse app-footerbar" id="app-footerbar-favorite">
-      <div class="col-md-12"> 
-        <br /><br /><br />Bottom bar favorite<br /><br /><br /><br />
-      </div>
-    </div><!--/.footerbar -->
+    <!-- Timeline bar -->
+    <div class="col-md-12 app-timeline-bar">
+      Here will be timeline bar ...
+    </div><!--/.timeline bar -->
 
     
     <!-- Footer -->
     <footer class="footer">
       <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-left">
-          <li>
-            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-choosen">
-              Vybrané
-            </a>
-          </li>
-          <li>
-            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-newest">
-              Nejnovější
-            </a>
-          <li>
-            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-favorite">
-              Nejžádanější
-            </a>
-          </li>
-        </ul>
         <p class="navbar-text navbar-right">
           <small>©2015. Developed under GNU GPL by Incad, NKČR, KNAV and MZK</small>
         </p>
