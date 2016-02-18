@@ -1,4 +1,10 @@
 /*** ---/ GENERAL STYLES /--- ***/
+.carousel-inner .active.left { left: -25%; }
+.carousel-inner .next        { left:  25%; }
+.carousel-inner .prev		 { left: -25%; }
+.carousel-control 			 { width:  4%; }
+.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
+
 
 html {
   position: relative;
@@ -22,6 +28,10 @@ h1, h2, h3, h4, h5, h6 {
 
 a {
   color: #4079b1;
+}
+
+mark {
+  font-weight: bold;
 }
 
 
@@ -89,6 +99,11 @@ a {
   color: #9e9e9e !important;
 }
 
+.app-color-black,
+.app-color-black a {
+  color: #333 !important;
+}
+
 
 /*** Others ***/
 .app-cursor-pointer {
@@ -101,6 +116,17 @@ a {
 
 .app-display-block {
   display: block;
+}
+
+.dropdown-menu {
+  border-top: 0;
+}
+
+
+/*** Wrapper ***/
+#app-wrapper {
+  position: relative;
+  padding-left: 0;
 }
 
 
@@ -176,6 +202,7 @@ a {
   box-shadow: none;
 }
 
+
 /*** Search form colored ***/
 .app-search-form-colored .form-control,
 .app-search-form-colored .btn {
@@ -190,13 +217,6 @@ a {
 .app-search-form-colored .form-control:-ms-input-placeholder { color: #99bed2; } /* IE 10+ */
 .app-search-form-colored .form-control::-ms-input-placeholder { color: #99bed2; } /* Edge */
 .app-search-form-colored .form-control:placeholder-shown { color: #99bed2; } /* Standard one last! */
-
-
-/*** Wrapper ***/
-#app-wrapper {
-  position: relative;
-  padding-left: 0;
-}
 
 
 /*** Footer ***/

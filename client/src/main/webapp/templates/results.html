@@ -72,7 +72,31 @@
           </ul><!--/.nav left -->
           <!-- Nav right -->
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Přihlášení / Registrace</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Přihlášení / Registrace <span class="caret"></span></a>
+              <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                <li>
+                  <form class="form" role="form" action="login">
+                    <div class="input-group form-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                      <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="Přihlašovací jméno">                                        
+                    </div>
+                    <div class="input-group form-group">
+                      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                      <input id="login-password" type="password" class="form-control" name="password" placeholder="Heslo">
+                    </div>
+                    <div class="form-group">
+                       <button type="submit" class="btn btn-success btn-block">Přihlášení</button>
+                    </div>
+                 </form>
+                </li>
+                <li class="divider"></li>
+                <li>
+                   <p class="app-color-gray"><small>Potřebujete účet? Registrujte se ! (účet Vám umožní přidávat si tituly do oblíbených)</small></p>
+                   <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Registrace nového uživatele">
+                </li>
+             </ul>
+            </li>
             <li><a href="#">Nápověda</a></li>
             <li class="dropdown app-navbar-item-lang">
               <a href="#" data-toggle="dropdown">Cs <span class="caret"></span></a>
@@ -94,24 +118,27 @@
       <div class="row">
         <!-- App toolbar left -->
         <div class="app-toolbar-left">
-          <ul class="nav">
-            <li><a href="#" title=""><i class="fa fa-reply"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-chevron-left"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-chevron-right"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-search"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-share-alt"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-eye"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-info"></i></a></li>
-            <li><a href="#" title=""><i class="fa fa-star"></i></a></li>
-          </ul>
+          <div class="app-result-count app-color-gray">Počet nalezených výsledků: <strong class="app-color-black">2998</strong></div>
         </div><!--/.app toolbar left -->
         <!-- App toolbar right -->
         <div class="app-toolbar-right">
-          <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-left">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Library</a></li>
-            <li class="active">Data</li>
-          </ol>
+          <ul class="pagination app-pagination app-clean-radius app-clean-border app-clean-mg app-clean-bg app-right navbar-left">
+            <li>
+              <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li>
+              <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
           <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-right">
             <li><a href="#" onclick="setItemView('col')"><i class="fa fa-columns"></i></a></li>
             <li><a href="#" onclick="setItemView('row')"><i class="fa fa-list"></i></a></li>
@@ -201,8 +228,23 @@
                   1989
                 </p>
                 <div class="app-color-gray">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  <div class="clearfix" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-1">
+                    <span class="pull-left"><i class="fa fa-info"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National digital library"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
+                </div>
+                <div class="item-1 hide">
+                  <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                  <p>
+                    <em>106</em><br />
+                    <em>[1926]</em>
+                  </p>
+                  <p>
+                     náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                  </p>
+                  <p>
+                    v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                  </p>
                 </div>
               </div>
             </div><!--/.result item -->
@@ -217,8 +259,20 @@
                   1989
                 </p>
                 <div class="app-color-gray">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  <div class="clearfix" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-2">
+                    <span class="pull-left"><i class="fa fa-info"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National museum"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
+                </div>
+                <div class="item-2 hide">
+                  <strong class="app-color-black app-display-block">Pestrý týden</strong>
+                  <p>
+                    <em>16</em><br />
+                    <em>27.12.1941</em>
+                  </p>
+                  <p>
+                      pokrývka, kterou jste se- šila ze zbytků látek, odbarvěte ji v „<mark>DUHA</mark> - Odbarvovači" a přebarvěte DUHOU. Jisté najdete mezi 36 odstíny barev <mark>DUHA</mark> ten, který se pro pokrývku nejlépe                         hodí. Upo- zorňujeme však
+                  </p>
                 </div>
               </div>
             </div><!--/.result item -->
@@ -331,7 +385,6 @@
         </div><!--/.row -->
       </div><!--/.content -->
     </div><!--/.wrapper -->
-
     
     <!-- Footer -->
     <footer class="footer">
@@ -341,6 +394,58 @@
         </p>
       </div>
     </footer><!--/.footer -->
+    
+    
+    <!-- Modal - search inside of this document -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="app-modal-search">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search inside of this document</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              <!-- Form -->
+              <form class="app-search-form">
+                <div class="input-group app-clean-border">
+                  <input type="text" class="form-control app-clean-radius">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default app-clean-radius" onclick="location.href = 'results.html';"><i class="fa fa-search"></i></button>
+                  </span>
+                </div>
+              </form><!--/.form -->  
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    
+    
+    <!-- Modal - share this document -->
+    <div class="modal fade" tabindex="-1" role="dialog" id="app-modal-share">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Share this document</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              <i class="fa fa-link fa-2x app-pd-right-15"></i>
+              <a href="http://www.incad.cz" target="_blank"><i class="fa fa-facebook-official fa-2x app-pd-right-15 app-pd-left-15"></i></a>
+              <i class="fa fa-google-plus fa-2x app-pd-left-15"></i>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 
     <!-- Bootstrap core JavaScript
@@ -368,6 +473,20 @@
           $('.app-result-container .app-result-item').removeClass('app-result-item-row');
         }
       }
+      
+      // Popup events
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip(); // tooltip
+        $('[data-toggle=popover]').popover({ // popover
+          html: true,
+          trigger: 'focus',
+          content: function() {
+            var id = this.id; // id of clickable element - <i>
+            return $('.'+id).html(); // will return class same as id of clickable element
+          }
+        });
+      })
+      
       
       // Footerbar - collapse modification
       $('.app-footerbar-btn').on('click',function(){

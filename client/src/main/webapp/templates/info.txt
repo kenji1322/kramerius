@@ -1,8 +1,11 @@
 TODO
 =========
-- presunout #app-wrapper do hlavnich css z app-sidebar.css a app-sidebar-home.css !!!!
-- presunout z app-results.css nize uvedene radky do hlavniho css
-	#app-wrapper > .container-fluid > .row,
-	#app-wrapper > .container-fluid > .row > .app-result-container {
-  		height: 100%;
-	}
+- load icon
+- login page - HECHO
+- home page - bottom bar - carousel ???
+- home page - desc. obrazku nechat v levo pod popisem - HECHO
+- result page - top navbar - pocet vysledku, strankovani pagination - HECHO
+- result page - upravit popover na klik celeho radku - HECHO
+- browse - zeleny - public, cerveny - private, sedivy - neuvedene (default) - 3 stavy = 3 class
+- timeline - items s listou s infem jako v results, zmensit itemy pripadne udelat responsivni jako v results
+

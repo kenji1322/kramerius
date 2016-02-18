@@ -63,13 +63,18 @@ body {
 
 .app-col-title ul > li {
   margin-bottom: 15px;
-  border-left: 3px solid #55b2af;
+  border-left: 3px solid #9e9e9e;
   min-height: 80px;
 }
 
 .app-col-title ul > li.app-item-private {
   border-color: #c3171d;
 }
+
+.app-col-title ul > li.app-item-public {
+  border-color: #55b2af;
+}
+
 
 .app-col-author ul > li {
   margin-bottom: 15px;

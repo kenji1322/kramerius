@@ -60,9 +60,9 @@ body {
 
 /*** Min 1650 ***/
 @media (min-width: 1650px) {
-  .app-img-desc {
+  /*.app-img-desc {
     position: absolute;
     right: 30px;
     bottom: 0;
-  }
+  }*/
 }
