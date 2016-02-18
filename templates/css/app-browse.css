@@ -20,6 +20,8 @@ body {
 .app-navbar-abc > .nav {
   float: none !important;
   text-align: center;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .app-navbar-abc > .nav > li {

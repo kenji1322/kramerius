@@ -1,77 +1,85 @@
 /*** ---/ TIMELINE STYLES /--- ***/
 
+
+/*** Timeline wrapper ***/
 .app-timeline {
   padding: 30px;
   height: 650px;
-  overflow: hidden;
+  height: calc(100% - 270px);
   position: relative;
+  overflow: hidden;
 }
 
 .app-timeline-row {
-  width: 96%;
+  width: 80%;
   position: relative;
+  height: 185px;
+  margin-bottom: 15px;
 }
 
-.app-timeline > .app-timeline-row > .app-timeline-group {
+.app-timeline > .app-timeline-row > .app-timeline-scroller {
+  height: 185px;
   white-space: nowrap;
   overflow: hidden;
-  margin: 0 52px 0 52px;
+  margin: 0 55px;
 }
 
+
+/*** Timeline btn ***/
 .app-timeline-btn {
   background-color: #6e6d6d;
   color: #ffffff;
   cursor: pointer;
+  width: 185px;
+  height: 40px;
+  padding: 8px 10px;
   position: absolute;
-  text-align: left;
-  top: 0;
-  transform: rotate(-90deg);
-  transform-origin: 100% 0 0;
-  width: 180px;
-  padding-left: 15px;
+  top: 72px;
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg); 
+  -ms-transform: rotate(-90deg); 
+  -o-transform: rotate(-90deg); 
   font-size: 18px;
 }
 
-.app-timeline-btn i {
-  padding-left: 20px;
+.app-timeline-btn-group-left > i,
+.app-timeline-btn-group-right > i {
+  display: block;
+  position: absolute;
+  top: 70px;
 }
 
-.app-timeline-btn-left {
-  left: -180px;
+.app-timeline-btn-group-left > i {
+  left: 15px;
 }
 
-.app-timeline-btn-right {
-  right: 36px;
+.app-timeline-btn-group-right > i {
+  right: 15px;
+}
+
+.app-timeline-btn-group-left > .app-timeline-btn  {
+  left: -73px;
+}
+
+.app-timeline-btn-group-right > .app-timeline-btn {
+  right: -72px;
 }
 
 
-/*** Timeline items ***/
+/*** Timeline item ***/
 .app-timeline-item {
-  display: inline-block;
-  width: 450px;
-  padding-left: 0;
   white-space: normal;
-  margin-right: 10px;
-}
-
-.app-timeline-pushdown {
-  height: 60px;
-}
-
-.app-timeline-item-row {
-  width: 100% !important;
-}
-
-.app-timeline-item-wrapper {
+  display: inline-block;
   position: relative;
-  min-height: 180px;
-  margin-bottom: 15px;
+  min-height: 185px;
   border-top: 5px solid #55b2af;
   background-color: #fff;
   padding: 15px 0 0 15px;
+  width: 20%;
+  margin-right: 10px;
 }
 
-.app-timeline-item-wrapper:before {
+.app-timeline-item:before {
   content: '';
   position: absolute;
   top: 0px;
@@ -80,19 +88,30 @@
   bottom: 0px;
   border-left: 1px solid #e5e5e5;
   border-right: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
 }
 
-.app-timeline-item-wrapper > p {
+.app-timeline-item > p {
   font-size: 12px;
+  max-height: 128px;
 }
 
-.app-timeline-item-wrapper > p > strong {
+.app-timeline-item > p > strong {
   display: block;
 }
 
-.app-timeline-item-wrapper > img {
+.app-timeline-item > img {
   padding: 0 15px 15px 0;
+}
+
+.app-timeline-item > .app-timeline-item-info {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #e5e5e5;
+  padding: 3px 15px 3px 15px;
+  font-size: 11px;
 }
 
 
@@ -121,3 +140,44 @@
   background-color: #fff;
   box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.100);
 }
+
+
+/************************/
+/**** MEDIA QUERIES ****/
+/************************/
+ 
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+  .app-timeline-row {
+    width: 85%;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+ .app-timeline-row {
+    width: 90%;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .app-timeline-row {
+    width: 94%;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .app-timeline-row {
+    width: 95%;
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .app-timeline-row {
+    width: 97%;
+  }
+}
+
