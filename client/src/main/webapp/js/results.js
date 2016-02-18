@@ -47,6 +47,7 @@ Results.prototype = {
         }, this));
         
         this.itemTemplate = $(".app-result-item").clone();
+        this.numFoundLabelContainer = $("#numFoundLabel");
 
         this.getDocs();
         
@@ -84,6 +85,7 @@ Results.prototype = {
         var docs;
         if (res.grouped) {
             numFound = res.grouped.root_pid.ngroups;
+            this.numFoundLabelContainer.text(numFound);
             var groups = res.grouped.root_pid.groups;
 
             for (var i = 0; i < groups.length; i++) {
@@ -102,6 +104,7 @@ Results.prototype = {
             }
         } else {
             numFound = res.response.numFound;
+            this.numFoundLabelContainer.text(numFound);
             docs = res.response.docs;
             for (var i = 0; i < docs.length; i++) {
                 var elem = this.itemTemplate.clone();

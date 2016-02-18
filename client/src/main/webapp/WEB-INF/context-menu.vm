@@ -1,10 +1,10 @@
 
     <div class="container-fluid app-toolbar">
       <!-- Row -->
-      <div class="row">
-#if($params.page == "doc") 
+      <div class="row"> 
         <!-- App toolbar left -->
         <div class="app-toolbar-left">
+#if($params.page == "doc")
           <ul class="nav">
             <li ><a href="#" class="translate_title" data-ctx="all" data-key="buttons.back" title="$i18n.buttons.outofdocument" onclick="backToResults();"><i class="fa fa-reply"></i></a></li>
             <li ><a href="#" class="translate_title" data-ctx="all" data-key="buttons.prev" title="$i18n.buttons.prev" onclick="K5.gui.selected.prev();" ><i class="fa fa-chevron-left"></i></a></li>
@@ -18,8 +18,13 @@
             <li ><a href="#" class="translate_title" data-ctx="notfavorite" data-key="buttons.removefromfavorite"  title="$i18n.buttons.removefromfavorite" onclick="K5.authentication.askForRemoveFromProfile();"><i class="fa fa-star"></i></a></li>
 
           </ul>
-        </div><!--/.app toolbar left -->
 #end
+#if($params.page == "search")
+          <div class="app-result-count app-color-gray">Počet nalezených výsledků: <strong class="app-color-black" id="numFoundLabel"></strong></div>
+#end
+        </div>
+
+<!--/.app toolbar left -->
         <!-- App toolbar right -->
         <div class="app-toolbar-right">
           <ol class="breadcrumb app-clean-radius app-clean-bg app-right navbar-left">
