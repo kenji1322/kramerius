@@ -52,11 +52,8 @@
     "resources/js/footer.js",
 
     "resources/js/app.js",
-    "resources/js/viewers.js",
-    "resources/js/breadcrumbs.js",
     
     "resources/js/edit/selects.js",
-    "resources/js/item.js",
 
     "resources/js/viewers/forbidden.js"
     
