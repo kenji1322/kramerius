@@ -34,17 +34,18 @@
               <div class="app-result-item-wrapper policy">
                 <img class="img-responsive pull-left" src="" alt="...">
                 <p class="app-clean-mg app-pd-right-15">
-                  <strong class="app-result-item-title">loading...</strong>
+                  <strong ><a class="app-result-item-title" href="#">loading...</a></strong>
                   <div class="app-result-item-author"></div> 
                   <div class="app-result-item-rok"></div>
                   <div class="app-result-item-teaser" style="display: none;"></div>
                 </p>
-                <div class="app-color-gray app-result-footer">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer" data-toggle="popover"></i></span>
+                <div class="app-color-gray app-result-item-info" role="button" tabindex="0" data-placement="top" data-toggle="popover">
+                  <span class="pull-left"><i class="fa fa-info"></i></span>
                   <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;<span class="app-result-item-found"></span></span>
                 </div>
               </div>
             </div><!--/.result item -->
+
 
             <!-- Sidebar btn -->
             <a href="#app-btn-sidebar-toggle" class="btn app-sidebar-btn" id="app-btn-sidebar-toggle" title="Skryt sidebar">
@@ -126,6 +127,8 @@
       
       // View of result items
       function setItemView(state) {
+        window.event.preventDefault();
+        window.event.stopPropagation();
         if(state == 'row'){
           $('.app-result-container .app-result-item').addClass('app-result-item-row');
         }

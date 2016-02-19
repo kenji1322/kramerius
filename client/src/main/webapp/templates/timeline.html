@@ -67,6 +67,7 @@
           <ul class="nav navbar-nav navbar-left app-nav-pipe">
             <li><a href="browse.html">Procházet</a></li>
             <li class="active"><a href="timeline.html">Časová osa</a></li>
+            <li><a href="collection.html">Sbírky</a></li>
           </ul><!--/.nav left -->
           <!-- Nav right -->
           <ul class="nav navbar-nav navbar-right">
@@ -111,285 +112,615 @@
     
     
     <!-- Wrapper -->
-    <div id="app-wrapper">
-
+    <div id="app-wrapper" class="app-full-height">
       <!-- Content -->
-      <div class="container-fluid">
+      <div class="container-fluid app-full-height">
         <!-- Row -->
-        <div class="row">
+        <div class="row app-full-height">
           <!-- Timeline area -->
           <div class="clearfix app-timeline">
-            <!-- Timeline row -->
-            <div class="app-timeline-row">
-              <!-- Btn left -->
-              <div class="app-timeline-btn app-timeline-btn-left">
-                <strong>2000</strong>
-                <i class="fa fa-angle-up fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-              </div><!--/.btn left -->
-              
-              <!-- Timeline group -->
-              <div class="app-timeline-group">
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-                
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-                
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-              </div><!--/.timeline group -->
-              
-              <!-- Btn right -->
-              <div class="app-timeline-btn app-timeline-btn-right">
-                <strong>1964</strong>
-                <i class="fa fa-angle-down fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-              </div><!--/.btn right -->
-            </div><!--/.timeline row -->
-            
             
             <!-- Timeline row -->
             <div class="app-timeline-row">
-              <!-- Btn left -->
-              <div class="app-timeline-btn app-timeline-btn-left">
-                <strong>2000</strong>
-                <i class="fa fa-angle-up fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-              </div><!--/.btn left -->
+              <!-- Timeline sroller -->
+              <div class="app-timeline-scroller">
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+              </div><!--/.timeline scroller -->
               
-              <!-- Timeline group -->
-              <div class="app-timeline-group">
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-                
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-                
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-              </div><!--/.timeline group -->
+              <!-- Btn group left -->
+              <div class="app-timeline-btn-group-left">
+                <div class="app-timeline-btn">
+                  <strong>2002</strong>
+                </div>
+                <i class="fa fa-angle-left fa-2x app-color-gray-light app-cursor-pointer"></i>
+              </div><!--/.btn group left -->
               
-              <!-- Btn right -->
-              <div class="app-timeline-btn app-timeline-btn-right">
-                <strong>1964</strong>
-                <i class="fa fa-angle-down fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-              </div><!--/.btn right -->
+              <!-- Btn group right -->
+              <div class="app-timeline-btn-group-right">
+                <div class="app-timeline-btn">
+                  <strong>1976</strong>
+                </div>
+                <i class="fa fa-angle-right fa-2x app-color-gray-light app-cursor-pointer"></i>
+              </div><!--/.btn group right -->
             </div><!--/.timeline row -->
             
-             <!-- Timeline row -->
-            <div class="app-timeline-row">
-              <!-- Btn left -->
-              <div class="app-timeline-btn app-timeline-btn-left">
-                <strong>2000</strong>
-                <i class="fa fa-angle-up fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-              </div><!--/.btn left -->
-              
-              <!-- Timeline group -->
-              <div class="app-timeline-group">
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-                
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-                
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-              </div><!--/.timeline group -->
-              
-              <!-- Btn right -->
-              <div class="app-timeline-btn app-timeline-btn-right">
-                <strong>1964</strong>
-                <i class="fa fa-angle-down fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-              </div><!--/.btn right -->
-            </div><!--/.timeline row -->
             
             <!-- Timeline row -->
             <div class="app-timeline-row">
-              <!-- Btn left -->
-              <div class="app-timeline-btn app-timeline-btn-left">
-                <strong>2000</strong>
-                <i class="fa fa-angle-up fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
+              <!-- Timeline sroller -->
+              <div class="app-timeline-scroller">
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+              </div><!--/.timeline scroller -->
+              
+              <!-- Btn group left -->
+              <div class="app-timeline-btn-group-left">
+                <div class="app-timeline-btn">
+                  <strong>2003</strong>
+                </div>
+                <i class="fa fa-angle-left fa-2x app-color-gray-light app-cursor-pointer"></i>
               </div><!--/.btn left -->
               
-              <!-- Timeline group -->
-              <div class="app-timeline-group">
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-                
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-                
-                <!-- Timeline item -->
-                <div class="app-timeline-item">
-                  <div class="app-timeline-item-wrapper">
-                    <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                    <p class="app-clean-mg app-pd-right-15">
-                      <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                      468<br /> 
-                      1989
-                    </p>
-                  </div>
-                </div><!--/.timeline item -->
-              </div><!--/.timeline group -->
-              
-              <!-- Btn right -->
-              <div class="app-timeline-btn app-timeline-btn-right">
-                <strong>1964</strong>
-                <i class="fa fa-angle-down fa-2x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-              </div><!--/.btn right -->
+              <!-- Btn group right -->
+              <div class="app-timeline-btn-group-right">
+                <div class="app-timeline-btn">
+                  <strong>8046</strong>
+                </div>
+                <i class="fa fa-angle-right fa-2x app-color-gray-light app-cursor-pointer"></i>
+              </div><!--/.btn group right -->
             </div><!--/.timeline row -->
             
+            
+            <!-- Timeline row -->
+            <div class="app-timeline-row">
+              <!-- Timeline sroller -->
+              <div class="app-timeline-scroller">
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+              </div><!--/.timeline scroller -->
+              
+              <!-- Btn group left -->
+              <div class="app-timeline-btn-group-left">
+                <div class="app-timeline-btn">
+                  <strong>2003</strong>
+                </div>
+                <i class="fa fa-angle-left fa-2x app-color-gray-light app-cursor-pointer"></i>
+              </div><!--/.btn left -->
+              
+              <!-- Btn group right -->
+              <div class="app-timeline-btn-group-right">
+                <div class="app-timeline-btn">
+                  <strong>8046</strong>
+                </div>
+                <i class="fa fa-angle-right fa-2x app-color-gray-light app-cursor-pointer"></i>
+              </div><!--/.btn group right -->
+            </div><!--/.timeline row -->
+            
+            
+            <!-- Timeline row -->
+            <div class="app-timeline-row">
+              <!-- Timeline sroller -->
+              <div class="app-timeline-scroller">
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                <!-- Timeline item -->
+                <div class="app-timeline-item">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    <span class="app-display-block">468</span>
+                    <span class="app-display-block">1989</span>
+                  </p>
+                  <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
+                    <i class="fa fa-info app-cursor-pointer"></i>
+                  </div>
+                  <div class="app-timeline-item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em class="app-display-block">[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div><!--/.timeline item -->
+                
+              </div><!--/.timeline scroller -->
+              
+              <!-- Btn group left -->
+              <div class="app-timeline-btn-group-left">
+                <div class="app-timeline-btn">
+                  <strong>2003</strong>
+                </div>
+                <i class="fa fa-angle-left fa-2x app-color-gray-light app-cursor-pointer"></i>
+              </div><!--/.btn left -->
+              
+              <!-- Btn group right -->
+              <div class="app-timeline-btn-group-right">
+                <div class="app-timeline-btn">
+                  <strong>8046</strong>
+                </div>
+                <i class="fa fa-angle-right fa-2x app-color-gray-light app-cursor-pointer"></i>
+              </div><!--/.btn group right -->
+            </div><!--/.timeline row -->
+            
+            <!-- Vertical nav -->
             <i class="fa fa-angle-up fa-3x app-color-gray-light app-cursor-pointer app-timeline-btn-up"></i>
-            <i class="fa fa-angle-down fa-3x app-color-gray-light app-cursor-pointer app-timeline-btn-down"></i>
+            <i class="fa fa-angle-down fa-3x app-color-gray-light app-cursor-pointer app-timeline-btn-down"></i><!--/. vertical nav -->
             
           </div><!--/.timeline area -->
-          <!-- Push down -->
-          <div class="col-md-12 app-timeline-pushdown"> </div><!--/.push down -->
         </div><!--/.row -->
       </div><!--/.content -->
     </div><!--/.wrapper -->
@@ -426,6 +757,20 @@
         e.preventDefault();
         $("#app-wrapper").toggleClass("toggled");
       });
+      
+      // Popup events
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip(); // tooltip
+        $('[data-toggle=popover]').popover({ // popover
+          html: true,
+          container: 'body',
+          trigger: 'focus',
+          content: function() {
+            var id = this.id; // id of clickable element - <i>
+            return $('.'+id).html(); // will return class same as id of clickable element
+          }
+        });
+      })
       
       // Footerbar - collapse modification
       $('.app-footerbar-btn').on('click',function(){

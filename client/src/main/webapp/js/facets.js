@@ -82,11 +82,15 @@ Facets.prototype = {
             }
         });
         $('#search_form input[name="page"]').val("search");
+        
+        $("#start").val("0");
         $("#search_form").submit();
     },
     removeAllFilters: function () {
         $("#search_form input.facet").remove();
         $('#search_form input[name="page"]').val("search");
+        
+        $("#start").val("0");
         $("#search_form").submit();
     },
     

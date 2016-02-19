@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Alberto Hernandez
+ * Copyright (C) 2013-2016 Alberto Hernandez
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,6 @@ Results.prototype = {
     _init: function() {
         if (this.resultsLoaded)
             return;
-        this.addContextButtons();
         
         K5.eventsHandler.addHandler(_.bind(function(type, data) {
             if (type === "window/resized") {
@@ -48,23 +47,25 @@ Results.prototype = {
         
         this.itemTemplate = $(".app-result-item").clone();
         this.numFoundLabelContainer = $("#numFoundLabel");
-
+        
+        this.paginationContainer = $("#pagination");
+        this.pageTemplate = this.paginationContainer.find(".page").clone();
+        this.pagePrev = this.paginationContainer.find(".prev").clone();
+        this.pageNext = this.paginationContainer.find(".next").clone();
+        this.paginationContainer.empty();
+        
         this.getDocs();
         
-        $("#search_results_docs").scroll(_.bind(function() {
-            this.onScroll();
-        }, this));
+        
 
-    },
-    onScroll: function() {
-        if ($('#search_results_docs .more_docs').length > 0) {
-            var el = $('#search_results_docs .more_docs');
-            if (isScrolledIntoView($(el), $('#search_results_docs'))) {
-                var start = $('#search_results_docs .more_docs').data('start');
-                $("#start").val(start);
-                this.getDocs();
-            }
-        }
+        window.onpopstate = _.bind(function(e) {
+            //console.log(e.state);
+            var s = (e.state ? e.state.start : 0);
+            $("#start").val(s);
+            this.getDocs();
+        }, this);
+
+
     },
     getDocs: function() {
         $('.opacityloading').show();
@@ -85,7 +86,6 @@ Results.prototype = {
         var docs;
         if (res.grouped) {
             numFound = res.grouped.root_pid.ngroups;
-            this.numFoundLabelContainer.text(numFound);
             var groups = res.grouped.root_pid.groups;
 
             for (var i = 0; i < groups.length; i++) {
@@ -104,7 +104,6 @@ Results.prototype = {
             }
         } else {
             numFound = res.response.numFound;
-            this.numFoundLabelContainer.text(numFound);
             docs = res.response.docs;
             for (var i = 0; i < docs.length; i++) {
                 var elem = this.itemTemplate.clone();
@@ -116,13 +115,6 @@ Results.prototype = {
                 this.container.append(elem);
             }
         }
-        
-        if (addMore) {
-            var start = parseInt(res.responseHeader.params.rows) + parseInt(res.responseHeader.params.start);
-            $("#search_results_docs").append('<div class="more_docs" data-start="' + start + '">more...</div>');
-        }
-        
-        
             
         $("div.collections").mouseenter(function(){
             $(this).children("div.cols").show();
@@ -130,14 +122,20 @@ Results.prototype = {
         $("div.collections").mouseleave(function(){
             $(this).children("div.cols").hide();
         });
+        
+        var start = 0;
+        if(res.responseHeader.params.start){
+            start = parseInt(res.responseHeader.params.start);
+        }
+        
+        var rows = parseInt($("#rows").val());
+        if(res.responseHeader.params.rows){
+            rows = parseInt(res.responseHeader.params.rows);
+        }
 
-        this.setHeader(numFound);
+        this.setHeader(numFound, start, rows);
     },
-    addContextButtons: function() {
-        var text = $("#results_menu").html();
-        $("#contextbuttons").append(text);
-    },
-    setHeader: function(numFound) {
+    setHeader: function(numFound, start, rows) {
         var key = 'common.title.plural_2';
         if (numFound > 4) {
             key = 'common.title.plural_2';
@@ -146,9 +144,57 @@ Results.prototype = {
         } else {
             key = 'common.title.singural';
         }
-        $("#search_results_header>div.totals>span.totaltext").data('key', key);
-        $("#search_results_header>div.totals>span.totaltext").text(K5.i18n.ctx.dictionary[key]);
-        $("#search_results_header>div.totals>span.total").text(numFound);
+        
+        this.numFoundLabelContainer.find(".number").text(numFound);
+            
+        this.numFoundLabelContainer.find(".text").attr('data-key', key);
+        this.numFoundLabelContainer.find(".text").data('key', key);
+        this.numFoundLabelContainer.find(".text").text(K5.i18n.ctx.dictionary[key]);
+        
+        //Pagination
+        this.paginationContainer.empty();
+        
+        if(numFound > rows){
+            var pages = Math.min(Math.floor(numFound / rows) + 1, 5);
+            if(start > 0){
+                this.paginationContainer.append(this.pagePrev);
+            }
+            
+            
+            var curr = Math.floor(start/rows) + 1;
+            var s = Math.max(curr - 2, 1);
+            if(pages < 5){
+                s = 1;
+            }
+            
+            for(var i = 0; i<pages; i++ ){
+                var p = this.pageTemplate.clone();
+                if(curr === i+s){
+                    p.addClass("active");
+                }
+                p.find(".page-label").text(i+s);
+                p.data("start", i*rows);
+                p.click(_.partial(function(res){
+                    window.event.preventDefault();
+                    var p = $(this).data("start");
+                    $("#start").val(p);
+                    
+                    var j = searchToJson();
+                    j.start = p;
+                    var searchStr = location.origin + location.pathname + "?" + jsonToSearch(j);
+                    window.history.pushState({start: p}, null, searchStr);
+                    res.getDocs();
+                }, this));
+                this.paginationContainer.append(p);
+            }
+            if(start < numFound - rows){
+                this.paginationContainer.append(this.pageNext);
+            }
+            this.paginationContainer.show();
+        }else{
+            this.paginationContainer.hide();
+        }
+        
     }
 };
 
@@ -211,8 +257,8 @@ Result.prototype = {
         
         this.elem.find(".app-result-item-title").html(rootTitle);
         this.elem.find("img").attr("src", imgsrc);
-        this.elem.data("pid", pid);
-        this.elem.click(function(){
+        this.elem.find(".app-result-item-title").data("pid", pid);
+        this.elem.find(".app-result-item-title").click(function(){
             K5.api.gotoDisplayingItemPage($(this).data('pid'));
         });
         
@@ -269,155 +315,19 @@ Result.prototype = {
                 info.full += '<div class="collection">' + K5.i18n.translatable(doc.collection[i]) + '</div>';
             }
         }
+        
 
-        this.elem.find(".app-result-footer").attr("title", info.full)
-                .popover({html:true, placement: "auto top"})
+        this.elem.find(".app-result-item-info").attr("content", info.full)
+                .popover({html:true, 
+                    trigger: 'focus',
+                    placement: "auto top",
+                    content: info.full
+                })
                 .click(function(e){
                     e.preventDefault();
                     e.stopPropagation(); 
                 });
         
-    },
-    
-    render2: function() {
-        var doc = this.json;
-        var pid = doc.PID;
-        var imgsrc = "api/item/" + pid + "/thumb";
-        var thumb = $('<div/>', {class: 'thumb'});
-
-        var title = doc[fieldMappings.title];
-        var rootTitle = doc["root_title"];
-        var info = {short: "", full: ""};
-        info.full = '<div class="title">' + rootTitle + '</div>';
-        info.short = "";
-
-        var showtooltip = false;
-
-        if (rootTitle.length > this.maxInfoLength) {
-            showtooltip = true;
-            info.short += '<div class="title">' + rootTitle.substring(0, this.maxInfoLength) + '...</div>';
-        } else {
-            info.short += '<div class="title">' + rootTitle + '</div>';
-        }
-        this.getDetails(info);
-
-        if (doc[fieldMappings.autor]) {
-            var cre = doc[fieldMappings.autor].toString();
-            info.full += '<div class="autor">' + cre + '</div>';
-
-            if (cre.length > 50) {
-                cre = cre.substring(0, 50) + "...";
-                showtooltip = true;
-            }
-            info.short += '<div class="autor">' + cre + '</div>';
-        }
-
-        if (doc["datum_str"]) {
-            info.full += '<div class="datum">' + doc["datum_str"] + '</div>';
-            info.short += '<div class="datum">' + doc["datum_str"] + '</div>';
-        }
-
-        var linkpid = pid;
-//        if(this.collapsed && this.collapsed > 1){
-//            var collapsed = $('<div class="collapsed">'+this.collapsed+'</div>');
-//            thumb.append(collapsed);
-//        }
-        var fedora_model = doc[fieldMappings.fedora_model];
-        var typtitulu = doc["model_path"][0].split("/")[0];
-        var modeltag = $('<div class="collapsed">');
-        if ((this.collapsed && this.collapsed > 1)) {
-            linkpid = doc['root_pid'];
-            var key = 'common.hits.plural_1';
-            if (this.collapsed > 4) {
-                key = 'common.hits.plural_2';
-            }
-            var tx = K5.i18n.translatable(key);
-            modeltag.append(this.collapsed + ' ' + tx + ' ' + K5.i18n.translatable('model.locativ.' + typtitulu));
-        } else if (fedora_model === typtitulu) {
-            modeltag.append(K5.i18n.translatable('fedora.model.' + typtitulu));
-        } else {
-            modeltag.append(K5.i18n.translatable('fedora.model.' + fedora_model) + ' ' +
-                    K5.i18n.translatable('model.locativ.' + typtitulu));
-        }
-
-//        info.short += modeltag;
-//        info.full += modeltag;
-        
-
-        if (this.hl && this.hl["text_ocr"]) {
-            for (var j = 0; j < this.hl.text_ocr.length; j++) {
-                showtooltip = true;
-                info.full += '<div class="hl">' + this.hl.text_ocr[j] + '</div>';
-            }
-        }
-
-        thumb.data("pid", pid);
-        thumb.data("root_pid", doc["root_pid"]);
-        thumb.data("info", info);
-        this.elem.append(thumb);
-        var policy = $('<div/>', {class: 'policy'});
-        if (doc['dostupnost']) {
-            policy.addClass(doc['dostupnost']);
-            policy.attr("title", doc['dostupnost']);
-        }
-
-        var divimg = $('<div/>', {class: 'img'});
-        var img = $('<img/>', {src: imgsrc});
-        $(thumb).append(divimg);
-        $(divimg).append(img);
-        img.load(function() {
-            if ($(this).parent().parent().parent().hasClass('as_row')) {
-                var w = $(this).parent().parent().width() - $(this).width() - 20;
-                $(this).parent().next().css('width', w);
-            }
-        });
-
-
-        var ithumb = $('<div/>', {class: 'info'});
-        var ifull = $('<div/>', {class: 'full'});
-        var ishort = $('<div/>', {class: 'short'});
-
-        ishort.html(info.short);
-        ifull.html(info.full);
-
-        ithumb.append(ishort);
-        ithumb.append(ifull);
-        thumb.append(ithumb);
-        if (showtooltip) {
-            thumb.attr("title", title);
-            thumb.tooltip({
-                content: info.full,
-                open: function(event, ui) {
-                    K5.i18n.k5translate(ui.tooltip);
-                    //ui.tooltip.animate({ top: ui.tooltip.position().top + 10 }, "fast" );
-                },
-                position: {my: "left top", at: "right top"}
-            });
-        }
-        
-        if(doc.hasOwnProperty("collection") && doc.collection.length>0){
-            var collTag  = $("<div/>", {class: "collections"});
-            collTag.append('<span class="ui-icon ui-icon-folder-open">collections</span>');
-            var collDiv = $('<div class="cols shadow-bottom ui-widget ui-widget-content">');
-            for(var i=0; i< doc.collection.length; i++){
-                collDiv.append('<div class="collection">' + K5.i18n.translatable(doc.collection[i]) + '</div>');
-            }
-
-            collTag.append(collDiv);
-            modeltag.prepend(collTag);
-        }
-
-        thumb.append(modeltag);
-        this.elem.append(policy);
-
-
-        thumb.click(function() {
-            var hash = hashParser();
-            hash.pid = linkpid;
-            //hash.pmodel = typtitulu;
-            K5.api.gotoDisplayingItemPage(jsonToHash(hash), $("#q").val());
-        });
-
     },
     getDetails: function(info) {
         //var title = this.json["dc.title"];

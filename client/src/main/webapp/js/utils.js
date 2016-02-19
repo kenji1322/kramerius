@@ -4,8 +4,8 @@
  * Returns valid jquery identifier
  * @param {string} id to convert. 
  * @global
- */function jq(myid) { 
-    return '#' + myid.replace(/(:|\.|\/)/g,'\\$1');
+ */function jq(myid) {
+    return '#' + myid.replace(/(:|\.|\/)/g, '\\$1');
 }
 
 /**
@@ -40,9 +40,9 @@ function lookUpKey(keypath, object) {
  * @global
  */
 function link(addr, target) {
-    if(target){
-         window.open(addr, target);
-    }else{
+    if (target) {
+        window.open(addr, target);
+    } else {
         window.location.assign(addr);
     }
 }
@@ -55,7 +55,7 @@ function link(addr, target) {
 function isArray(obj) {
     if (typeof obj !== 'undefined') {
         return obj.constructor === Array;
-    } else{
+    } else {
         return false;
     }
 }
@@ -113,7 +113,7 @@ function stacktrace() {
 }
 
 // Array Remove - By John Resig (MIT Licensed)
-Array.prototype.remove = function(from, to) {
+Array.prototype.remove = function (from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
     this.length = from < 0 ? this.length + from : from;
     return this.push.apply(this, rest);
@@ -124,7 +124,7 @@ function colorToHex(c) {
 }
 
 
-var Point = function(x, y) {
+var Point = function (x, y) {
     this.x = x;
     this.y = y;
 };
@@ -132,25 +132,25 @@ var Point = function(x, y) {
 Point.prototype = {
     x: 0,
     y: 0,
-    getX: function() {
+    getX: function () {
         return this.x;
     },
-    getY: function() {
+    getY: function () {
         return this.y;
     },
-    setX: function(x) {
+    setX: function (x) {
         this.x = x;
     },
-    setY: function(y) {
+    setY: function (y) {
         this.y = y;
     },
-    move: function(dx, dy) {
+    move: function (dx, dy) {
         this.x = this.x + dx;
         this.y = this.y + dy;
     }
 }
 
-var Size = function(w, h) {
+var Size = function (w, h) {
     this.width = w;
     this.height = h;
 };
@@ -158,15 +158,15 @@ var Size = function(w, h) {
 Size.prototype = {
     width: 0,
     height: 0,
-    getWidth: function() {
+    getWidth: function () {
         return this.width;
     },
-    getHeight: function() {
+    getHeight: function () {
         return this.height;
     }
 }
 
-var Rectangle = function(x, y, width, height) {
+var Rectangle = function (x, y, width, height) {
     this.location = new Point(x, y);
     this.size = new Size(width, height);
 
@@ -176,28 +176,28 @@ Rectangle.prototype = {
     location: new Point(0, 0),
     size: new Size(0, 0),
     center: new Point(0, 0),
-    getX: function() {
+    getX: function () {
         return this.location.getX();
     },
-    getY: function() {
+    getY: function () {
         return this.location.getY();
     },
-    getWidth: function() {
+    getWidth: function () {
         return this.size.getWidth();
     },
-    getHeight: function() {
+    getHeight: function () {
         return this.size.getHeight();
     },
-    getLocation: function() {
+    getLocation: function () {
         return this.location;
     },
-    getCenter: function() {
+    getCenter: function () {
         return this.center;
     },
-    getSize: function() {
+    getSize: function () {
         return this.size;
     },
-    clone: function() {
+    clone: function () {
         return new Rectangle(this.location, this.size);
     }
 }
@@ -225,9 +225,9 @@ function isTouchDevice() {
  * @static
  */
 function cleanWindow() {
-        $(".showing").each(function(index,value) {
-                close(value);                                               
-        });
+    $(".showing").each(function (index, value) {
+        close(value);
+    });
 }
 
 /**
@@ -236,8 +236,8 @@ function cleanWindow() {
  * @static
  */
 function divopen(elm) {
-        $(elm).addClass("showing");        
-        $(elm).show();        
+    $(elm).addClass("showing");
+    $(elm).show();
 }
 
 
@@ -248,7 +248,7 @@ function divopen(elm) {
  * @static
  */
 function divclose() {
-    $(".showing").hide();     
+    $(".showing").hide();
 }
 
 /**
@@ -257,21 +257,23 @@ function divclose() {
  * @static
  */
 function close(elm) {
-        $(elm).removeClass("showing");        
-        $(elm).hide();        
+    $(elm).removeClass("showing");
+    $(elm).hide();
 }
 
 
 function toggle(elm) {
-        if ($(elm).is(':visible')) close(elm);                
-        else divopen(elm);
+    if ($(elm).is(':visible'))
+        close(elm);
+    else
+        divopen(elm);
 }
 
 function visible(elm) {
-        return ($(elm).is(':visible'));                
+    return ($(elm).is(':visible'));
 }
 
-function escapeSolrChars(value){
+function escapeSolrChars(value) {
     var specials = ['+', '-', '&', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', '\\'];
     var regexp = new RegExp("(\\" + specials.join("|\\") + ")", "g");
     return value.replace(regexp, "\\$1");
@@ -285,65 +287,65 @@ function removeHistoryPostfix(url) {
 
 /** prototypes */
 if (typeof String.prototype.startsWith !== 'function') {
-        String.prototype.startsWith = function (str){
-                return this.slice(0, str.length) === str;
-        };
+    String.prototype.startsWith = function (str) {
+        return this.slice(0, str.length) === str;
+    };
 }
 
 if (typeof String.prototype.endsWith !== 'function') {
-        String.prototype.endsWith = function (str){
-                return this.slice(-str.length) === str;
-        };
+    String.prototype.endsWith = function (str) {
+        return this.slice(-str.length) === str;
+    };
 }
 
-function getHistoryDeep(){
-    
+function getHistoryDeep() {
+
     var hash = hashParser();
     if (hash.hasOwnProperty("hist")) {
         return parseInt(hash.hist);
-    }else{
+    } else {
         return 0;
     }
 }
 
-function backToResults(){
+function backToResults() {
     var histDeep = getHistoryDeep();
     window.history.go(0 - histDeep - 1);
 }
 
-function hashParser(hash){
-    if(!hash){
+function hashParser(hash) {
+    if (!hash) {
         hash = window.location.hash;
-    }else if(!hash.startsWith("#")){
+    } else if (!hash.startsWith("#")) {
         hash = "#" + hash;
     }
-    if(hash.length > 1){
+    if (hash.length > 1) {
         hash = hash.startsWith("#!") ? hash.substring(2) : hash.substring(1);
         var parts = hash.split(";");
         var ret = {};
         //ret.pid = parts[0];
-        for(var i = 0; i<parts.length; i++){
+        for (var i = 0; i < parts.length; i++) {
             var part = parts[i].split("=");
-            if(part.length>1){
+            if (part.length > 1) {
                 ret[part[0]] = part[1];
-            }else if(i===0){
+            } else if (i === 0) {
                 // je to prvni a bez =
                 ret.pid = parts[0];
-            }else{
-                ret["key"+i] = part[0];
+            } else {
+                ret["key" + i] = part[0];
             }
         }
         return ret;
-    }else{
+    } else {
         return {};
     }
 }
 
-function jsonToHash(json){
+function jsonToHash(json) {
     var hash = "";
-    
-    $.each(json, function(item, val){
-        hash += ";"+item+"=" + val;
+
+    $.each(json, function (item, val) {
+        hash += ";" + item + "=" + val;
     });
 //    
 //    if(json.hasOwnProperty("pid")){
@@ -357,21 +359,54 @@ function jsonToHash(json){
 //    if(json.hasOwnProperty("pmodel")){
 //        hash += ";pmodel=" + json.pmodel;
 //    }
-    if(hash.length>1){
+    if (hash.length > 1) {
         hash = hash.substring(1);
     }
     return hash;
 }
 
-function isAdvancedSearch(){
+function isAdvancedSearch() {
     return $("#search_form input.facet").length > 0
 }
 
-function setAdvSearch(){
-        var fq = "";
-        $("#search_form input.facet").each(function(item){
-            fq += $(this).data("fq");
-        });
-        return fq;
+function setAdvSearch() {
+    var fq = "";
+    $("#search_form input.facet").each(function (item) {
+        fq += $(this).data("fq");
+    });
+    return fq;
 
+}
+
+function searchToJson() {
+    console.log(window.location.search)
+    if(!window.location.search || window.location.search === ""){
+        return {};
     }
+    var pairs = window.location.search.substring(1).split("&"),
+            obj = {},
+            pair,
+            i;
+
+    for (var i = 0;  i<pairs.length; i++) {
+        if (pairs[i] === "")
+            continue;
+
+        pair = pairs[i].split("=");
+        obj[ decodeURIComponent(pair[0]) ] = decodeURIComponent(pair[1]);
+    }
+
+    return obj;
+}
+
+function jsonToSearch(json){
+    var ret = "";
+
+    $.each(json, function (item, val) {
+        ret += "&" + item + "=" + val;
+    });
+    if (ret.length > 1) {
+        ret = ret.substring(1);
+    }
+    return ret;
+}

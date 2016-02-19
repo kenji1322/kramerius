@@ -23,11 +23,14 @@
   min-height: 185px;
   margin-bottom: 15px;
   border-top: 5px solid #55b2af;
+  
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
   background-color: #fff;
   padding: 15px 0 0 15px;
 }
 
-.app-result-item-wrapper:before {
+.app-result-item-wrapperkkk:before {
   content: '';
   position: absolute;
   top: 0px;
@@ -50,7 +53,7 @@
   padding: 0 15px 15px 0;
 }
 
-.app-result-item-wrapper > div {
+.app-result-item-wrapper > .app-result-item-info {
   display: block;
   position: absolute;
   left: 0;

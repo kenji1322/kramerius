@@ -6,6 +6,7 @@ TODO
 - home page - desc. obrazku nechat v levo pod popisem - HECHO
 - result page - top navbar - pocet vysledku, strankovani pagination - HECHO
 - result page - upravit popover na klik celeho radku - HECHO
-- browse - zeleny - public, cerveny - private, sedivy - neuvedene (default) - 3 stavy = 3 class
-- timeline - items s listou s infem jako v results, zmensit itemy pripadne udelat responsivni jako v results
+- browse - 3 stavy -> default (bez class sedivy), public (class "app-item-public" - zeleny), private (class "app-item-private" - cerveny) - HECHO
+- timeline - items s listou s infem jako v results, zmensit itemy pripadne udelat responsivni jako v results - HECHO
+- results - upravit html a css - HECHO
 

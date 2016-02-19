@@ -1,0 +1,171 @@
+/*** ---/ COLLECTION STYLES /--- ***/
+
+
+/*** Timeline wrapper ***/
+.app-timeline {
+  padding: 30px;
+  height: calc(100% - 70px);
+  position: relative;
+  overflow: hidden;
+}
+
+.app-timeline-row {
+  width: 80%;
+  position: relative;
+  height: 185px;
+  margin-bottom: 15px;
+  background-color: re;
+}
+
+.app-timeline > .app-timeline-row > .app-timeline-scroller {
+  height: 185px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0 62px 0 82px;
+}
+
+
+/*** Timeline btn ***/
+.app-timeline-btn {
+  background-color: #6e6d6d;
+  color: #ffffff;
+  cursor: pointer;
+  width: 185px;
+  height: 60px;
+  padding: 8px 10px;
+  position: absolute;
+  top: 62px;
+  -webkit-transform: rotate(-90deg); 
+  -moz-transform: rotate(-90deg); 
+  -ms-transform: rotate(-90deg); 
+  -o-transform: rotate(-90deg); 
+}
+
+.app-timeline-btn-group-left > i,
+.app-timeline-btn-group-right > i {
+  display: block;
+  position: absolute;
+  top: 70px;
+}
+
+.app-timeline-btn-group-left > i {
+  left: 65px;
+}
+
+.app-timeline-btn-group-right > i {
+  right: 45px;
+}
+
+.app-timeline-btn-group-left > .app-timeline-btn  {
+  left: -63px;
+}
+
+.app-timeline-btn-group-right > .app-timeline-btn {
+  height: 40px;
+  top: 72px;
+  right: -72px;
+  font-size: 18px;
+}
+
+
+/*** Timeline item ***/
+.app-timeline-item {
+  white-space: normal;
+  display: inline-block;
+  position: relative;
+  min-height: 185px;
+  border-top: 5px solid #55b2af;
+  background-color: #fff;
+  padding: 15px 0 0 15px;
+  width: 20%;
+  margin-right: 10px;
+}
+
+.app-timeline-item:before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+}
+
+.app-timeline-item > p {
+  font-size: 12px;
+  max-height: 128px;
+}
+
+.app-timeline-item > p > strong {
+  display: block;
+}
+
+.app-timeline-item > img {
+  padding: 0 15px 15px 0;
+}
+
+.app-timeline-item > .app-timeline-item-info {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #e5e5e5;
+  padding: 3px 15px 3px 15px;
+  font-size: 11px;
+}
+
+
+/*** Vertical nav ***/
+.app-timeline-btn-up {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+}
+
+.app-timeline-btn-down {
+  position: absolute;
+  bottom: 0px;
+  right: 30px;
+}
+
+
+/************************/
+/**** MEDIA QUERIES ****/
+/************************/
+ 
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+  .app-timeline-row {
+    width: 85%;
+  }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+ .app-timeline-row {
+    width: 90%;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+  .app-timeline-row {
+    width: 94%;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .app-timeline-row {
+    width: 95%;
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .app-timeline-row {
+    width: 97%;
+  }
+}
