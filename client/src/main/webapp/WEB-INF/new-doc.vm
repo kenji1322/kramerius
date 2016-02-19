@@ -1,0 +1,101 @@
+
+  <head>
+    #parse("new-common-header.vm")
+    <link href="templates/css/app-results.css" rel="stylesheet">
+    <link href="templates/css/app-toolbar.css" rel="stylesheet">
+    <link href="templates/css/app-sidebar.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+<!-- Navbar -->
+    #parse("navbar.vm")
+<!--/.navbar -->    
+    
+    <!-- App toolbar -->
+    #parse("context-menu.vm")
+    <!--/.app toolbar -->
+    
+    
+    
+    
+    <!-- Wrapper -->
+    <div id="app-wrapper">
+      <!-- Sidebar -->
+      #parse("new-doc-metadata.vm")
+      <!--/.sidebar -->
+
+      <!-- Content -->
+      <div class="container-fluid">
+        <!-- Row -->
+        <div class="row">
+          <!-- Result area -->
+          <div class="app-result-container clearfix #if($params.detail == "true")app-result-detail #else app-result-level#end">
+            <!-- Thumb col -->
+            #parse("new-doc-thumbs.vm")
+            <!--/.thumb col -->
+            #if($params.detail == "true")
+            <!-- View detail col -->
+            #parse("new-doc-viewer.vm")
+            <!--/.view detail col -->
+            #end
+            <!-- Sidebar btn -->
+            <a href="#app-btn-sidebar-toggle" class="btn app-sidebar-btn" id="app-btn-sidebar-toggle" title="Skryt sidebar">
+              <span> </span>
+            </a><!--/.sidebar btn -->
+            
+            <!-- Push down -->
+            <div class="col-md-12 app-result-pushdown"> </div><!--/.push down -->
+          </div><!--/.result area -->
+        </div><!--/.row -->
+      </div><!--/.content -->
+    </div><!--/.wrapper -->
+    
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container-fluid">
+        <p class="navbar-text navbar-right">
+          <small>©2015. Developed under GNU GPL by Incad, NKČR, KNAV and MZK</small>
+        </p>
+      </div>
+    </footer><!--/.footer -->
+
+
+
+    
+    <!-- Custom js -->
+    <script src="js/doc.js" type="text/javascript" ></script>
+    <script>
+
+        var fieldMappings = $search.mappings;
+
+      // Sidebar toggle script
+      $("#app-btn-sidebar-toggle").click(function(e) {
+        e.preventDefault();
+        $("#app-wrapper").toggleClass("toggled");
+      });
+      
+      // View of result items
+      function setItemView(state) {
+        window.event.preventDefault();
+        window.event.stopPropagation();
+        if(state == 'row'){
+          $('.app-result-container .app-result-item').addClass('app-result-item-row');
+        }
+        else {
+          $('.app-result-container .app-result-item').removeClass('app-result-item-row');
+        }
+      }
+      
+      // Footerbar - collapse modification
+      $('.app-footerbar-btn').on('click',function(){
+        var isActive = $(this).parent().hasClass('active'); // set var to recognize if the parent element contains class 'active'
+        $('.app-footerbar').collapse('hide'); // hide when some other element is collapsed
+        $('.app-footerbar-btn').parent().removeClass('active'); // remove class 'active' from all parent elements 
+        if(!isActive){ // condition for adding class 'active' to the parent element
+          $(this).parent().addClass('active');
+        }
+      })
+    </script>
+  </body>

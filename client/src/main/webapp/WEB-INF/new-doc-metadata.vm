@@ -1,0 +1,51 @@
+
+    
+      <div id="app-sidebar-wrapper">
+        <!-- Sidebar nav -->
+        <div class="nav app-sidebar-nav">
+          <p>
+            <strong>Collection of Czechoslovak chemical communications</strong>
+          </p>
+          <p>
+            Původ titulu: <a href="#" title="">kramerius.lib.cas.cz</a>
+          </p>
+          <p>
+            <strong><small>Periodikum</small></strong>
+          </p>
+          <hr />
+          <p>
+            <small>
+              <em>Identifikátor</em><br />
+              <strong class="app-display-block app-pd-left-15">84512d5e-9c67-11e2-8aad-005056a60003</strong>
+            </small>
+          </p>
+          <p>
+            <small>
+              <em>Identifikátor</em><br />
+              <strong class="app-display-block app-pd-left-15">nez ISSN 0010-0765</strong>
+            </small>
+          </p>
+          <p>
+            <small>
+              <em>Názvová informace</em><br />
+              <em class="app-display-block app-pd-left-15">Názvová informace</em>
+              <strong class="app-display-block app-pd-left-15">Collection of Czechoslovak chemical communications</strong>
+            </small>
+          </p>
+          <p>
+            <small>
+              <em>Názvová informace</em><br />
+              <em class="app-display-block app-pd-left-15">Názvová informace</em>
+              <strong class="app-display-block app-pd-left-15">Collection des travaux chimiques de Tchécoslovaquie, Sbornik čechoslovackich chimičeskich rabot</strong>
+            </small>
+          </p>
+          <p>
+            <small>
+              <em>Názvová informace</em><br />
+              <em class="app-display-block app-pd-left-15">Názvová informace</em>
+              <strong class="app-display-block app-pd-left-15">Collection of Czechoslovak chemical communications</strong>
+            </small>
+          </p>
+          <div class="app-sidebar-pushdown"> </div>
+        </div><!--/.sidebar nav -->
+      </div>

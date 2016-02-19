@@ -30,17 +30,6 @@
   padding: 15px 0 0 15px;
 }
 
-.app-result-item-wrapperkkk:before {
-  content: '';
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
-  border-left: 1px solid #e5e5e5;
-  border-right: 1px solid #e5e5e5;
-}
-
 .app-result-item-wrapper > p {
   font-size: 12px;
 }
@@ -96,7 +85,7 @@
   height: 100%;
 }
 
-.app-result-detail-thumb {
+.app-result-detail .app-result-detail-thumb {
   position: absolute;
   top: 0;
   left: 0;
