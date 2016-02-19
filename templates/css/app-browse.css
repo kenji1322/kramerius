@@ -1,8 +1,5 @@
 /*** ---/ BROWSE STYLES /--- ***/
 
-body {
- /* overflow: hidden;*/
-}
 
 /*** Toolbar ***/
 .app-toolbar .form-control {
@@ -58,15 +55,21 @@ body {
 
 .app-col-title ul,
 .app-col-author ul {
-  height:calc(100% - 40px);
   overflow:auto;
   padding-top: 15px;
+}
+
+.app-col-title ul {
+    height:calc(100% - 40px);
+}
+
+.app-col-author ul {
+  height:calc(100% - 85px);
 }
 
 .app-col-title ul > li {
   margin-bottom: 15px;
   border-left: 3px solid #9e9e9e;
-  min-height: 80px;
 }
 
 .app-col-title ul > li.app-item-private {
@@ -80,7 +83,12 @@ body {
 
 .app-col-author ul > li {
   margin-bottom: 15px;
-  min-height: 40px;
+}
+
+/*** Clear left everytime after second col ***/
+.app-col-title ul > li.col-md-6:nth-child(2n+1),
+.app-col-author ul > li.col-md-6:nth-child(2n+1) {
+  clear: left;
 }
 
 
@@ -88,8 +96,20 @@ body {
 /**** MEDIA QUERIES ****/
 /************************/
 
-/*** Min 1200 ***/
-@media (min-width: 1200px) {
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+  .app-col-title ul,
+  .app-col-author ul {
+    height:calc(100% - 85px);
+  }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+  .app-col-title ul,
+  .app-col-author ul {
+    height:calc(100% - 40px);
+  }
   .app-toolbar .form-control {
     margin-left: 500px;
   } 
