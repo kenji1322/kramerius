@@ -1,13 +1,6 @@
 /*** ---/ GENERAL STYLES /--- ***/
-.carousel-inner .active.left { left: -25%; }
-.carousel-inner .next        { left:  25%; }
-.carousel-inner .prev		 { left: -25%; }
-.carousel-control 			 { width:  4%; }
-.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
-
-
 html {
-  position: relative;
+/*  position: relative;*/
   /*min-height: 100%;*/
   height: 100%;
 }
@@ -133,6 +126,11 @@ mark {
   padding-left: 0;
 }
 
+.app-content-wrapper {
+  /*padding: 30px 15px 60px 30px;*/
+  position: relative;
+}
+
 
 /*** Navbar ***/
 .app-navbar {
@@ -179,6 +177,11 @@ mark {
 
 .app-navbar-item-lang .dropdown-menu {
   min-width: 70px;
+}
+
+.app-navbar-item-login .dropdown-menu {
+  padding: 15px;
+  min-width: 250px;
 }
 
 .navbar-brand {
@@ -263,7 +266,7 @@ footer .navbar-text {
 /*** Min 768 ***/
 @media (min-width: 768px) {
   .app-navbar .checkbox {
-    margin-left: 15px;  
+    margin-left: 10px;  
   }
   .navbar-form .input-group > .form-control {
     width: 220px;
@@ -328,11 +331,17 @@ footer .navbar-text {
   .app-navbar .dropdown-menu > li > a:focus {
     background-color: #006698;
   }
+  .app-navbar-item-login .divider {
+    background-color: #99bed2 !important;
+  }
+  .app-navbar-item-login > ul > li > p.app-color-gray {
+    color: #99bed2 !important;
+  }
 }
 
-/*** Max 1090 and Min 768 ***/
-@media (max-width: 1090px) and (min-width: 768px) {
-  .app-page-result .app-navbar .navbar-right {
-    display: none;
+/*** Max 850 and Min 768 ***/
+@media (max-width: 850px) and (min-width: 768px) {
+  .navbar-form .input-group > .form-control {
+    width: 170px;
   }
 }

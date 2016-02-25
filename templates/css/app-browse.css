@@ -28,17 +28,8 @@
 
 
 /*** Content ***/
-.app-container,
-.app-container > .row,
-.app-container > .row > .app-col-title,
-.app-container > .row > .app-col-title > .row,
-.app-container > .row > .app-col-author,
-.app-container > .row > .app-col-author > .row {
-  height:100%
-}
-
-.app-container {
-  height:calc(100% - 150px);
+.app-content-wrapper {
+  height:calc(100% - 145px);
 }
 
 .app-col-title-label,

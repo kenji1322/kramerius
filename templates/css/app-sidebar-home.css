@@ -6,11 +6,9 @@
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-}
-
-#app-wrapper > .container-fluid {
-  padding-bottom: 60px; /* pusher for footer ***/
-  height: 100%;
+  height:calc(100% - 4px);
+  padding-bottom: 40px;
+  position: relative;
 }
 
 #app-wrapper.toggled {
@@ -19,11 +17,12 @@
 
 /*** Sidebar ***/
 #app-sidebar-wrapper {
-  z-index: 100;
-  position: fixed;
+  z-index: 0;
+  /*position: fixed;*/
+  position: absolute;
   right: 370px;
   width: 0;
-  height: 100%;
+  height: calc(100% - 40px);
   margin-right: -370px;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
@@ -47,6 +46,7 @@
   top: 20px;
   left: 20px;
   width: 315px;
+  padding-bottom: 20px;
 }
 
 .app-sidebar-nav > hr {
@@ -82,16 +82,13 @@
   display: block;
   position: absolute;
   padding: 10px 2px;
-  top:150px;
+  top:30%;
   right: 0;
-  z-index: 1001;
   background-color: #ffffff;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border: 1px solid #d9d9d9;
   border-right: 0;
- /*-webkit-box-shadow: -15px 0 10px -12px #333;
-  box-shadow: -2px 0 8px -3px silver;*/
   color: #0073B2;
 }
 
@@ -104,17 +101,13 @@
   content:"\e257";
 }
 
-.app-sidebar-pushdown {
-  height: 100px;
-}
-
 
 /************************/
 /**** MEDIA QUERIES *****/
 /************************/
 
-/*** Min 1110 ***/
-@media(min-width:1110px) {
+/*** Min 768 ***/
+@media(min-width:768px) {
   #app-wrapper {
     padding-right: 370px;
   }
@@ -129,13 +122,13 @@
   }
 }
 
-/*** Max 1110 ***/
-@media(max-width:1110px) {
+/*** Max 768 ***/
+@media(max-width:768px) {
   #app-wrapper .app-sidebar-btn span:after {
-    content:"\e257";
+    content:"\e258";
   }
   #app-wrapper.toggled .app-sidebar-btn span:after {
-    content:"\e258" !important;
+    content:"\e257" !important;
   }
   #app-wrapper.toggled #app-sidebar-wrapper { /* IE fix behavior of scrollbar */
     -ms-overflow-style: scrollbar;

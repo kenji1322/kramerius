@@ -63,9 +63,9 @@
           </ul><!--/.nav left -->
           <!-- Nav right -->
           <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+            <li class="dropdown app-navbar-item-login">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Přihlášení / Registrace <span class="caret"></span></a>
-              <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+              <ul class="dropdown-menu">
                 <li>
                   <form class="form" role="form" action="login">
                     <div class="input-group form-group">
@@ -103,7 +103,7 @@
     </nav><!--/.navbar -->
     
     
-    <!-- Wrapper -->
+    <!-- App wrapper -->
     <div id="app-wrapper">
       <!-- Sidebar -->
       <div id="app-sidebar-wrapper">
@@ -162,16 +162,16 @@
             </ul>
           </li>
           <hr />
-          <li class="app-sidebar-pushdown"> </li>
         </ul><!--/.sidebar nav -->
       </div><!--/.sidebar -->
       
       <!-- Content -->
-      <div class="container-fluid">
+      <div class="container-fluid app-full-height">
         <!-- Row -->
-        <div class="row">
-          <!-- Container -->
-          <div class="col-md-12 app-home-container">
+        <div class="row app-full-height">
+          <!-- Contant wrapper -->
+          <div class="app-content-wrapper app-full-height">
+            <div class="app-home-wrapper">
             <!-- Dialog window -->
             <div class="app-home-dialog">
               <!-- Form -->
@@ -217,16 +217,17 @@
                 </a>
               </h4>
             </div><!--/.img desc -->
+            </div>
             
             <!-- Sidebar btn -->
             <a href="#app-btn-sidebar-toggle" class="btn app-sidebar-btn" id="app-btn-sidebar-toggle" title="Skryt sidebar">
               <span></span>
             </a><!--/.sidebar btn -->
             
-          </div><!--/.container -->
+          </div><!--/.content wrapper -->
         </div><!--/.row -->
       </div><!--/.content -->
-    </div><!--/.wrapper -->
+    </div><!--/.app wrapper -->
     
     
     <!-- Footerbar -->

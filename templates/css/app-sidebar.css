@@ -6,12 +6,9 @@
   -moz-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  height:calc(100% - 44px);
   padding-top: 40px;
-}
-
-#app-wrapper > .container-fluid {
-  /*padding-bottom: 60px;*/ /* pusher for footer ***/
-  height: 100%;
+  position: relative;
 }
 
 #app-wrapper.toggled {
@@ -21,10 +18,11 @@
 /*** Sidebar ***/
 #app-sidebar-wrapper {
   z-index: 0;
-  position: fixed;
+  /*position: fixed;*/
+  position: absolute;
   left: 370px;
   width: 0;
-  height: 100%;
+  height: calc(100% - 40px);
   margin-left: -370px;
   overflow-x: hidden;
   overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
@@ -48,6 +46,7 @@
   top: 20px;
   left: 20px;
   width: 315px;
+  padding-bottom: 20px;
 }
 
 .app-sidebar-nav > hr {
@@ -83,16 +82,13 @@
   display: block;
   position: absolute;
   padding: 10px 2px;
-  top:150px;
+  top:30%;
   left: 0;
-  z-index: 1001;
   background-color: #ffffff;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border: 1px solid #d9d9d9;
   border-left: 0;
- /*-webkit-box-shadow: -15px 0 10px -12px #333;
-  box-shadow: -2px 0 8px -3px silver;*/
   color: #0073B2;
 }
 
@@ -103,10 +99,6 @@
 
 #app-wrapper.toggled .app-sidebar-btn span:after {
   content:"\e258";
-}
-
-.app-sidebar-pushdown {
-  height: 150px;
 }
 
 
