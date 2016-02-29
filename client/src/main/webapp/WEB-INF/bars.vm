@@ -1,0 +1,1 @@
+$search.getDaJSON("fedora.model:monograph OR fedora.model:map")

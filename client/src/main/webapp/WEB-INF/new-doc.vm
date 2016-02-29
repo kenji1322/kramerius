@@ -1,12 +1,14 @@
 
   <head>
     #parse("new-common-header.vm")
-    <link href="templates/css/app-results.css" rel="stylesheet">
     <link href="templates/css/app-toolbar.css" rel="stylesheet">
     <link href="templates/css/app-sidebar.css" rel="stylesheet">
+    <link href="templates/css/app-results.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body class="app-page-document #if($params.detail == "true")
+app-page-detail
+#end">
 
 <!-- Navbar -->
     #parse("navbar.vm")
@@ -18,19 +20,18 @@
     
     
     
-    
     <!-- Wrapper -->
     <div id="app-wrapper">
       <!-- Sidebar -->
       #parse("new-doc-metadata.vm")
       <!--/.sidebar -->
 
-      <!-- Content -->
-      <div class="container-fluid">
+
+<div class="container-fluid app-full-height">
         <!-- Row -->
-        <div class="row">
-          <!-- Result area -->
-          <div class="app-result-container clearfix #if($params.detail == "true")app-result-detail #else app-result-level#end">
+        <div class="row app-full-height">
+          <!-- Content wrapper -->
+          <div class="app-content-wrapper app-full-height">
             <!-- Thumb col -->
             #parse("new-doc-thumbs.vm")
             <!--/.thumb col -->
@@ -39,30 +40,20 @@
             #parse("new-doc-viewer.vm")
             <!--/.view detail col -->
             #end
+            
             <!-- Sidebar btn -->
             <a href="#app-btn-sidebar-toggle" class="btn app-sidebar-btn" id="app-btn-sidebar-toggle" title="Skryt sidebar">
               <span> </span>
             </a><!--/.sidebar btn -->
             
-            <!-- Push down -->
-            <div class="col-md-12 app-result-pushdown"> </div><!--/.push down -->
-          </div><!--/.result area -->
+          </div><!--/.content wrapper -->
         </div><!--/.row -->
-      </div><!--/.content -->
+      </div>
     </div><!--/.wrapper -->
     
-    
     <!-- Footer -->
-    <footer class="footer">
-      <div class="container-fluid">
-        <p class="navbar-text navbar-right">
-          <small>©2015. Developed under GNU GPL by Incad, NKČR, KNAV and MZK</small>
-        </p>
-      </div>
-    </footer><!--/.footer -->
-
-
-
+    #parse('new-footer.vm')
+    <!--/.footer -->
     
     <!-- Custom js -->
     <script src="js/doc.js" type="text/javascript" ></script>

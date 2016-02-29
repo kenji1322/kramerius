@@ -57,59 +57,9 @@
       </div><!--/.content -->
     </div><!--/.wrapper -->
     
-    
-    <!-- Footerbar -->
-    <div class="collapse app-footerbar" id="app-footerbar-choosen">
-      <div class="col-md-12">
-        <i class="fa fa-angle-left fa-3x app-pd-right-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-            <div class="home-thumbs">
-                    <span><a href="#" title="#"><img src="" alt="#" /></a></span>
-            </div>
-        <i class="fa fa-angle-right fa-3x app-pd-left-15 app-color-gray-light app-cursor-pointer app-va-md"></i>
-      </div>
-    </div>
-    <div class="collapse app-footerbar" id="app-footerbar-newest">
-      <div class="col-md-12"> 
-        <div class="home-thumbs">
-                <span><a href="#" title="#"><img src="" alt="#" /></a></span>
-        </div>
-      </div>
-    </div>
-    <div class="collapse app-footerbar" id="app-footerbar-favorite">
-      <div class="col-md-12"> 
-        <div class="home-thumbs">
-                <span><a href="#" title="#"><img src="" alt="#" /></a></span>
-        </div>
-      </div>
-    </div><!--/.footerbar -->
-
-    
     <!-- Footer -->
-    <footer class="footer">
-      <div class="container-fluid">
-        <ul class="nav navbar-nav navbar-left">
-          <li>
-            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-choosen">
-              Vybrané
-            </a>
-          </li>
-          <li>
-            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-newest">
-              Nejnovější
-            </a>
-          <li>
-            <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-favorite">
-              Nejžádanější
-            </a>
-          </li>
-        </ul>
-        <p class="navbar-text navbar-right">
-          <small>©2015. Developed under GNU GPL by Incad, NKČR, KNAV and MZK</small>
-        </p>
-      </div>
-    </footer><!--/.footer -->
-
-
+    #parse('new-footer.vm')
+    <!--/.footer -->
 
     
     <!-- Custom js -->

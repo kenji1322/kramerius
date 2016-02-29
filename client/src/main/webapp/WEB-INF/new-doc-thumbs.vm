@@ -1,113 +1,125 @@
-<div class="app-result-detail-thumb">
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper app-result-item-wrapper-active">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 1</strong>
-                    title 1
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 2</strong>
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 3</strong>
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 3</strong>
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper app-result-item-wrapper-active">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 1</strong>
-                    title 1
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 2</strong>
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 3</strong>
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 3</strong>
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper app-result-item-wrapper-active">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 1</strong>
-                    title 1
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 2</strong>
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 3</strong>
-                  </p>
-                </div>
-              </div><!--/.result item -->
-              <!-- Result item -->
-              <div class="col-md-2 app-result-item">
-                <div class="app-result-item-wrapper">
-                  <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Page 3</strong>
-                  </p>
-                </div>
-              </div><!--/.result item -->
+<div class="app-document-wrapper app-full-height">
+              <div class="clearfix">
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper app-result-item-wrapper-active">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+                <!-- Result item -->
+                <div class="col-md-2 app-result-item">
+                  <div class="app-result-item-wrapper">
+                    <img class="img-responsive" src="img/thumb-2.jpg" alt="...">
+                    <p class="app-clean-mg">
+                      <strong>Ročník I</strong>
+                      Collection of Czechoslovak chemical communications Datum vydání: 1929<br /> 
+                      Ročník I
+                    </p>
+                  </div>
+                </div><!--/.result item -->
+              </div>
             </div>

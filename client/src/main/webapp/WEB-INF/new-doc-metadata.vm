@@ -1,6 +1,4 @@
-
-    
-      <div id="app-sidebar-wrapper">
+<div id="app-sidebar-wrapper">
         <!-- Sidebar nav -->
         <div class="nav app-sidebar-nav">
           <p>
@@ -46,6 +44,5 @@
               <strong class="app-display-block app-pd-left-15">Collection of Czechoslovak chemical communications</strong>
             </small>
           </p>
-          <div class="app-sidebar-pushdown"> </div>
         </div><!--/.sidebar nav -->
       </div>

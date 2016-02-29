@@ -1,0 +1,25 @@
+<footer class="footer">
+<div class="container-fluid">
+#if(!$params.page || $params.page == 'home')
+  <ul class="nav navbar-nav navbar-left">
+    <li>
+      <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-choosen">
+        #translatable('common.cool')
+      </a>
+    </li>
+    <li>
+      <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-newest">
+        #translatable('common.latest')
+      </a>
+    <li>
+      <a role="button" class="app-footerbar-btn" data-toggle="collapse" href="#app-footerbar-favorite">
+        #translatable('common.popular')
+      </a>
+    </li>
+  </ul>
+#end
+  <p class="navbar-text navbar-right">
+    <small>©2015. Developed under GNU GPL by Incad, NKČR, KNAV and MZK</small>
+  </p>
+</div>
+</footer>
