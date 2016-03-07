@@ -85,6 +85,14 @@ var Da = function(elem, th, options) {
             this.options = options;
         }
         
+        
+    this.maxYear = 0;
+    this.minYear = 3000;
+    this.yearWithMaxCount = 0;
+    this.maxCount = 0;
+    this.minCount = 0;
+    this.years = [];
+        
     var da = this;
     this.init();
     $(this.canvas).click(function(event) {
@@ -115,16 +123,6 @@ var Da = function(elem, th, options) {
                 event.stopPropagation();
             },
             threshold: 20
-        });
-    }else{
-        $(this.canvas).mousewheel(function(event) {
-            if (!da.scrolling) {
-                if (event.deltaX !== 0) {
-                    da.doScroll(event.deltaX);
-                } else {
-                    da.doScroll(-event.deltaY);
-                }
-            }
         });
     }
 
@@ -190,24 +188,18 @@ Da.prototype = {
 
         this.barsPanelheight = $(this.canvas).height();
         $(this.canvas).attr("height", this.barsPanelheight);
-        var totalWidth = this.period * (this.barMargin + this.barWidth);
-        this.barsPanelWidth = totalWidth;
-        $(this.canvas).css("width", totalWidth);
-        $(this.canvas).attr("width", totalWidth);
-        this.scale = (1.0 * this.barsPanelheight) / this.maxCount;
-
         this.infoCanvas = $('<canvas/>');
-        $(this.infoCanvas).css({left: 0, top: 0, "z-index": 20, "position": "absolute", "cursor": "pointer"});
-        $(this.infoCanvas).css("width", totalWidth);
-        $(this.infoCanvas).attr("width", totalWidth);
-        $(this.infoCanvas).css("height", $(this.canvas).height());
-        $(this.infoCanvas).attr("height", $(this.canvas).height());
+        
+        
+        
+        
+
         this.$div.append(this.infoCanvas);
 
 
     },
     load: function(){
-        $.get("bars.vm", _.bind(function(data){
+        $.getJSON("bars.vm", _.bind(function(data){
             
             var jarray = data;
             this.maxYear = 0;
@@ -246,6 +238,20 @@ Da.prototype = {
         }, this));
     },
     render: function() {
+        
+        var totalWidth = this.period * (this.barMargin + this.barWidth);
+        this.barsPanelWidth = totalWidth;
+        $(this.canvas).css("width", totalWidth);
+        $(this.canvas).attr("width", totalWidth);
+        this.scale = (1.0 * this.barsPanelheight) / this.maxCount;
+
+        $(this.infoCanvas).css({left: 0, top: 0, "z-index": 20, "position": "absolute", "cursor": "pointer"});
+        $(this.infoCanvas).css("width", totalWidth);
+        $(this.infoCanvas).attr("width", totalWidth);
+        $(this.infoCanvas).css("height", $(this.canvas).height());
+        $(this.infoCanvas).attr("height", $(this.canvas).height());
+        
+        
         for (var i = 0; i <= this.period; i++) {
             if ((i + this.minYear) % 10 === 0) {
                 var l = i * (this.barMargin + this.barWidth);
@@ -373,7 +379,7 @@ Da.prototype = {
         var speed = 500;
         var obj = this;
         this.scrolling = true;
-        this.$div.animate({scrollLeft: to}, speed, function() {
+        this.$div.parent().animate({scrollLeft: to}, speed, function() {
             obj.scrolling = false;
         });
         if (to <= 0) {

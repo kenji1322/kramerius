@@ -19,9 +19,10 @@
     
     <!-- App CSS -->
     <link href="css/app.css" rel="stylesheet">
-    <link href="css/app-results.css" rel="stylesheet">
     <link href="css/app-toolbar.css" rel="stylesheet">
     <link href="css/app-sidebar.css" rel="stylesheet">
+    <link href="css/app-results.css" rel="stylesheet">
+
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -72,10 +73,10 @@
             <li><a href="collection.html">Sbírky</a></li>
           </ul><!--/.nav left -->
           <!-- Nav right -->
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+          <ul class="nav navbar-nav navbar-right visible-lg visible-xs">
+            <li class="dropdown app-navbar-item-login">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Přihlášení / Registrace <span class="caret"></span></a>
-              <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+              <ul class="dropdown-menu">
                 <li>
                   <form class="form" role="form" action="login">
                     <div class="input-group form-group">
@@ -150,7 +151,7 @@
     </div><!--/.app toolbar -->
     
     
-    <!-- Wrapper -->
+    <!-- App wrapper -->
     <div id="app-wrapper">
       <!-- Sidebar -->
       <div id="app-sidebar-wrapper">
@@ -209,180 +210,243 @@
             </ul>
           </li>
           <hr />
-          <li class="app-sidebar-pushdown"> </li>
         </ul><!--/.sidebar nav -->
       </div><!--/.sidebar -->
 
       <!-- Content -->
-      <div class="container-fluid">
+      <div class="container-fluid app-full-height">
         <!-- Row -->
-        <div class="row">
-          <!-- Result area -->
-          <div class="app-result-container clearfix">
-            <!-- Result item -->
-            <div class="col-md-3 app-result-item">
-              <div class="app-result-item-wrapper">
-                <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
-                <p class="app-clean-mg app-pd-right-15">
-                  <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                  468<br /> 
-                  1989
-                </p>
-                <div class="app-color-gray app-result-item-info" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-1">
-                  <span class="pull-left"><i class="fa fa-info"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National digital library"></i>&#160;&#160;3 nálezy v periodiku</span>
-                </div>
-                <div class="item-1 hide">
-                  <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
-                  <p>
-                    <em class="app-display-block">106</em>
-                    <em>[1926]</em>
+        <div class="row app-full-height">
+          <!-- Content wrapper -->
+          <div class="app-content-wrapper app-full-height">
+            <!-- Result wrapper -->
+            <div class="app-result-wrapper clearfix">
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-1.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
                   </p>
-                  <p>
-                     náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                  <div class="app-color-gray app-result-item-info" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-1">
+                    <span class="pull-left"><i class="fa fa-info"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National digital library"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
+                  <div class="item-1 hide">
+                    <strong class="app-color-black app-display-block">Obrázky z kukátka.</strong>
+                    <p>
+                      <em class="app-display-block">106</em>
+                      <em>[1926]</em>
+                    </p>
+                    <p>
+                       náš kostel skvěl se v zlaté záři. Nad východem stála obrovská vlídná <mark>duha</mark> neobyčejné krásy. Lidé
+                    </p>
+                    <p>
+                      v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                    </p>
+                  </div>
+                </div>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
                   </p>
-                  <p>
-                    v lesku novém a <mark>duha</mark> smíru s Bohem i mezi národy že rozklene se nad milou Moravěnkou. Rytíř Ducha
+                  <div class="app-color-gray app-result-item-info" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-2">
+                    <span class="pull-left"><i class="fa fa-info"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National museum"></i>&#160;&#160;3 nálezy v periodiku</span>
+
+                  </div>
+                  <div class="item-2 hide">
+                    <strong class="app-color-black app-display-block">Pestrý týden</strong>
+                    <p>
+                      <em class="app-display-block">16</em>
+                      <em>27.12.1941</em>
+                    </p>
+                    <p>
+                        pokrývka, kterou jste se- šila ze zbytků látek, odbarvěte ji v „<mark>DUHA</mark> - Odbarvovači" a přebarvěte DUHOU. Jisté najdete mezi 36 odstíny barev <mark>DUHA</mark> ten, který se pro pokrývku                         nejlépe hodí. Upo- zorňujeme však
+                    </p>
+                  </div>
+                </div>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-3.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
                   </p>
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
-              </div>
-            </div><!--/.result item -->
-            
-            <!-- Result item -->
-            <div class="col-md-3 app-result-item">
-              <div class="app-result-item-wrapper">
-                <img class="img-responsive pull-left" src="img/thumb-2.jpg" alt="...">
-                <p class="app-clean-mg app-pd-right-15">
-                  <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                  468<br /> 
-                  1989
-                </p>
-                <div class="app-color-gray app-result-item-info" role="button" tabindex="0" data-placement="top" data-toggle="popover" id="item-2">
-                  <span class="pull-left"><i class="fa fa-info"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer" data-toggle="tooltip" title="National museum"></i>&#160;&#160;3 nálezy v periodiku</span>
-                  
-                </div>
-                <div class="item-2 hide">
-                  <strong class="app-color-black app-display-block">Pestrý týden</strong>
-                  <p>
-                    <em class="app-display-block">16</em>
-                    <em>27.12.1941</em>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
                   </p>
-                  <p>
-                      pokrývka, kterou jste se- šila ze zbytků látek, odbarvěte ji v „<mark>DUHA</mark> - Odbarvovači" a přebarvěte DUHOU. Jisté najdete mezi 36 odstíny barev <mark>DUHA</mark> ten, který se pro pokrývku                         nejlépe hodí. Upo- zorňujeme však
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
+                </div>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-5.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
                   </p>
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
-              </div>
-            </div><!--/.result item -->
-            
-            <!-- Result item -->
-            <div class="col-md-3 app-result-item">
-              <div class="app-result-item-wrapper">
-                <img class="img-responsive pull-left" src="img/thumb-3.jpg" alt="...">
-                <p class="app-clean-mg app-pd-right-15">
-                  <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                  468<br /> 
-                  1989
-                </p>
-                <div class="app-color-gray app-result-item-info">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-6.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
+                  </p>
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
-              </div>
-            </div><!--/.result item -->
-            
-            <!-- Result item -->
-            <div class="col-md-3 app-result-item">
-              <div class="app-result-item-wrapper">
-                <img class="img-responsive pull-left" src="img/thumb-4.jpg" alt="...">
-                <p class="app-clean-mg app-pd-right-15">
-                  <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                  468<br /> 
-                  1989
-                </p>
-                <div class="app-color-gray app-result-item-info">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-7.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
+                  </p>
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
-              </div>
-            </div><!--/.result item -->
-            
-            <!-- Result item -->
-            <div class="col-md-3 app-result-item">
-              <div class="app-result-item-wrapper">
-                <img class="img-responsive pull-left" src="img/thumb-5.jpg" alt="...">
-                <p class="app-clean-mg app-pd-right-15">
-                  <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                  468<br /> 
-                  1989
-                </p>
-                <div class="app-color-gray app-result-item-info">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-8.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
+                  </p>
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
-              </div>
-            </div><!--/.result item -->
-            
-            <!-- Result item -->
-            <div class="col-md-3 app-result-item">
-              <div class="app-result-item-wrapper">
-                <img class="img-responsive pull-left" src="img/thumb-6.jpg" alt="...">
-                <p class="app-clean-mg app-pd-right-15">
-                  <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                  468<br /> 
-                  1989
-                </p>
-                <div class="app-color-gray app-result-item-info">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-7.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
+                  </p>
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
-              </div>
-            </div><!--/.result item -->
-            
-            <!-- Result item -->
-            <div class="col-md-3 app-result-item">
-              <div class="app-result-item-wrapper">
-                <img class="img-responsive pull-left" src="img/thumb-7.jpg" alt="...">
-                <p class="app-clean-mg app-pd-right-15">
-                  <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                  468<br /> 
-                  1989
-                </p>
-                <div class="app-color-gray app-result-item-info">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-8.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
+                  </p>
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
-              </div>
-            </div><!--/.result item -->
-            
-            <!-- Result item -->
-            <div class="col-md-3 app-result-item">
-              <div class="app-result-item-wrapper">
-                <img class="img-responsive pull-left" src="img/thumb-8.jpg" alt="...">
-                <p class="app-clean-mg app-pd-right-15">
-                  <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                  468<br /> 
-                  1989
-                </p>
-                <div class="app-color-gray app-result-item-info">
-                  <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
-                  <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-7.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
+                  </p>
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
                 </div>
-              </div>
-            </div><!--/.result item -->
-            
+              </div><!--/.result item -->
+
+              <!-- Result item -->
+              <div class="col-md-3 app-result-item">
+                <div class="app-result-item-wrapper">
+                  <img class="img-responsive pull-left" src="img/thumb-8.jpg" alt="...">
+                  <p class="app-clean-mg app-pd-right-15">
+                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
+                    468<br /> 
+                    1989
+                  </p>
+                  <div class="app-color-gray app-result-item-info">
+                    <span class="pull-left"><i class="fa fa-info app-cursor-pointer"></i></span>
+                    <span class="pull-right"><i class="fa fa-folder-open app-cursor-pointer"></i>&#160;&#160;3 nálezy v periodiku</span>
+                  </div>
+                </div>
+              </div><!--/.result item -->
+            </div><!--/.result wrapper -->
                   
             <!-- Sidebar btn -->
             <a href="#app-btn-sidebar-toggle" class="btn app-sidebar-btn" id="app-btn-sidebar-toggle" title="Skryt sidebar">
               <span> </span>
             </a><!--/.sidebar btn -->
             
-            <!-- Push down -->
-            <div class="col-md-12 app-result-pushdown"> </div><!--/.push down -->
-          </div><!--/.result area -->
+          </div><!--/.content wrapper -->
         </div><!--/.row -->
       </div><!--/.content -->
-    </div><!--/.wrapper -->
+    </div><!--/.app wrapper -->
     
     <!-- Footer -->
     <footer class="footer">
@@ -465,10 +529,10 @@
       // View of result items
       function setItemView(state) {
         if(state == 'row'){
-          $('.app-result-container .app-result-item').addClass('app-result-item-row');
+          $('.app-result-wrapper .app-result-item').addClass('app-result-view-row');
         }
         else {
-          $('.app-result-container .app-result-item').removeClass('app-result-item-row');
+          $('.app-result-wrapper .app-result-item').removeClass('app-result-view-row');
         }
       }
       
@@ -477,6 +541,7 @@
         $('[data-toggle="tooltip"]').tooltip(); // tooltip
         $('[data-toggle=popover]').popover({ // popover
           html: true,
+          container: 'body',
           trigger: 'focus',
           content: function() {
             var id = this.id; // id of clickable element - <i>
@@ -484,7 +549,6 @@
           }
         });
       })
-      
       
       // Footerbar - collapse modification
       $('.app-footerbar-btn').on('click',function(){

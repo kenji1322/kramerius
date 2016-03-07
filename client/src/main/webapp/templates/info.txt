@@ -10,3 +10,4 @@ TODO
 - timeline - items s listou s infem jako v results, zmensit itemy pripadne udelat responsivni jako v results - HECHO
 - results - upravit html a css - HECHO
 
+

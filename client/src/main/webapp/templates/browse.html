@@ -33,7 +33,7 @@
     <![endif]-->
   </head>
 
-  <body class="app-page-result">
+  <body class="app-page-browse">
     <!-- Navbar -->
     <nav class="navbar navbar-fixed-top app-navbar app-clean-border">
       <!-- Container -->
@@ -71,10 +71,10 @@
             <li><a href="collection.html">Sbírky</a></li>
           </ul><!--/.nav left -->
           <!-- Nav right -->
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+          <ul class="nav navbar-nav navbar-right visible-lg visible-xs">
+            <li class="dropdown app-navbar-item-login">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Přihlášení / Registrace <span class="caret"></span></a>
-              <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+              <ul class="dropdown-menu">
                 <li>
                   <form class="form" role="form" action="login">
                     <div class="input-group form-group">
@@ -162,12 +162,13 @@
     </nav><!--/.navbar ABC -->
     
     
-    <!-- Content -->
-    <div class="container-fluid app-container">
+    <!-- Content wrapper -->
+    <div class="container-fluid app-content-wrapper app-full-height">
       <!-- Row -->
-      <div class="row">
-        <div class="col-md-6 app-col-title">
-          <div class="row">
+      <div class="row app-full-height">
+        <!-- Col title -->
+        <div class="col-md-6 app-col-title app-full-height">
+          <div class="row app-full-height">
             <div class="col-md-12 app-col-title-label">
               <strong>Název</strong>
             </div>
@@ -314,9 +315,10 @@
               </li>
             </ul>
           </div>
-        </div>
-        <div class="col-md-6 app-col-author">
-          <div class="row">
+        </div><!--/.col title -->
+        <!-- Col author -->
+        <div class="col-md-6 app-col-author app-full-height">
+          <div class="row app-full-height">
             <div class="col-md-12 app-col-author-label">
               <strong>Autoři</strong>
             </div>
@@ -413,9 +415,9 @@
               </li>
             </ul>
           </div>
-        </div>
+        </div><!--/.col author -->
       </div><!--/.row -->
-    </div><!--/.content -->
+    </div><!--/.content wrapper -->
 
     
     <!-- Footer -->

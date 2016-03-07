@@ -1,5 +1,14 @@
 /*** ---/ HOME STYLES /--- ***/
 
+.app-page-home .app-content-wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.app-home-wrapper {
+  padding: 0 15px 30px 15px;
+}
+
 body {
   background-image: url(../img/bg-img-design-2.png);
  /* background-repeat: no-repeat;
@@ -58,11 +67,9 @@ body {
   }
 }
 
-/*** Min 1650 ***/
-@media (min-width: 1650px) {
-  /*.app-img-desc {
-    position: absolute;
-    right: 30px;
-    bottom: 0;
-  }*/
+/*** Max 850 and Min 768 ***/
+@media (max-width: 850px) and (min-width: 768px) {
+  .app-page-home .app-navbar .navbar-right {
+    display: none;
+  }
 }

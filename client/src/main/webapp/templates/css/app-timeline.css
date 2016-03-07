@@ -1,8 +1,8 @@
 /*** ---/ TIMELINE STYLES /--- ***/
 
 
-/*** Timeline wrapper ***/
-.app-timeline {
+/*** Content wrapper ***/
+.app-content-wrapper {
   padding: 30px;
   height: 650px;
   height: calc(100% - 270px);
@@ -17,7 +17,7 @@
   margin-bottom: 15px;
 }
 
-.app-timeline > .app-timeline-row > .app-timeline-scroller {
+.app-timeline-scroller {
   height: 185px;
   white-space: nowrap;
   overflow: hidden;
