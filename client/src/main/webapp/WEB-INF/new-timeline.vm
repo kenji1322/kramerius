@@ -15,25 +15,25 @@
             width:100%; 
             height:100px;
         }
-        #canvasda .info{
+        #canvasda .app-timeline-info{
             font: 12px Duru Sans;
             font-family: 'Duru Sans', sans-serif;
             font-weight: 500;
             color: #ffff00;
             background-color: #234589;
         }
-        #canvasda .label{
+        #canvasda .app-timeline-label{
             font: 12px Duru Sans;
             font-family: 'Duru Sans', sans-serif;
             font-weight: 500;
             color: rgba(23, 45, 89, 1);
             background-color: rgba(23, 45, 89, 0.5);
         }
-        #canvasda .bar{
+        #canvasda .app-timeline-bar{
             background-color: orange;
             width: 6px;
         }
-        #canvasda .bar .sel{
+        #canvasda .app-timeline-bar .app-timeline-sel{
             background-color: #234589;
         }
     </style>
@@ -56,7 +56,7 @@
         <!-- Row -->
         <div class="row app-full-height">
           <!-- Content wrapper -->
-          <div class="app-content-wrapper">
+          <div class="app-content-wrapper app-timeline-container">
             
 <!-- Timeline row -->
             <div class="app-timeline-row">
@@ -64,12 +64,12 @@
               <div class="app-timeline-scroller">
 <!-- Timeline item -->
                 <div class="app-timeline-item">
-                  <img class="img-responsive pull-left" src="" alt="...">
-                  <p class="app-clean-mg app-pd-right-15">
-                    <strong>Zborník príspevkovy prednesených na ... celoštátnej konferencii o problematike ar...</strong>
-                    <span class="app-display-block">468</span>
-                    <span class="app-display-block">1989</span>
-                  </p>
+
+<img class="img-responsive pull-left" src="" alt="...">
+<p class="app-clean-mg app-pd-right-15">
+  <strong><a data-field="root_title" href="#">loading...</a></strong>
+  <span class="app-display-block" data-field="dc.creator"></span>
+</p>
                   <div class="app-timeline-item-info app-color-gray" role="button" tabindex="0" data-placement="bottom" data-toggle="popover" id="app-timeline-item-1">
                     <i class="fa fa-info app-cursor-pointer"></i>
                   </div>
@@ -94,7 +94,7 @@
               <!-- Btn group left -->
               <div class="app-timeline-btn-group-left">
                 <div class="app-timeline-btn">
-                  <strong>2002</strong>
+                  <strong class="app-year-title"></strong>
                 </div>
                 <i class="fa fa-angle-left fa-2x app-color-gray-light app-cursor-pointer"></i>
               </div><!--/.btn group left -->
@@ -102,7 +102,7 @@
               <!-- Btn group right -->
               <div class="app-timeline-btn-group-right">
                 <div class="app-timeline-btn">
-                  <strong>1976</strong>
+                  <strong class="app-year-count"></strong>
                 </div>
                 <i class="fa fa-angle-right fa-2x app-color-gray-light app-cursor-pointer"></i>
               </div><!--/.btn group right -->
@@ -126,7 +126,7 @@
 
 
         <div id="canvasda" class="years" style="overflow:auto; width:100%; height:100%;bottom:0;">
-        <div class="info"></div><div class="label"></div><div class="bar"><div class="sel"></div></div>
+        <div class="app-timeline-info"></div><div class="app-timeline-label"></div><div class="app-timeline-bar"><div class="app-timeline-sel"></div></div>
         <canvas width="1000" height="130" style="position: absolute;bottom:0;"></canvas>
         </div>
 

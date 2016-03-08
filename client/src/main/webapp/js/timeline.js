@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-/* global K5 */
+/* global K5, _ */
 
 K5.eventsHandler.addHandler(function(type, configuration) {
     if (type === "widow/url/hash") {
@@ -42,29 +42,9 @@ K5.eventsHandler.addHandler(function(type, configuration) {
     if (type === "i18n/dictionary") {
         $(document).prop('title', K5.i18n.ctx.dictionary['application.title'] + ". " + K5.i18n.ctx.dictionary['common.timeline']);
         if (!K5.gui["da"]) {
-            
-//                var maxYear = 0;
-//                var minYear = 3000;
-//                for (var i = 0; i < ja.length; i++) {
-//                    var year = parseInt(ja[i]);
-//                    var val = parseInt(ja[++i]);
-//                    var curDate = new Date();
-//                    var curYear = curDate.getFullYear();
-//                    if (year > 1000 && year <= curYear) {
-//                        maxYear = Math.max(maxYear, year);
-//                        minYear = Math.min(minYear, year);
-//                    }
-//
-//                }
-//                var th = new YearRows('#yearRows', {maxYear: maxYear, minYear: minYear});
-                var da = new Da('#canvasda');
-//                $("#yearRows").bind("wresize", function() {
-//                    th.onResize();
-//                });
-                da.load();
-                //setTimeout('th.onResize()', 100);
-
-            
+            new Timeline(".app-timeline-container");
+            var da = new Da('#canvasda');
+            da.load();
             K5.gui["da"] = da;
         }
     }
@@ -73,17 +53,13 @@ K5.eventsHandler.addHandler(function(type, configuration) {
 
 
 
-var Da = function(elem, th, options) {
+var Da = function(elem) {
     
     
-        this.div = elem;
-        this.$div = $(elem);
-        this.canvas = elem + ">canvas";
-        this.$canvas = $(elem + ">canvas");
-        this.thumbs = th;
-        if (options) {
-            this.options = options;
-        }
+    this.div = elem;
+    this.$div = $(elem);
+    this.canvas = elem + ">canvas";
+    this.$canvas = $(elem + ">canvas");
         
         
     this.maxYear = 0;
@@ -130,7 +106,7 @@ var Da = function(elem, th, options) {
         var year = params.year;
         var count = 0;
         if (da.years[year]) {
-            count = da.years[year].count
+            count = da.years[year].count;
         }
         var cy = parseInt(year);
 
@@ -166,24 +142,24 @@ Da.prototype = {
     infoArrowW: 10,
     init: function() {
 
-        var infocss = $(this.div).find("div.info");
+        var infocss = $(this.div).find("div.app-timeline-info");
         this.infoFont = $(infocss).css("font");
         this.lineWidth = parseInt($(infocss).css("fontWeight")) / 1000.0;
         //alert(this.lineWidth);
         this.infoBg = $(infocss).css("background-color");
         this.infoColor = $(infocss).css("color");
         
-        var labelcss = $(this.div).find("div.label");
+        var labelcss = $(this.div).find("div.app-timeline-label");
         this.labelFont = $(labelcss).css("font");
         this.labelLineWidth = parseInt($(labelcss).css("fontWeight")) / 1000.0;
         this.labelBg = $(labelcss).css("background-color");
         this.labelColor = $(labelcss).css("color");
 
-        var barcss = $(this.div).find("div.bar");
+        var barcss = $(this.div).find("div.app-timeline-bar");
         this.barColor = $(barcss).css("background-color");
         this.barWidth = $(barcss).width();
 
-        var barSelcss = $(this.div).find("div.bar>div.sel");
+        var barSelcss = $(this.div).find("div.app-timeline-bar>div.app-timeline-sel");
         this.barColorSel = $(barSelcss).css("background-color");
 
         this.barsPanelheight = $(this.canvas).height();
@@ -534,61 +510,97 @@ $.jCanvas.extend({
 
 
 
-
-
 var Timeline = function(elem, options) {
-    this.elem = elem;
-    this.$elem = $(elem);
-    this.options = options;
+    this.container = $(elem);
+    this.activeYears= {};
+    this.years = {};
+
+    this.yearContainerTempl = $('.app-timeline-row').clone();
+    this.itemContainerTempl = $('.app-timeline-item').clone();
+    
+    $(".years").bind("yearChanged", _.bind(function(event, params) {
+        this.currentYear = params.year;
+        
+        if(!this.years.hasOwnProperty(params.year)){
+            this.addYear(params.year);
+        }
+        this.render();
+    }, this));
     
 }
 
 Timeline.prototype = {
-    background: "silver",
-    maxBands: 4,
-    init: function() {
-
+    maxYears: 4,
+    render: function() {
+        var year = parseInt(this.currentYear);
+        this.container.empty();
+        for(var i=0; i< this.maxYears; i++){
+            var strYear = (year+i).toString();
+            if(!this.years.hasOwnProperty(strYear)){
+                this.addYear(strYear);
+            }
+            this.container.append(this.years[strYear].container);
+        }
+    },
+    addYear: function(year){
+        var container = this.yearContainerTempl.clone();
+        var row = {
+            "container": container, 
+            "timeline": new TimelineRow({
+                "year": year, 
+                "container": container,
+                "itemTempl": this.itemContainerTempl.clone()
+            })
+        };
+        this.years[year] = row;
     }
 }
 
-var TimelineRow = function(elem, options) {
-    this.elem = elem;
-    this.$elem = $(elem);
-    this.year = options.year;
-    this.init();
+var TimelineRow = function(config) {
+    this.year = config.year;
+    this.container = config.container;
+    this.scroll = this.container.find(".app-timeline-scroller");
+    this.countContainer = this.container.find(".app-year-count");
+    this.titleContainer = this.container.find(".app-year-title");
+    this.itemTempl = config.itemTempl;
+    this.titleContainer.text(this.year);
+    this.getDocs({"offset":0});
 }
 
 TimelineRow.prototype = {
     rowsPerRequest: 50,
-    init: function() {
-
-
-        this.scroll = $('<div/>', {class: 'scroll'});
-        this.container = $('<ul/>');
-        this.container.addClass('container');
-        this.scroll.append(this.container);
-        this.$elem.append(this.scroll);
-
-    },
-    getThumbs: function(params) {
-        //var query = "fl=dc.creator,dc.title,PID,dostupnost,model_path&fq=fedora.model:monograph OR fedora.model:map&q=rok:" + this.year + "&start=" + params.offset + "&rows=" + this.rowsPerRequest;
+    getDocs: function(params) {
         var query = "fl=root_pid,dc.creator,root_title,dc.title,PID,dostupnost,model_path,fedora.model"+
                 "&group=true&group.ngroups=true&group.field=root_pid&group.format=simple&group.sort=level asc"+
                 "&q=rok:" + this.year + "&start=" + params.offset + "&rows=" + this.rowsPerRequest;
-                //"&defType=edismax&bq=(level:0)^4.5&&bq=(level:1)^3.5&bq=(level:2)^2.5";
         K5.api.askForSolr(query, _.bind(function(data) {
-            //this.docs = {"docs": data.response.docs, "count": data.response.numFound};
-            //this.totalBand.html(data.response.numFound);
             this.docs = {"docs": data.grouped.root_pid.doclist.docs, "count": data.grouped.root_pid.ngroups};
-            this.totalBand.html(data.grouped.root_pid.ngroups);
+            this.countContainer.text(data.grouped.root_pid.ngroups);
             this.render();
         }, this), "application/json");
 
     },
     render: function() {
+        this.scroll.empty();
         var docs = this.docs.docs;
         for (var i = 0; i < docs.length; i++) {
-            this.addThumb(docs[i]);
+            var item = this.itemTempl.clone();
+            var doc = docs[i];
+
+            var pid = doc["PID"];
+            var root_pid = doc["root_pid"];
+            var model = doc["fedora.model"];
+            
+            item.find("[data-field]").each(function(){
+                var f = $(this).data("field");
+                if(doc[f]){
+                    $(this).text(doc[f]);
+                }
+            });
+            
+            this.scroll.append(item);
+            
+            //this.addThumb(docs[i]);
         }
 
     },
