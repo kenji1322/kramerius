@@ -29,6 +29,8 @@ function I18N(application){
     },this));
 }
 
+
+
 I18N.prototype= {
 
     ctx:{},
@@ -68,8 +70,11 @@ I18N.prototype= {
             this.ctx['language']=lang;
             this.ctx['country']=country;
             this.ctx['dictionary']=data;
+            
+            var vcUrl = "api/vc?sort=ASC&langCode="+country;
+            
             if (whenready != null) whenready.apply(null, [data]);
-            $.getJSON("api/vc", _.bind(function(data) {
+            $.getJSON(vcUrl, _.bind(function(data) {
                 if (this.ctx["configuration"]["cdkSources"]) {
                     for(var i=0; i< data.length; i++){
                         this.ctx['dictionary'][data[i].pid] = data[i].descs[lang];

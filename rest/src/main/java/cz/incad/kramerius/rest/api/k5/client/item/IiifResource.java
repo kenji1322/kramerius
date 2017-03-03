@@ -1,70 +1,15 @@
 package cz.incad.kramerius.rest.api.k5.client.item;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.name.Named;
-import cz.incad.kramerius.FedoraAccess;
-import cz.incad.kramerius.SolrAccess;
-import cz.incad.kramerius.rest.api.exceptions.BadRequestException;
-import cz.incad.kramerius.rest.api.exceptions.GenericApplicationException;
-import cz.incad.kramerius.rest.api.k5.client.SolrMemoization;
-import cz.incad.kramerius.rest.api.k5.client.item.ItemResource;
-import cz.incad.kramerius.rest.api.k5.client.item.exceptions.PIDNotFound;
-import cz.incad.kramerius.rest.api.k5.client.item.utils.IIIFUtils;
-import cz.incad.kramerius.rest.api.k5.client.item.utils.ItemResourceUtils;
-import cz.incad.kramerius.rest.api.k5.client.utils.PIDSupport;
-import cz.incad.kramerius.rest.api.k5.client.utils.SOLRUtils;
-import cz.incad.kramerius.utils.ApplicationURL;
-import cz.incad.kramerius.utils.RESTHelper;
-import de.digitalcollections.iiif.presentation.model.api.v2.Canvas;
-import de.digitalcollections.iiif.presentation.model.api.v2.Image;
-import de.digitalcollections.iiif.presentation.model.api.v2.ImageResource;
-import de.digitalcollections.iiif.presentation.model.api.v2.Manifest;
-import de.digitalcollections.iiif.presentation.model.api.v2.PropertyValue;
-import de.digitalcollections.iiif.presentation.model.api.v2.Sequence;
-import de.digitalcollections.iiif.presentation.model.api.v2.Service;
-import de.digitalcollections.iiif.presentation.model.impl.jackson.v2.IiifPresentationApiObjectMapper;
-import de.digitalcollections.iiif.presentation.model.impl.v2.CanvasImpl;
-import de.digitalcollections.iiif.presentation.model.impl.v2.ImageImpl;
-import de.digitalcollections.iiif.presentation.model.impl.v2.ImageResourceImpl;
-import de.digitalcollections.iiif.presentation.model.impl.v2.ManifestImpl;
-import de.digitalcollections.iiif.presentation.model.impl.v2.PropertyValueSimpleImpl;
-import de.digitalcollections.iiif.presentation.model.impl.v2.SequenceImpl;
-import de.digitalcollections.iiif.presentation.model.impl.v2.ServiceImpl;
-
-import org.apache.commons.lang3.tuple.Pair;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONException;
-import org.w3c.dom.Element;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-import javax.xml.xpath.XPathExpressionException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLConnection;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by rumanekm on 11/19/15.
  */
 @Path("/v5.0/iiif")
 public class IiifResource {
-
+    
+    /* DISABLED ON CDK because of java 1.7
     public static final Logger LOGGER = Logger.getLogger(IiifResource.class.getName());
 
     @Inject
@@ -234,6 +179,7 @@ public class IiifResource {
         }
     }
 
+   */
     /**
      * Basic URL
      *

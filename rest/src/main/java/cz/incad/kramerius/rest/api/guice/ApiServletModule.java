@@ -94,7 +94,7 @@ public class ApiServletModule extends JerseyServletModule {
         // k5 - znovu...
         bind(ClientUserResource.class);
         bind(ItemResource.class);
-        bind(IiifResource.class);
+        //bind(IiifResource.class);
         
         bind(FeederResource.class);
         bind(ClientVirtualCollections.class);

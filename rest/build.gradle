@@ -8,8 +8,10 @@ dependencies {
     compile project(':common') 
     compile project(':security-core')
 
+    /* DISABLED ON CDK because of java 1.7
     compile name:"iiif-presentation-model-api-3.2.3"
     compile name:"iiif-presentation-model-impl-3.2.3"
+    */
 
 	// jackson dependency
 	compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.1'
