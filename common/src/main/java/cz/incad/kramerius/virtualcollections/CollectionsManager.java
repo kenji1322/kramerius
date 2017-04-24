@@ -50,4 +50,12 @@ public interface CollectionsManager {
      */
     public boolean containsDataStream(String pid, String streamName) throws CollectionException;
     
+
+    /**
+     * Returns true if given collection exists
+     * @param pid
+     * @return
+     */
+    public boolean exists(String pid);
+    
 }

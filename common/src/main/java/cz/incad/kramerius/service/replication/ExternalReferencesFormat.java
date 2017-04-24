@@ -181,7 +181,7 @@ public class ExternalReferencesFormat implements ReplicationFormat {
             document.adoptNode(binaryContent);
             binaryContent.setTextContent(new String(Base64.encodeBase64(bos.toByteArray())));
             version.appendChild(binaryContent);
-            
+
             datastream.setAttribute("CONTROL_GROUP", "M");
             
         } finally {

@@ -47,6 +47,7 @@ import org.xml.sax.SAXException;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.requestfactory.shared.SkipInterfaceValidation;
 
 import cz.incad.Kramerius.AbstractImageServlet;
 import cz.incad.Kramerius.imaging.utils.ZoomChangeFromReplicated;

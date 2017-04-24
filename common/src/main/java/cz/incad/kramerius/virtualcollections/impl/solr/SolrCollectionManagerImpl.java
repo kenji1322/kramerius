@@ -27,6 +27,8 @@ public class SolrCollectionManagerImpl extends AbstractCollectionManager {
     public List<Collection> getCollections() throws CollectionException {
         try {
             List<Collection> vcs = new ArrayList<Collection>();
+            
+            
             String query = "/terms?terms=true&terms.fl=collection&terms.limit=1000&terms.sort=index&wt=json";
             String solrHost = KConfiguration.getInstance().getSolrHost();
             String uri = solrHost + query;

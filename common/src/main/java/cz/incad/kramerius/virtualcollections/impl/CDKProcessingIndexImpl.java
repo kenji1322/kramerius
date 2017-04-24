@@ -129,6 +129,11 @@ public class CDKProcessingIndexImpl implements CDKProcessingIndex {
     @Override
     public void index(Type type, JSONObject jsonObject) throws CDKProcessingIndexException {
         try {
+        	
+        	if (!jsonObject.has("type")) {
+        		jsonObject.put("type", type.name());
+        	}
+        	
             Client c = Client.create();
             String host = getSolrAddress()+"/update?commit=true";
             WebResource r = c.resource(host);
@@ -172,7 +177,8 @@ public class CDKProcessingIndexImpl implements CDKProcessingIndex {
         setObject.put("set", value);
         
         jsonObj.put(name, setObject);
-        
+
+        jsonArray.put(jsonObj);
         ClientResponse resp =  r.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_JSON).entity(jsonArray.toString(),MediaType.APPLICATION_JSON).post(ClientResponse.class);
         int status = resp.getStatus();
         if (status != 200) {

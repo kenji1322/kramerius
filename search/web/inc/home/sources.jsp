@@ -14,9 +14,9 @@
 
 <!-- 
 
-Zalozka collections; zobrazi kolekce
+Zalozka zdroje
 
- -->
+-->
 <view:object name="cols" clz="cz.incad.Kramerius.views.virtualcollection.ListOfCDKSourcesViewObject"></view:object>
 
 <c:if test="${empty param.refresh}">
@@ -45,9 +45,9 @@ Zalozka collections; zobrazi kolekce
         window.location = url;
     }
     
-    function refreshCollections(){
+    function refreshSources(){
         $("#collection_list").html('<div style="text-align:center; width:100%;display:block;margin-top:30px;"><img src="img/loading.gif" /></div>') ;
-        $.get('inc/home/collections.jsp?refresh=true', function(data){
+        $.get('inc/home/sources.jsp?refresh=true', function(data){
            $("#collection_list").html(data) ;
         }).error(function(data){
            $("#collection_list").html("Error") ;
@@ -55,7 +55,7 @@ Zalozka collections; zobrazi kolekce
     }
     
 </script>
-<a id="col_refresh" style="float:right;" href="javascript:refreshCollections();" title="<view:msg>common.refresh</view:msg>"><span class="ui-icon ui-icon-refresh">refresh</span></a>
+<a id="col_refresh" style="float:right;" href="javascript:refreshSources();" title="<view:msg>common.refresh</view:msg>"><span class="ui-icon ui-icon-refresh">refresh</span></a>
 <div class="collections" id="collection_list" style="font-size:1.2em;">
 </c:if>
 
@@ -69,30 +69,31 @@ Zalozka collections; zobrazi kolekce
        </c:otherwise>
 </c:choose>
 
-
+    
 <c:forEach var="col" items="${cols.sourcesLocale}">
     <li>
         <c:forEach items="${col.descriptions}" var="desc">
-			<a href="javascript:setVirtualCollection('${col.pid}');"><h3>${desc.text}</h3></a>
-			
-			<ul>
-					<c:forEach items="${col.collections}" var="subcol">
-				    <li>
-						<c:forEach items="${subcol.descriptions}" var="sdesc">
-						<a href="javascript:setVirtualCollection('${subcol.pid}');">${sdesc.text}</a>
-						</c:forEach>
-					</li>
-					</c:forEach>
-				
-			</ul>
-			
+<c:choose>
+       <c:when test="${cols.thumbnailsVisible}">
+            <div align="center" style="overflow:hidden; border:1px solid #eeeeee; height:120px; width:100px; float:left; margin:5px; ">
+                <a href="javascript:setVirtualCollection('${col.pid}');" >
+                    <img align="middle" vspace="2" id="img_${col.pid}" src="img?uuid=${col.pid}&stream=IMG_THUMB&action=SCALE&scaledHeight=96" border="0"
+                         title="${desc.text}" alt="${desc.text}" />
+                </a>
+                <div style="color:black;text-overflow: ellipsis;font-size:11px">${desc.text}</div>
+            </div>
+       </c:when>    
+      <c:otherwise>
+            <a href="javascript:setVirtualCollection('${col.pid}');">${desc.text}</a>
+
+       </c:otherwise>
+</c:choose>
+
+            
+
         </c:forEach>
     </li>
 </c:forEach>
-
-
-    
-
     </ul>
     <c:if test="${empty param.refresh}">
 </div>

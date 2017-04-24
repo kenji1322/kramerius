@@ -107,14 +107,11 @@ public abstract class AbstractCollectionManager implements CollectionsManager {
         } catch (DOMException e) {
             throw new CollectionException(e);
         } catch (IOException e) {
-            exists(pid);
-            
-            
             throw new CollectionException(e);
         }
     }
 
-    protected boolean exists(String pid) {
+    public boolean exists(String pid) {
         try {
             this.fa.getRelsExt(pid);
             return true;

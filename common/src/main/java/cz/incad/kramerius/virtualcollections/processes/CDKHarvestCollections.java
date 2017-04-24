@@ -1,4 +1,4 @@
-package cz.incad.kramerius.virtualcollections;
+package cz.incad.kramerius.virtualcollections.processes;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -17,8 +17,15 @@ import com.sun.jersey.api.client.WebResource;
 
 import cz.incad.kramerius.FedoraAccess;
 import cz.incad.kramerius.impl.FedoraAccessImpl;
+import cz.incad.kramerius.processes.annotations.DefaultParameterValue;
+import cz.incad.kramerius.processes.annotations.ParameterName;
+import cz.incad.kramerius.processes.annotations.Process;
 import cz.incad.kramerius.utils.conf.KConfiguration;
+import cz.incad.kramerius.virtualcollections.CDKProcessingIndex;
+import cz.incad.kramerius.virtualcollections.CDKProcessingIndexException;
+import cz.incad.kramerius.virtualcollections.CollectionUtils;
 import cz.incad.kramerius.virtualcollections.CDKProcessingIndex.Type;
+import cz.incad.kramerius.virtualcollections.CollectionUtils.CollectionManagerWait;
 import cz.incad.kramerius.virtualcollections.impl.CDKProcessingIndexImpl;
 import cz.incad.kramerius.virtualcollections.impl.fedora.FedoraCollectionsManagerImpl;
 
@@ -27,48 +34,56 @@ public class CDKHarvestCollections {
 	
 	public static final Logger LOGGER = Logger.getLogger(CDKHarvestCollections.class.getName());
 	
+	
     public static void main(String[] args) throws CDKProcessingIndexException, IOException, InterruptedException {
     	FedoraAccess fedoraAccess = new FedoraAccessImpl(KConfiguration.getInstance(), null);
     	FedoraCollectionsManagerImpl fedoraColManager = new FedoraCollectionsManagerImpl();
     	fedoraColManager.setFedoraAccess(fedoraAccess);
-    	
     	CDKProcessingIndex procIndex = new CDKProcessingIndexImpl();
-
-    	JSONArray jsArr = procIndex.getDataByType(CDKProcessingIndex.Type.source);
-        for (int i = 0,ll=jsArr.length(); i < ll; i++) {
-            JSONObject json = jsArr.getJSONObject(i);
-            String url = json.getString("url");
-            JSONArray collection = getCollection(json.getString("pid"), url);
-            for (int j = 0,lj=collection.length(); j < lj; j++) {
-                JSONObject col = collection.getJSONObject(j);
-
-                boolean cleave = col.getBoolean("canLeave");
-                String pid = col.getString("pid");
-                
-                if (!fedoraColManager.exists(pid)) {
-                    Map<String, String> names = new HashMap<String, String>();
-                    Set keySet = col.keySet();
-                    for (Object ok : keySet) {
-    					String key = ok.toString(); 
-    					if (key.startsWith("description_txt_")) {
-    						String langCode = key.substring("description_txt_".length());
-    						names.put(langCode, col.getString(key));
-    					}
-                    }
-                    LOGGER.info("Creating remote virtual collection in the fedora repository "+pid);
-                    CollectionUtils.create(pid, fedoraAccess, null, cleave, names, new CollectionUtils.CollectionManagerWait(fedoraColManager));
-                } else {
-                    LOGGER.info("Virtual collection in the repository already exist "+pid);
-                	
-                }
-
-                LOGGER.info("Indexing virtual collection in the fedora repository "+pid);
-                	
-                // should be somehow handled because of transaction
-                procIndex.index(Type.collection, col);
+    	if (args.length == 2 ) {
+    		collectionFromUrl(fedoraAccess, fedoraColManager, procIndex, args[0], args[1]);
+    	} else {
+        	JSONArray jsArr = procIndex.getDataByType(CDKProcessingIndex.Type.source);
+            for (int i = 0,ll=jsArr.length(); i < ll; i++) {
+                JSONObject json = jsArr.getJSONObject(i);
+                String url = json.getString("url");
+                String parent = json.getString("pid");
+                collectionFromUrl(fedoraAccess, fedoraColManager, procIndex, parent, url);
             }
-        }
+    	}
     }
+
+
+
+	private static void collectionFromUrl(FedoraAccess fedoraAccess, FedoraCollectionsManagerImpl fedoraColManager,
+			CDKProcessingIndex procIndex, String parent, String url)
+			throws UnsupportedEncodingException, IOException, InterruptedException, CDKProcessingIndexException {
+		JSONArray collection = getCollection(parent, url);
+		for (int j = 0,lj=collection.length(); j < lj; j++) {
+		    JSONObject col = collection.getJSONObject(j);
+		    boolean cleave = col.getBoolean("canLeave");
+		    String pid = col.getString("pid");
+		    if (!fedoraColManager.exists(pid)) {
+		        Map<String, String> names = new HashMap<String, String>();
+		        Set keySet = col.keySet();
+		        for (Object ok : keySet) {
+					String key = ok.toString(); 
+					if (key.startsWith("description_txt_")) {
+						String langCode = key.substring("description_txt_".length());
+						names.put(langCode, col.getString(key));
+					}
+		        }
+		        LOGGER.info("Creating remote virtual collection in the fedora repository "+pid);
+		        CollectionUtils.create(pid, fedoraAccess, null, cleave, names, new CollectionUtils.CollectionManagerWait(fedoraColManager));
+		    } else {
+		        LOGGER.info("Virtual collection in the repository already exist "+pid);
+		    	
+		    }
+		    LOGGER.info("Indexing virtual collection in the fedora repository "+pid);
+		    // should be somehow handled because of transaction
+		    procIndex.index(Type.collection, col);
+		}
+	}
 
 
     

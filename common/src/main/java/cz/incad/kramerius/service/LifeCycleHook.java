@@ -17,7 +17,7 @@
 package cz.incad.kramerius.service;
 
 /**
- * Everyone who can be informed about start and shutdown
+ * Everyone  can be informed about start and shutdown
  * @author pavels
  */
 public interface LifeCycleHook {

@@ -24,6 +24,8 @@ import cz.incad.Kramerius.exts.menu.main.MainMenuPart;
 import cz.incad.Kramerius.exts.menu.main.impl.MainMenuImpl;
 import cz.incad.Kramerius.exts.menu.main.impl.adm.AdminMenuItem;
 import cz.incad.Kramerius.exts.menu.main.impl.adm.AdminMenuPartImpl;
+import cz.incad.Kramerius.exts.menu.main.impl.adm.items.CDKHarvestCollectionItem;
+import cz.incad.Kramerius.exts.menu.main.impl.adm.items.CDKSourceAdministration;
 import cz.incad.Kramerius.exts.menu.main.impl.adm.items.CollectionsRightsAdministration;
 import cz.incad.Kramerius.exts.menu.main.impl.adm.items.Convert;
 import cz.incad.Kramerius.exts.menu.main.impl.adm.items.CriteriaEditor;
@@ -88,10 +90,10 @@ public class MainMenuConfiguration extends AbstractModule {
         adminItems.addBinding().to(RolesEditor.class);
         adminItems.addBinding().to(GlobalRightsAdministration.class);
         adminItems.addBinding().to(CriteriaEditor.class);
-        // administrace
-        adminItems.addBinding().to(VirtualCollectionsAdministration.class);
-        // prava
-        adminItems.addBinding().to(CollectionsRightsAdministration.class);
+        // disabled - cdk
+        //adminItems.addBinding().to(VirtualCollectionsAdministration.class);
+        // disabled - cdk
+        //adminItems.addBinding().to(CollectionsRightsAdministration.class);
  
         adminItems.addBinding().to(MetadataEditor.class);
         adminItems.addBinding().to(MovingWallProcess.class);
@@ -114,6 +116,9 @@ public class MainMenuConfiguration extends AbstractModule {
         adminItems.addBinding().to(ParametrizedImport.class);
         adminItems.addBinding().to(NDKMetsImport.class);
         adminItems.addBinding().to(ParametrizedK4Replication.class);
+
+        adminItems.addBinding().to(CDKHarvestCollectionItem.class);
+        adminItems.addBinding().to(CDKSourceAdministration.class);
         
         adminItems.addBinding().to(ShowStatistics.class);
         adminItems.addBinding().to(DeleteProcesses.class);

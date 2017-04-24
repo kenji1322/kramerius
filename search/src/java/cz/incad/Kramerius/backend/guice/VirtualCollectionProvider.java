@@ -12,6 +12,8 @@ import com.google.inject.name.Named;
 
 import cz.incad.kramerius.FedoraAccess;
 import cz.incad.kramerius.utils.conf.KConfiguration;
+import cz.incad.kramerius.virtualcollections.CDKSource;
+import cz.incad.kramerius.virtualcollections.CDKSourcesAware;
 import cz.incad.kramerius.virtualcollections.Collection;
 import cz.incad.kramerius.virtualcollections.CollectionException;
 import cz.incad.kramerius.virtualcollections.CollectionsManager;
@@ -21,13 +23,20 @@ public class VirtualCollectionProvider implements Provider<Collection> {
     @Inject
     @Named("securedFedoraAccess")
     FedoraAccess fedoraAccess;
+
     @Inject
     KConfiguration kConfiguration;
 
-    @Inject
-    @Named("fedora")
-    CollectionsManager manager;
     
+    @Inject
+    CDKSourcesAware sources;
+    
+    @Inject
+    @Named("cdk")
+    CollectionsManager collectionManager;
+    
+    
+
     public static final String VIRTUAL_COLLECTION = "virtual_collection";
     private Provider<HttpServletRequest> provider;
     private Logger logger;
@@ -53,10 +62,13 @@ public class VirtualCollectionProvider implements Provider<Collection> {
                     if (!parameter.startsWith("vc:")) {
                         parameter = "vc:" + parameter;
                     }
-                    //ArrayList<String> langs = new ArrayList<String>(Arrays.asList(kConfiguration.getPropertyList("interface.languages")));
-                    Collection vc = this.manager.getCollection(parameter);
+                    Collection vc = this.sources.getSource(parameter);
+                    if (vc == null) {
+                    	vc = this.collectionManager.getCollection(parameter);
+                    }
                     session.setAttribute(VIRTUAL_COLLECTION, vc);
                     return vc;
+                    
                 }
 
             } else if (session.getAttribute(VIRTUAL_COLLECTION) != null) {

@@ -504,4 +504,39 @@
     </process>
 
 
+    <process>
+        <id>cdkcollectionharvest</id>
+        <description>Harvesting collections from source (or sources)</description>
+        <mainClass>cz.incad.cdk.cdkharvester.CDKHarvestCollections</mainClass>
+        <standardOs>lrOut</standardOs>
+        <errOs>lrErr</errOs>
+        <securedaction>virtualcollection_manage</securedaction>
+    </process>
+
+    <process>
+        <id>cdksourceharvest</id>
+        <description>Harvesting collections from source (or sources)</description>
+        <mainClass>cz.incad.cdk.cdkharvester.CDKSourceHarvestProcessImpl</mainClass>
+        <standardOs>lrOut</standardOs>
+        <errOs>lrErr</errOs>
+        <templates>
+            <input class="cz.incad.cdk.cdkharvester.input.CDKHarvestFullProcessTemplate"></input>
+        </templates>
+        <securedaction>virtualcollection_manage</securedaction>
+    </process>
+    
+
+    <process>
+        <id>cdksourcetitleharvest</id>
+        <description>Harvesting collections from source (or sources)</description>
+        <mainClass>cz.incad.cdk.cdkharvester.CDKHarvestOneTitleProcessImpl</mainClass>
+        <standardOs>lrOut</standardOs>
+        <errOs>lrErr</errOs>
+        <templates>
+            <input class="cz.incad.cdk.cdkharvester.input.CDKHarvestOneTitleProcessTemplate"></input>
+        </templates>
+        <securedaction>virtualcollection_manage</securedaction>
+    </process>
+
+
 </processes>

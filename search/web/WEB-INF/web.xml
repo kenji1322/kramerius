@@ -27,16 +27,6 @@
         <url-pattern>/iiif/*</url-pattern>
     </filter-mapping>
 
-    <!-- mod_proxy filter; doesnt work in krameriusdemo don't know why (logout doesn't work)
-    <filter>
-        <filter-name>mod_proxy</filter-name>
-        <filter-class>cz.incad.Kramerius.apache.modproxy.ModProxyEnabledFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>mod_proxy</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    -->
 
     <!--  thrid party authentication -->
     <filter>
@@ -99,6 +89,12 @@
     <servlet>
         <servlet-name>vc</servlet-name>
         <servlet-class>cz.incad.Kramerius.views.virtualcollection.VirtualCollectionServlet</servlet-class>
+    </servlet>
+
+    <!-- Servelt pro manipulaci cdk zdroju -->
+    <servlet>
+        <servlet-name>sources</servlet-name>
+        <servlet-class>cz.incad.Kramerius.views.virtualcollection.CDKSourceServlet</servlet-class>
     </servlet>
 
 
@@ -314,6 +310,12 @@
         <servlet-name>vc</servlet-name>
         <url-pattern>/vc</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>sources</servlet-name>
+        <url-pattern>/sources</url-pattern>
+    </servlet-mapping>
+
 
     <servlet-mapping>
         <servlet-name>thumb</servlet-name>

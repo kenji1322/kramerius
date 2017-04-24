@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.inject.multibindings.Multibinder;
-import com.lizardtech.djvu.IFFEnumeration;
 import com.sun.jersey.guice.JerseyServletModule;
 import com.sun.jersey.guice.spi.container.servlet.GuiceContainer;
 
@@ -28,7 +27,6 @@ import cz.incad.kramerius.rest.api.k5.admin.rights.RightsResource;
 import cz.incad.kramerius.rest.api.k5.admin.statistics.StatisticsResource;
 import cz.incad.kramerius.rest.api.k5.admin.users.RolesResource;
 import cz.incad.kramerius.rest.api.k5.admin.users.UsersResource;
-import cz.incad.kramerius.rest.api.k5.admin.vc.VirtualCollectionsResource;
 import cz.incad.kramerius.rest.api.k5.client.JSONDecorator;
 import cz.incad.kramerius.rest.api.k5.client.SolrMemoization;
 import cz.incad.kramerius.rest.api.k5.client.feedback.FeedbackResource;
@@ -44,7 +42,6 @@ import cz.incad.kramerius.rest.api.k5.client.feeder.decorators.SolrISSNDecorate;
 import cz.incad.kramerius.rest.api.k5.client.feeder.decorators.SolrLanguageDecorate;
 import cz.incad.kramerius.rest.api.k5.client.impl.SolrMemoizationImpl;
 import cz.incad.kramerius.rest.api.k5.client.info.InfoResource;
-import cz.incad.kramerius.rest.api.k5.client.item.IiifResource;
 import cz.incad.kramerius.rest.api.k5.client.item.ItemResource;
 import cz.incad.kramerius.rest.api.k5.client.item.decorators.CollectionsDecorator;
 import cz.incad.kramerius.rest.api.k5.client.item.decorators.DonatorDecorate;
@@ -109,7 +106,6 @@ public class ApiServletModule extends JerseyServletModule {
         bind(RightsResource.class);
         bind(UsersResource.class);
         bind(RolesResource.class);
-        bind(VirtualCollectionsResource.class);
 
         bind(StatisticsResource.class);
 

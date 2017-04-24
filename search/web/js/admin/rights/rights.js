@@ -764,7 +764,47 @@ GlobalActions.prototype.globalActions=function() {
 }
 
 
+
+/** Open amdinistration sources and collections */
+GlobalActions.prototype.cdkadministration=function() {
+	var url = "inc/admin/_cdksources_actions.jsp";
+	
+	$.get(url, bind(function(data) {
+		if (this.cdkdialog) {
+			this.cdkdialog.dialog('open');
+		} else {
+			var items = mapJQuerySelector(function (item) {
+				return items;
+			},$("#cdkadmin"));
+
+			if (items || items.length == 0) {
+				$(document.body).append('<div id="cdkadmin"></div>');
+			}
+		    
+		    this.cdkdialog = $('#cdkadmin').dialog({
+		        width:1200,
+		        height:800,
+		        modal:true,
+		        buttons: [{
+                      text:dictionary['common.close'],
+                      click:bind(function() {
+  		                  this.cdkdialog.dialog("close");
+                      },this)
+		        }]
+		    });
+		 
+		 	console.log(this.cdkdialog);   
+		}
+    
+        //this.coldialog.dialog( "option", "title", dictionary['rights.global.actions.title'] );
+
+		$("#cdkadmin").html(data);
+	}, this));
+
+}
+
 /** Open collection actions dialog */
+/*
 GlobalActions.prototype.collectionActions=function() {
 	var url = "inc/admin/_collection_actions.jsp";
 	$.get(url, bind(function(data) {
@@ -793,11 +833,12 @@ GlobalActions.prototype.collectionActions=function() {
 		    
 		}
     
-        //this.coldialog.dialog( "option", "title", dictionary['rights.global.actions.title'] );
 
 		$("#collectionActions").html(data);
 	}, this));
 }
+*/
+
 
 
 var globalActions = new GlobalActions();

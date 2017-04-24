@@ -47,7 +47,6 @@ import cz.incad.kramerius.rest.api.exceptions.GenericApplicationException;
 import cz.incad.kramerius.rest.api.k5.client.item.exceptions.PIDNotFound;
 import cz.incad.kramerius.rest.api.replication.exceptions.ObjectNotFound;
 import cz.incad.kramerius.utils.ApplicationURL;
-import cz.incad.kramerius.virtualcollections.CDKVirtualCollectionsGet;
 import cz.incad.kramerius.virtualcollections.Collection;
 import cz.incad.kramerius.virtualcollections.CollectionUtils;
 import cz.incad.kramerius.virtualcollections.CollectionsManager;
@@ -61,16 +60,12 @@ public class ClientVirtualCollections {
             .getLogger(ClientVirtualCollections.class.getName());
 
     @Inject
-    @Named("fedora")
+    @Named("cdk")
     CollectionsManager manager;
 
     @Inject
     @Named("securedFedoraAccess")
     FedoraAccess fedoraAccess;
-
-    @Inject
-    CDKVirtualCollectionsGet cdkVirtGet;
-    
 
     Provider<HttpServletRequest> req;
     
@@ -80,14 +75,11 @@ public class ClientVirtualCollections {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     public Response oneVirtualCollection(@PathParam("pid") String pid) {
         try {
-            String resource = this.cdkVirtGet.getResource(pid);
-            Collection col = this.cdkVirtGet.virtualCollectionsFromResource(pid, resource);
+        	Collection col = this.manager.getCollection(pid);
             return Response
                     .ok()
                     .entity(CollectionUtils
                             .virtualCollectionTOJSON(col)).build();
-            
-
         } catch (ObjectNotFound e) {
             throw e;
         } catch (Exception e) {
@@ -148,7 +140,7 @@ public class ClientVirtualCollections {
     public Response get(@QueryParam("sort") String sortType,@QueryParam("langCode") String langCode) {
         try {
             Locale locale = Locale.forLanguageTag(langCode);
-            List<Collection> cols = this.cdkVirtGet.virtualCollections();
+            List<Collection> cols = this.manager.getCollections();
             Collections.sort(cols, new CollectionComparator(locale, sortType(sortType)));
 
             JSONArray jsonArr = new JSONArray();

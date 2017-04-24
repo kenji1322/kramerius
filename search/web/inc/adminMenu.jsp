@@ -210,6 +210,13 @@ function importPeriodicals() {
     });
 }
 
+function cdkCollectionHarvest() {
+    showConfirmDialog(dictionary['administrator.dialogs.importPeriodical.confirm'], function(){
+        var url = "lr?action=start&def=cdkcollectionharvest&out=text";
+        processStarter("cdkcollectionharvest").start(url);
+    });
+}
+
 function replaceAll(txt, replace, with_this) {
 	  return txt.replace(new RegExp(replace, 'g'),with_this);
 }

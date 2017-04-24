@@ -76,7 +76,7 @@ public class DatabaseRightsManager implements RightsManager {
     RightCriteriumWrapperFactory criteriumWrapperFactory;
     
     @Inject
-    @Named("solr")
+    @Named("cdk")
     CollectionsManager colGet;
     
     @Override

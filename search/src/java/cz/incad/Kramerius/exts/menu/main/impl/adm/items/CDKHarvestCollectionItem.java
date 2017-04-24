@@ -19,6 +19,6 @@ public class CDKHarvestCollectionItem extends AbstractMainMenuItem implements Ad
 	public String getRenderedItem() throws IOException {
         return renderMainMenuItem(
                 "javascript:cdkCollectionHarvest(); javascript:hideAdminMenu();",
-                "administrator.menu.dialogs.importPeriodical.title", false);
+                "administrator.menu.dialogs.cdkharvestcollections.title", false);
 	}
 }

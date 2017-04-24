@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ import cz.incad.kramerius.resourceindex.ResourceIndexService;
 import cz.incad.kramerius.utils.IOUtils;
 import cz.incad.kramerius.utils.XMLUtils;
 import cz.incad.kramerius.virtualcollections.Collection.Description;
+import cz.incad.kramerius.virtualcollections.impl.AbstractCollectionManager;
 import cz.incad.kramerius.virtualcollections.impl.fedora.FedoraCollectionsManagerImpl;
 
 public class CollectionUtils {
@@ -95,13 +97,19 @@ public class CollectionUtils {
     
     /** Methods bellow are mostly moved from previous implementation of virtual collections */
     public static String create(FedoraAccess fedoraAccess,String title,boolean canLeaveFlag, Map<String, String>plainTexts, CollectionWait wait) throws IOException, InterruptedException {
+        String pid = "vc:" + UUID.randomUUID().toString();
+        return create(pid, fedoraAccess, title, canLeaveFlag, plainTexts, wait);
+    }
 
-        Map<String, String> encodedTexts = new HashMap<String, String>();
+    /** Methods bellow are mostly moved from previous implementation of virtual collections */
+	public static String create(String pid, FedoraAccess fedoraAccess, String title,
+			boolean canLeaveFlag, Map<String, String> plainTexts, CollectionWait wait)
+			throws UnsupportedEncodingException, IOException, InterruptedException {
+		Map<String, String> encodedTexts = new HashMap<String, String>();
         for (String k : plainTexts.keySet()) {
             String encoded = Base64.getEncoder().encodeToString(plainTexts.get(k).getBytes("UTF-8"));
             encodedTexts.put(k, encoded);
         }
-        String pid = "vc:" + UUID.randomUUID().toString();
         InputStream stream = CollectionUtils.class.getResourceAsStream("vc_template.stg");
         String string = IOUtils.readAsString(stream, Charset.forName("UTF-8"), true);
         StringTemplateGroup grp = new StringTemplateGroup(new StringReader(string), DefaultTemplateLexer.class);
@@ -110,7 +118,8 @@ public class CollectionUtils {
         template.setAttribute("title", title != null ? title : pid);
         template.setAttribute("canLeave", canLeaveFlag);
         template.setAttribute("text", encodedTexts);
-        
+        System.out.println(encodedTexts);
+        System.out.println(template.toString());
         fedoraAccess.getAPIM().ingest(template.toString().getBytes("UTF-8"), "info:fedora/fedora-system:FOXML-1.1", "Create virtual collection");
         
         if (wait != null) {
@@ -124,7 +133,7 @@ public class CollectionUtils {
             }
         }
         return pid;
-    }
+	}
 
     public static String create(FedoraAccess fedoraAccess) throws IOException {
         String pid = "vc:" + UUID.randomUUID().toString();
@@ -184,9 +193,9 @@ public class CollectionUtils {
             LOGGER.log(Level.INFO, "Datastream modified");
         }
     }
-
+    
     public static void modifyLangDatastream(String pid, String lang, String ds, FedoraAccess fedoraAccess) throws IOException {
-        String dsName = VirtualCollectionsManager.TEXT_DS_PREFIX + lang;
+        String dsName = AbstractCollectionManager.TEXT_DS_PREFIX + lang;
         modifyLangDatastream(pid, lang, dsName, ds, fedoraAccess);
     }
 

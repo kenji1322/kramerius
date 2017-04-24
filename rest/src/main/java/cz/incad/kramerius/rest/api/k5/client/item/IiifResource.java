@@ -94,7 +94,7 @@ public class IiifResource {
 
                         resource.setService(service);
                         Image image = new ImageImpl();
-                        image.setOn(new URI(id));
+                        image.setOn(new URI(id));`
                         image.setResource(resource);
                         canvas.setImages(Collections.singletonList(image));
                         canvases.add(canvas);

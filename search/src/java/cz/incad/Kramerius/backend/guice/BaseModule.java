@@ -1,5 +1,11 @@
 package cz.incad.Kramerius.backend.guice;
 
+import java.io.File;
+import java.sql.Connection;
+import java.util.Locale;
+
+import javax.servlet.jsp.jstl.fmt.LocalizationContext;
+
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Scopes;
@@ -13,7 +19,6 @@ import cz.incad.kramerius.MostDesirable;
 import cz.incad.kramerius.SolrAccess;
 import cz.incad.kramerius.audio.AudioLifeCycleHook;
 import cz.incad.kramerius.audio.urlMapping.CachingFedoraUrlManager;
-import cz.incad.kramerius.audio.urlMapping.MockUrlManager;
 import cz.incad.kramerius.audio.urlMapping.RepositoryUrlManager;
 import cz.incad.kramerius.impl.FedoraAccessImpl;
 import cz.incad.kramerius.impl.MostDesirableImpl;
@@ -33,25 +38,19 @@ import cz.incad.kramerius.service.impl.GoogleAnalyticsImpl;
 import cz.incad.kramerius.service.impl.METSServiceImpl;
 import cz.incad.kramerius.statistics.StatisticReport;
 import cz.incad.kramerius.statistics.StatisticsAccessLog;
-import cz.incad.kramerius.statistics.filters.DateFilter;
-import cz.incad.kramerius.statistics.filters.ModelFilter;
-import cz.incad.kramerius.statistics.filters.StatisticsFilter;
-import cz.incad.kramerius.statistics.filters.StatisticsFiltersContainer;
-import cz.incad.kramerius.statistics.filters.VisibilityFilter;
-import cz.incad.kramerius.statistics.impl.*;
+import cz.incad.kramerius.statistics.impl.AuthorReport;
+import cz.incad.kramerius.statistics.impl.DatabaseStatisticsAccessLogImpl;
+import cz.incad.kramerius.statistics.impl.LangReport;
+import cz.incad.kramerius.statistics.impl.ModelStatisticReport;
 import cz.incad.kramerius.utils.conf.KConfiguration;
-import cz.incad.kramerius.virtualcollections.CDKVirtualCollectionsGet;
-import cz.incad.kramerius.virtualcollections.impl.CDKVirtualCollectionsGetImpl;
+import cz.incad.kramerius.virtualcollections.CDKProcessingIndex;
+import cz.incad.kramerius.virtualcollections.CDKSourcesAware;
 import cz.incad.kramerius.virtualcollections.Collection;
 import cz.incad.kramerius.virtualcollections.CollectionsManager;
+import cz.incad.kramerius.virtualcollections.impl.CDKProcessingIndexImpl;
+import cz.incad.kramerius.virtualcollections.impl.cdk.CDKProcessingCollectionManagerImpl;
 import cz.incad.kramerius.virtualcollections.impl.fedora.FedoraCollectionsManagerImpl;
 import cz.incad.kramerius.virtualcollections.impl.solr.SolrCollectionManagerImpl;
-
-import javax.servlet.jsp.jstl.fmt.LocalizationContext;
-
-import java.io.File;
-import java.sql.Connection;
-import java.util.Locale;
 
 /**
  * Base kramerius module
@@ -66,7 +65,6 @@ public class BaseModule extends AbstractModule {
         
         Multibinder<StatisticReport> reports = Multibinder.newSetBinder(binder(), StatisticReport.class);
         reports.addBinding().to(ModelStatisticReport.class);
-        //reports.addBinding().to(DateDurationReport.class);
         reports.addBinding().to(AuthorReport.class);
         reports.addBinding().to(LangReport.class);
 
@@ -88,11 +86,14 @@ public class BaseModule extends AbstractModule {
 
         bind(MostDesirable.class).to(MostDesirableImpl.class);
 
-        // 
         bind(Collection.class).toProvider(VirtualCollectionProvider.class);
+        
+        bind(CDKProcessingIndex.class).to(CDKProcessingIndexImpl.class);
         
         bind(CollectionsManager.class).annotatedWith(Names.named("fedora")).to(FedoraCollectionsManagerImpl.class);
         bind(CollectionsManager.class).annotatedWith(Names.named("solr")).to(SolrCollectionManagerImpl.class);
+        bind(CollectionsManager.class).annotatedWith(Names.named("cdk")).to(CDKProcessingCollectionManagerImpl.class);
+        bind(CDKSourcesAware.class).to(CDKProcessingCollectionManagerImpl.class);
         
         bind(RelationService.class).to(RelationServiceImpl.class).in(Scopes.SINGLETON);
         bind(GoogleAnalytics.class).to(GoogleAnalyticsImpl.class).in(Scopes.SINGLETON);
@@ -104,7 +105,10 @@ public class BaseModule extends AbstractModule {
         lfhooks.addBinding().to(AudioLifeCycleHook.class);
         
         // only CDK
-        bind(CDKVirtualCollectionsGet.class).to(CDKVirtualCollectionsGetImpl.class);
+        //bind(CDKVirtualCollectionsGet.class).to(CDKVirtualCollectionsGetImpl.class);
+        //bind(CDKVirtualCollectionsGet.class).to(CDKSolrVirtualCollectionsGetImpl.class);
+
+        
     }
 
     @Provides

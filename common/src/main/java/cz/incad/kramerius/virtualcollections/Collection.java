@@ -17,7 +17,27 @@ public class Collection {
     
     private List<Description> descriptions = new ArrayList<Description>();
     
-    public Collection(String pid, String label, boolean canLeaveFlag) {
+    public Collection() {
+		super();
+	}
+
+	public void setPid(String pid) {
+		this.pid = pid;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+
+	public void setCanLeaveFlag(boolean canLeaveFlag) {
+		this.canLeaveFlag = canLeaveFlag;
+	}
+
+	public void setDescriptions(List<Description> descriptions) {
+		this.descriptions = descriptions;
+	}
+
+	public Collection(String pid, String label, boolean canLeaveFlag) {
         super();
         this.pid = pid;
         this.canLeaveFlag = canLeaveFlag;
