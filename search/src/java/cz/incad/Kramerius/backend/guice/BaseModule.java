@@ -43,14 +43,16 @@ import cz.incad.kramerius.statistics.impl.DatabaseStatisticsAccessLogImpl;
 import cz.incad.kramerius.statistics.impl.LangReport;
 import cz.incad.kramerius.statistics.impl.ModelStatisticReport;
 import cz.incad.kramerius.utils.conf.KConfiguration;
-import cz.incad.kramerius.virtualcollections.CDKProcessingIndex;
 import cz.incad.kramerius.virtualcollections.CDKSourcesAware;
+import cz.incad.kramerius.virtualcollections.CDKStateSupport;
 import cz.incad.kramerius.virtualcollections.Collection;
 import cz.incad.kramerius.virtualcollections.CollectionsManager;
-import cz.incad.kramerius.virtualcollections.impl.CDKProcessingIndexImpl;
+import cz.incad.kramerius.virtualcollections.impl.CDKStateSupportImpl;
 import cz.incad.kramerius.virtualcollections.impl.cdk.CDKProcessingCollectionManagerImpl;
 import cz.incad.kramerius.virtualcollections.impl.fedora.FedoraCollectionsManagerImpl;
 import cz.incad.kramerius.virtualcollections.impl.solr.SolrCollectionManagerImpl;
+import cz.incad.kramerius.virtualcollections.impl.support.CDKCollectionsIndexImpl;
+import cz.incad.kramerius.virtualcollections.support.CDKCollectionsIndex;
 
 /**
  * Base kramerius module
@@ -88,12 +90,13 @@ public class BaseModule extends AbstractModule {
 
         bind(Collection.class).toProvider(VirtualCollectionProvider.class);
         
-        bind(CDKProcessingIndex.class).to(CDKProcessingIndexImpl.class);
+        bind(CDKCollectionsIndex.class).to(CDKCollectionsIndexImpl.class);
         
         bind(CollectionsManager.class).annotatedWith(Names.named("fedora")).to(FedoraCollectionsManagerImpl.class);
         bind(CollectionsManager.class).annotatedWith(Names.named("solr")).to(SolrCollectionManagerImpl.class);
         bind(CollectionsManager.class).annotatedWith(Names.named("cdk")).to(CDKProcessingCollectionManagerImpl.class);
         bind(CDKSourcesAware.class).to(CDKProcessingCollectionManagerImpl.class);
+        bind(CDKStateSupport.class).to(CDKStateSupportImpl.class).asEagerSingleton();
         
         bind(RelationService.class).to(RelationServiceImpl.class).in(Scopes.SINGLETON);
         bind(GoogleAnalytics.class).to(GoogleAnalyticsImpl.class).in(Scopes.SINGLETON);

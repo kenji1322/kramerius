@@ -93,8 +93,8 @@
 
     <!-- Servelt pro manipulaci cdk zdroju -->
     <servlet>
-        <servlet-name>sources</servlet-name>
-        <servlet-class>cz.incad.Kramerius.views.virtualcollection.CDKSourceServlet</servlet-class>
+        <servlet-name>cdkmanage</servlet-name>
+        <servlet-class>cz.incad.Kramerius.views.virtualcollection.CDKManageServlet</servlet-class>
     </servlet>
 
 
@@ -312,8 +312,8 @@
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>sources</servlet-name>
-        <url-pattern>/sources</url-pattern>
+        <servlet-name>cdkmanage</servlet-name>
+        <url-pattern>/cdkmanage</url-pattern>
     </servlet-mapping>
 
 

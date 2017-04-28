@@ -18,8 +18,6 @@ import org.json.JSONObject;
 
 import com.google.inject.Inject;
 
-import cz.incad.kramerius.virtualcollections.CDKProcessingIndex;
-import cz.incad.kramerius.virtualcollections.CDKProcessingIndexException;
 import cz.incad.kramerius.virtualcollections.CDKSource;
 import cz.incad.kramerius.virtualcollections.CDKSourcesAware;
 import cz.incad.kramerius.virtualcollections.Collection;
@@ -27,13 +25,15 @@ import cz.incad.kramerius.virtualcollections.CollectionException;
 import cz.incad.kramerius.virtualcollections.CollectionsManager.SortType;
 import cz.incad.kramerius.virtualcollections.impl.AbstractCollectionManager;
 import cz.incad.kramerius.virtualcollections.impl.AbstractCollectionManager.CollectionComparator;
+import cz.incad.kramerius.virtualcollections.support.CDKCollectionsIndex;
+import cz.incad.kramerius.virtualcollections.support.CDKCollectionsIndexException;
 
 public class CDKProcessingCollectionManagerImpl extends AbstractCollectionManager implements CDKSourcesAware{
 
-    private CDKProcessingIndex procIndex;
+    private CDKCollectionsIndex procIndex;
     
     @Inject
-    public CDKProcessingCollectionManagerImpl(CDKProcessingIndex procIndex) {
+    public CDKProcessingCollectionManagerImpl(CDKCollectionsIndex procIndex) {
         super();
         this.procIndex = procIndex;
     }
@@ -42,7 +42,7 @@ public class CDKProcessingCollectionManagerImpl extends AbstractCollectionManage
 	public List<Collection> getCollections() throws CollectionException {
     	try {
 			List<Collection> list = new ArrayList<Collection>();
-			JSONArray cols = this.procIndex.getDataByType(CDKProcessingIndex.Type.collection);
+			JSONArray cols = this.procIndex.getDataByType(CDKCollectionsIndex.Type.collection);
 			for (int i = 0,ll=cols.length(); i < ll; i++) {
 				JSONObject jsonObject = cols.getJSONObject(i);
 				Collection col = fromProcessingIndex(jsonObject, Collection.class);
@@ -51,7 +51,7 @@ public class CDKProcessingCollectionManagerImpl extends AbstractCollectionManage
 			return list;
 		} catch (JSONException e) {
 			throw new CollectionException(e);
-		} catch (CDKProcessingIndexException e) {
+		} catch (CDKCollectionsIndexException e) {
 			throw new CollectionException(e);
 		} catch (InstantiationException e) {
 			throw new CollectionException(e);
@@ -96,7 +96,7 @@ public class CDKProcessingCollectionManagerImpl extends AbstractCollectionManage
 	public List<CDKSource> getSources() throws CollectionException {
     	try {
 			List<CDKSource> list = new ArrayList<CDKSource>();
-			JSONArray cols = this.procIndex.getDataByType(CDKProcessingIndex.Type.source);
+			JSONArray cols = this.procIndex.getDataByType(CDKCollectionsIndex.Type.source);
 			for (int i = 0,ll=cols.length(); i < ll; i++) {
 				JSONObject jsonObject = cols.getJSONObject(i);
 				CDKSource col = fromProcessingIndex(jsonObject, CDKSource.class);
@@ -121,7 +121,7 @@ public class CDKProcessingCollectionManagerImpl extends AbstractCollectionManage
 			return list;
 		} catch (JSONException e) {
 			throw new CollectionException(e);
-		} catch (CDKProcessingIndexException e) {
+		} catch (CDKCollectionsIndexException e) {
 			throw new CollectionException(e);
 		} catch (InstantiationException e) {
 			throw new CollectionException(e);
@@ -170,7 +170,7 @@ public class CDKProcessingCollectionManagerImpl extends AbstractCollectionManage
 			return list;
 		} catch (JSONException e) {
 			throw new CollectionException(e);
-		} catch (CDKProcessingIndexException e) {
+		} catch (CDKCollectionsIndexException e) {
 			throw new CollectionException(e);
 		} catch (InstantiationException e) {
 			throw new CollectionException(e);

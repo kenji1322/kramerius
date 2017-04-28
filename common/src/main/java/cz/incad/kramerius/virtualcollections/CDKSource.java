@@ -11,7 +11,9 @@ import java.util.Date;
 public class CDKSource extends Collection {
 	
 	private String url;
+	
 	private LocalDateTime harvestingTimeStamp;
+	
 	private LocalDateTime publishingTimeStamp;
 	
 	public CDKSource(String pid, String label, boolean canLeaveFlag) {

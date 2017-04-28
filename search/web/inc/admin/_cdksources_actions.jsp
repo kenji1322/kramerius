@@ -66,7 +66,7 @@ CDKAdminSupport.prototype.content=function() {
 
 CDKAdminSupport.prototype.edit=function(action, canLeave, czech, english, collection, sourceurl, name) {
 	//var url = "vc?action=CREATE&canLeave=" + canLeave;
-    var url = "sources?action="+action+"&canLeave=" + canLeave;
+    var url = "cdkmanage?action="+action+"&canLeave=" + canLeave;
 
 	if (czech) {
         var escapedText = replaceAll(encodeURIComponent(czech), ',', '');
@@ -132,7 +132,7 @@ CDKAdminSupport.prototype.source=function(collection) {
                                var english = $("#english_text").val();
                                var canLeave = $("#canLeave").is(":checked");
                                var collection = $("#vc_pid").val();
-                               var action = (collection ? "CHANGE" : "CREATE");
+                               var action = (collection ? "CHANGESOURCE" : "CREATESOURCE");
 
                                
                                var czech_log_desc = $("#descs_cs_text").val();

@@ -1,4 +1,4 @@
-package cz.incad.kramerius.virtualcollections.impl;
+package cz.incad.kramerius.virtualcollections.impl.support;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -16,14 +16,14 @@ import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 
 import cz.incad.kramerius.utils.conf.KConfiguration;
-import cz.incad.kramerius.virtualcollections.CDKProcessingIndex;
-import cz.incad.kramerius.virtualcollections.CDKProcessingIndex.Type;
-import cz.incad.kramerius.virtualcollections.CDKProcessingIndexException;
+import cz.incad.kramerius.virtualcollections.support.CDKCollectionsIndex;
+import cz.incad.kramerius.virtualcollections.support.CDKCollectionsIndexException;
+import cz.incad.kramerius.virtualcollections.support.CDKCollectionsIndex.Type;
 
-public class CDKProcessingIndexImpl implements CDKProcessingIndex {
+public class CDKCollectionsIndexImpl implements CDKCollectionsIndex {
     
     
-    public CDKProcessingIndexImpl() {
+    public CDKCollectionsIndexImpl() {
     }
     
     public static String getSolrAddress() {
@@ -32,7 +32,7 @@ public class CDKProcessingIndexImpl implements CDKProcessingIndex {
     
     
     @Override
-	public JSONObject getDataByPid(String pid) throws CDKProcessingIndexException {
+	public JSONObject getDataByPid(String pid) throws CDKCollectionsIndexException {
         try {
             JSONArray res = genericQuery(pidQuery(pid));
             if (res.length() > 0 ) {
@@ -41,38 +41,38 @@ public class CDKProcessingIndexImpl implements CDKProcessingIndex {
             	return null;
             }
         } catch (UnsupportedEncodingException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         }
 	}
 
 	@Override
-	public JSONArray getDataByParentAndType(String parentPid, Type type) throws CDKProcessingIndexException {
+	public JSONArray getDataByParentAndType(String parentPid, Type type) throws CDKCollectionsIndexException {
         try {
             return genericQuery(parentPidAndTypeQuery(parentPid, type));
         } catch (UnsupportedEncodingException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         }
 	}
 
 	@Override
-    public JSONArray getDataByParent(String parentPid) throws CDKProcessingIndexException {
+    public JSONArray getDataByParent(String parentPid) throws CDKCollectionsIndexException {
         try {
             return genericQuery(parentPidQuery(parentPid));
         } catch (UnsupportedEncodingException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         }
     }
 
     @Override
-    public JSONArray getDataByType(Type type) throws CDKProcessingIndexException {
+    public JSONArray getDataByType(Type type) throws CDKCollectionsIndexException {
         try {
             return genericQuery(typeQuery(type));
         } catch (UnsupportedEncodingException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         }
     }
 
-    private JSONArray genericQuery(String q) throws CDKProcessingIndexException {
+    private JSONArray genericQuery(String q) throws CDKCollectionsIndexException {
         JSONArray retValArray = new JSONArray();
         try {
         	int start = 0;
@@ -90,11 +90,11 @@ public class CDKProcessingIndexImpl implements CDKProcessingIndex {
         	} while(start < numberOfResults);
             
         } catch (UniformInterfaceException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         } catch (ClientHandlerException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         } catch (JSONException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         }
         return retValArray;
     }
@@ -127,7 +127,7 @@ public class CDKProcessingIndexImpl implements CDKProcessingIndex {
     }
 
     @Override
-    public void index(Type type, JSONObject jsonObject) throws CDKProcessingIndexException {
+    public void index(Type type, JSONObject jsonObject) throws CDKCollectionsIndexException {
         try {
         	
         	if (!jsonObject.has("type")) {
@@ -149,21 +149,21 @@ public class CDKProcessingIndexImpl implements CDKProcessingIndex {
             int status = resp.getStatus();
             if (status != 200) {
                 String entity = resp.getEntity(String.class);
-                throw new CDKProcessingIndexException("couldn't index data because of "+entity);
+                throw new CDKCollectionsIndexException("couldn't index data because of "+entity);
             }
             
         } catch (JSONException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         } catch (UniformInterfaceException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         } catch (ClientHandlerException e) {
-            throw new CDKProcessingIndexException(e);
+            throw new CDKCollectionsIndexException(e);
         }
 
     }
 
     @Override
-    public void updateField(String pid, String name, String value) throws CDKProcessingIndexException {
+    public void updateField(String pid, String name, String value) throws CDKCollectionsIndexException {
         Client c = Client.create();
         String host = getSolrAddress()+"/update?commit=true";
         WebResource r = c.resource(host);
@@ -183,7 +183,7 @@ public class CDKProcessingIndexImpl implements CDKProcessingIndex {
         int status = resp.getStatus();
         if (status != 200) {
             String entity = resp.getEntity(String.class);
-            throw new CDKProcessingIndexException("couldn't index data because of "+entity);
+            throw new CDKCollectionsIndexException("couldn't index data because of "+entity);
         }
 
         

@@ -43,6 +43,7 @@ import cz.incad.kramerius.statistics.database.StatisticDatabaseInitializator;
 import cz.incad.kramerius.users.database.LoggedUserDatabaseInitializator;
 import cz.incad.kramerius.utils.DatabaseUtils;
 import cz.incad.kramerius.utils.IOUtils;
+import cz.incad.kramerius.virtualcollections.database.CDKProcessingDatabaseInitalizator;
 
 /**
  * Starting point for K4 application
@@ -93,7 +94,10 @@ public class StartupServlet extends GuiceServlet {
 
             // statistics tables
             StatisticDatabaseInitializator.initDatabase(connection, versionService);
-
+            
+            // cdk states
+            CDKProcessingDatabaseInitalizator.initDatabase(connection, versionService);
+            
             // stores new db version to doatabase
             versionService.updateNewVersion();
 

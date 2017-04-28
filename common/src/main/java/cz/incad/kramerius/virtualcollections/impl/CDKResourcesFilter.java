@@ -5,6 +5,7 @@ import java.util.List;
 import cz.incad.kramerius.utils.conf.KConfiguration;
 import cz.incad.kramerius.virtualcollections.Collection;
 
+@Deprecated
 public class CDKResourcesFilter {
 
     public List<String> getResources() {
