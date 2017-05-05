@@ -641,9 +641,7 @@ public class LongRunningProcessServlet extends GuiceServlet {
                     }
 
                     LRProcess process = processes.get(0);
-                    //process.setProcessState(States.calculateBatchState(childStates));
                     process.setBatchState(BatchStates.calculateBatchState(childStates));
-                    
                     lrProcessManager.updateLongRunningProcessState(process);
                     
                     return lrProcessManager.getSessionKey(process.getAuthToken());

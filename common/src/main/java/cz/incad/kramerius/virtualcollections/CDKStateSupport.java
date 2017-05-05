@@ -17,7 +17,7 @@ public interface CDKStateSupport {
 		PUBLISHED;
 	}
 	
-	public void insert(String pid) throws CDKStateSupportException;
+	public void insert(String pid, String timeStamp) throws CDKStateSupportException;
 
 	public void remove(String pid) throws CDKStateSupportException;
 	

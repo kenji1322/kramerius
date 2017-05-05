@@ -20,16 +20,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import cz.incad.Kramerius.backend.guice.GuiceServlet;
+import cz.incad.Kramerius.statistics.formatters.utils.StringUtils;
 import cz.incad.kramerius.FedoraAccess;
 import cz.incad.kramerius.ObjectPidsPath;
+import cz.incad.kramerius.processes.LRProcessManager;
 import cz.incad.kramerius.processes.impl.ProcessStarter;
 import cz.incad.kramerius.processes.utils.ProcessUtils;
 import cz.incad.kramerius.security.IsActionAllowed;
 import cz.incad.kramerius.security.SecuredActions;
 import cz.incad.kramerius.security.SecurityException;
 import cz.incad.kramerius.security.SpecialObjects;
+import cz.incad.kramerius.security.User;
+import cz.incad.kramerius.users.LoggedUsersSingleton;
 import cz.incad.kramerius.virtualcollections.CDKSource;
 import cz.incad.kramerius.virtualcollections.CDKStateSupport;
 import cz.incad.kramerius.virtualcollections.CDKStateSupport.CDKState;
@@ -52,12 +57,32 @@ public class CDKManageServlet extends AbstractColsServlet {
 	
 	@Inject
 	CDKStateSupport stateSupport;
+	
+	@Inject
+	LoggedUsersSingleton logUsers; 
 
+	@Inject
+	Provider<User> provider;
+	
+	@Inject
+	LRProcessManager lrProcessManager;
+	
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+
+        	User user =  null;
         	
-            if (actionAllowed.isActionAllowed(SecuredActions.VIRTUALCOLLECTION_MANAGE.getFormalName(), SpecialObjects.REPOSITORY.getPid(),null, ObjectPidsPath.REPOSITORY_PATH)) {
+
+        	String authToken = req.getHeader("auth-token");
+        	if (authToken != null) {
+            	String sessionKey = lrProcessManager.getSessionKey(authToken);
+            	user = this.logUsers.getLoggedUser(sessionKey);
+        	} else {
+        		user = this.provider.get();
+        	}
+        	
+            if (actionAllowed.isActionAllowed(user, SecuredActions.VIRTUALCOLLECTION_MANAGE.getFormalName(), SpecialObjects.REPOSITORY.getPid(),null, ObjectPidsPath.REPOSITORY_PATH)) {
                 Actions actionToDo = Actions.CHANGESOURCE;
                 String actionNameParam = req.getParameter(ACTION_NAME);
                 if (actionNameParam != null) {
@@ -217,7 +242,12 @@ public class CDKManageServlet extends AbstractColsServlet {
 					CollectionsManager colMan, HttpServletRequest req, HttpServletResponse response)
 					throws Exception, SecurityException {
 				String pid = req.getParameter("pid");
-				stateSupport.insert(pid);
+				String tmsp = req.getParameter("timestamp");
+				if ( (pid != null && (!"".equals(pid.trim()))) && (tmsp != null && (!"".equals(tmsp.trim())))) {
+					stateSupport.insert(pid, tmsp);
+				} else {
+					response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+				}
 			}
         	
         },
@@ -256,12 +286,13 @@ public class CDKManageServlet extends AbstractColsServlet {
 					throws Exception, SecurityException {
 				String state = req.getParameter("state");
 				List<String> pids = stateSupport.getPids(CDKState.valueOf(state));
-				
 				response.setContentType("text/plain");
 				PrintWriter out = response.getWriter();
 				for (String p : pids) {
 					out.println(p);
 				}
+				
+				
 			} 
         	
         },

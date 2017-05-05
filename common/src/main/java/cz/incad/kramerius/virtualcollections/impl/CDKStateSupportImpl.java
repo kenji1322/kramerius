@@ -3,6 +3,10 @@ package cz.incad.kramerius.virtualcollections.impl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +23,8 @@ import cz.incad.kramerius.virtualcollections.CDKStateSupportException;
 
 public class CDKStateSupportImpl implements CDKStateSupport {
 
+	public static final SimpleDateFormat ACCEPTED_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	
 	public static final Logger LOGGER = Logger.getLogger(CDKStateSupportImpl.class.getName());
 
 	@Inject
@@ -26,17 +32,20 @@ public class CDKStateSupportImpl implements CDKStateSupport {
 	Provider<Connection> connectionProvider = null;
 
 	@Override
-	public synchronized void insert(String pid) throws CDKStateSupportException {
+	public synchronized void insert(String pid, String timestamp) throws CDKStateSupportException {
 		Connection connection = null;
 		try {
 			connection = connectionProvider.get();
 			if (connection == null)
 				throw new NotReadyException("connection not ready");
 
-			new JDBCUpdateTemplate(connection).executeUpdate("insert into cdk_states(PID, STATE) values(?, ?)", pid,
-					CDKState.HARVESTED.name());
+			Date parsed = ACCEPTED_DATE_FORMAT.parse(timestamp);
+			new JDBCUpdateTemplate(connection).executeUpdate("insert into cdk_states(PID,STATE,TMSP) values(?,?,?)", pid,
+					CDKState.HARVESTED.name(), new Timestamp(parsed.getTime()));
 		} catch (SQLException e) {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+			throw new CDKStateSupportException(e);
+		} catch (ParseException e) {
 			throw new CDKStateSupportException(e);
 		}
 
@@ -117,6 +126,11 @@ public class CDKStateSupportImpl implements CDKStateSupport {
 		return pids;
 	}
 	
+	
+	public static void main(String[] args) {
+		
+	}
+
 	
 
 }
