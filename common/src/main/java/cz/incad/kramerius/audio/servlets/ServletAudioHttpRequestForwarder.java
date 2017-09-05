@@ -120,9 +120,11 @@ public class ServletAudioHttpRequestForwarder extends AbstractAudioHttpRequestFo
                     && (ex.getCause().getMessage().equals(CONNECTION_RESET) || ex.getCause().getMessage().equals(BROKEN_PIPE))) {
                 LOGGER.warning("Connection reset probably by client (or by repository)");
             } else {
-                //mam ta ty hnusoba
-                LOGGER.log(Level.WARNING, "Sound unit bad image");
-            }
+                if ("ClientAbortException".equals(ex.getClass().getSimpleName())) {
+                    LOGGER.info("Bad sound unit image");
+                } else {
+                    LOGGER.log(Level.SEVERE, ex.getMessage(), ex);
+                }            }
         } finally {
             try {
                 LOGGER.fine("closing connection to repository");
