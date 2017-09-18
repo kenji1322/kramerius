@@ -302,7 +302,12 @@ public class GeneratePDFServiceImpl extends AbstractPDFRenderSupport implements
                     i18nUrl, ImageFetcher.WEB);
         } catch (OutOfRangeException e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            if (e.getMessage() == "too much pages") {
+                LOGGER.log(Level.INFO,"too much pages for pdf generating");
+            }
+            else {
+                e.printStackTrace();
+            }
         }
     }
 
