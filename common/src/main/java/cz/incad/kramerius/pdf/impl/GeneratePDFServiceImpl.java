@@ -301,8 +301,9 @@ public class GeneratePDFServiceImpl extends AbstractPDFRenderSupport implements
                     path.getLeaf(), numberOfPages, rect), os, null, imgServletUrl,
                     i18nUrl, ImageFetcher.WEB);
         } catch (OutOfRangeException e) {
+            //gggg stale to vypluva, bude to inde
             // TODO Auto-generated catch block
-            if (e.getMessage() == "too much pages") {
+            if (e.getMessage().equals("too much pages")) {
                 LOGGER.log(Level.INFO,"too much pages for pdf generating");
             }
             else {
