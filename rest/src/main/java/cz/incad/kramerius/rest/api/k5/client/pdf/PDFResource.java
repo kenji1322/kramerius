@@ -393,12 +393,7 @@ public class PDFResource extends AbstractPDFResource  {
                     LOGGER.log(Level.SEVERE, e.getMessage(), e);
                     throw new GenericApplicationException(e.getMessage());
                 } catch (OutOfRangeException e1) {
-                    if (e1.getMessage().equals("too much pages")) {
-                        LOGGER.log(Level.INFO,"too much pages for pdf generating");
-                    }
-                    else {
-                        LOGGER.log(Level.SEVERE, e1.getMessage(), e1);
-                    }
+                    LOGGER.log(Level.WARNING,"too much pages for pdf generating - consider changing config attribute");
                     throw new PDFResourceBadRequestException(e1.getMessage());
                 } catch (SecurityException e1) {
                     LOGGER.log(Level.INFO, e1.getMessage());
