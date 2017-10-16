@@ -211,7 +211,7 @@ public class PDFResource extends AbstractPDFResource  {
                             LOGGER.severe("cannot write statistic records");
                             LOGGER.log(Level.SEVERE, e.getMessage(),e);
                         }
-
+                        
                         StreamingOutput stream = streamingOutput(fileToDelete,format);
                         return Response
                             .ok()
