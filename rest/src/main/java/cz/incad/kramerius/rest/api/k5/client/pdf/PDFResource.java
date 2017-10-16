@@ -106,19 +106,19 @@ public class PDFResource extends AbstractPDFResource  {
         LETTER(PageSize.LETTER),
         POSTCARD(PageSize.POSTCARD),
         TABLOID(PageSize.TABLOID);
-
+        
         protected Rectangle rect;
 
         private Size(Rectangle rect) {
             this.rect = rect;
-        }
-
+        } 
+        
         public Rectangle getRectangle() {
             return rect;
         }
     }
-
-
+    
+    
     /**
      * Returns informations about resouce (how many pages can be generated and if resource is busy)
      * @return
@@ -130,7 +130,7 @@ public class PDFResource extends AbstractPDFResource  {
             JSONObject jsonObject = new JSONObject();
             String maxPage = KConfiguration.getInstance().getProperty(
                     "generatePdfMaxRange");
-
+            
             boolean turnOff = KConfiguration.getInstance().getConfiguration().getBoolean("turnOffPdfCheck");
             if (turnOff) {
                 jsonObject.put("pdfMaxRange", "unlimited");
@@ -157,12 +157,12 @@ public class PDFResource extends AbstractPDFResource  {
         }
     }
 
-
+    
 
     /**
-     * Print only part of image
+     * Print only part of image 
      * @param pid PID
-     * @param xpos Determine x-position. Value is defined by percentage of total width.
+     * @param xpos Determine x-position. Value is defined by percentage of total width. 
      * @param ypos Determine y-position. Value is defined by percentage of total height.
      * @param width Deterime width. Value is defiend by percentage of total width.
      * @param height Determine height. Value is defined by percentage of total height
@@ -173,7 +173,7 @@ public class PDFResource extends AbstractPDFResource  {
     @GET
     @Path("part")
     @Produces({ "application/pdf", "application/json" })
-    public Response part(@QueryParam("pid") String pid,
+    public Response part(@QueryParam("pid") String pid, 
             @QueryParam("xpos") String xpos,
             @QueryParam("ypos") String ypos,
             @QueryParam("width") String width,
@@ -187,7 +187,7 @@ public class PDFResource extends AbstractPDFResource  {
                     File fileToDelete = null;
                     try {
                         pid = this.fedoraAccess.findFirstViewablePid(pid);
-
+                        
                         BufferedImage bufImage = KrameriusImageSupport.readImage(pid,FedoraUtils.IMG_FULL_STREAM, this.fedoraAccess, 0);
 
                         double xPerctDouble = Double.parseDouble(xpos);
@@ -198,12 +198,12 @@ public class PDFResource extends AbstractPDFResource  {
 
                         BufferedImage subImage =  KrameriusImageSupport.partOfImage(bufImage, xPerctDouble, yPerctDouble,
                                 widthPerctDouble, heightPerctDouble);
-
+            
                         fileToDelete = File.createTempFile("subimage", ".png");
                         FileOutputStream fos = new FileOutputStream(fileToDelete);
                         KrameriusImageSupport.writeImageToStream(subImage, ImageMimeType.PNG.getDefaultFileExtension(), fos);
                         fos.close();
-
+                        
                         try {
                             this.mostDesirable.saveAccess(pid, new Date());
                             this.statisticsAccessLog.reportAccess(pid, FedoraUtils.IMG_FULL_STREAM, ReportedAction.PDF.name());
@@ -241,9 +241,9 @@ public class PDFResource extends AbstractPDFResource  {
                 PDFExlusiveGenerateSupport.PDF_SEMAPHORE.release();
         }
     }
-
+    
     /**
-     * Generate pdf from selection
+     * Generate pdf from selection 
      * @param pidsParam List of pids
      * @param pageType First page type. Possible values TEXT, IMAGE
      * @param format Page format. Possible values : A0,...A5, B0,...B5, LETTER, POSTCARD
@@ -266,10 +266,10 @@ public class PDFResource extends AbstractPDFResource  {
                             .valueOf(pageType) : AbstractPDFResource.FirstPage.TEXT;
 
                     String[] pids = pidsParam.split(",");
-
+                    
                     // max number test
                     ConfigurationUtils.checkNumber(pids);
-
+                    
                     Rectangle formatRect = formatRect(format);
                     final File generatedPDF = super.selection(pids, formatRect, fp);
                     final InputStream fis = new FileInputStream(generatedPDF);
@@ -322,9 +322,9 @@ public class PDFResource extends AbstractPDFResource  {
     }
 
 
-
+    
     /**
-     * Generate whole document
+     * Generate whole document 
      * @param pid PID of generating document
      * @param number Number of pages (whole document or maximum number of pages)
      * @param pageType Type of firt page. Possible values: TEXT,IMAGE
@@ -351,7 +351,7 @@ public class PDFResource extends AbstractPDFResource  {
                     // max number test
                     int n = ConfigurationUtils.checkNumber(number);
                     Rectangle formatRect = formatRect(format);
-
+                    
                     final File generatedPdf = super.parent(pid, n, formatRect, fp);
 
                     final InputStream fis = new FileInputStream(generatedPdf);
