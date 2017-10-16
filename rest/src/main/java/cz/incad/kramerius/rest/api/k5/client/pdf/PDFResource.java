@@ -102,7 +102,7 @@ public class PDFResource extends AbstractPDFResource  {
         A2(PageSize.A2),
         A1(PageSize.A1),
         A0(PageSize.A0),
-
+        
         LETTER(PageSize.LETTER),
         POSTCARD(PageSize.POSTCARD),
         TABLOID(PageSize.TABLOID);
