@@ -77,9 +77,9 @@ import cz.incad.kramerius.utils.imgs.KrameriusImageSupport;
 public class PDFResource extends AbstractPDFResource  {
 
     public static Logger LOGGER = Logger.getLogger(PDFResource.class.getName());
+    
 
-
-
+    
     /**
      * Paper size
      * @author pavels
