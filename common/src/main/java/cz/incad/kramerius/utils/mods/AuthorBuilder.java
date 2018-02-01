@@ -71,19 +71,14 @@ public class AuthorBuilder extends AbstractBuilder {
             if ((textNode !=null ) && (textNode instanceof Text)) {
                 String role   = ((Text)textNode).getData();
                 if (roleIsAuthor(role)) {
-                    String givenName = null; String familyName = null;
-                    XPathExpression givenNameExpr = xpath.compile("mods:namePart[@type='given']/text()");
-                    textNode = givenNameExpr.evaluate(item, XPathConstants.NODE);
+                    String name = null;
+                    XPathExpression nameExpr = xpath.compile ("//mods:name/mods:namePart/text()");
+                    textNode = nameExpr.evaluate(item, XPathConstants.NODE);
                     if (textNode != null) {
-                        givenName = ((Text)textNode).getData();
+                        name = ((Text)textNode).getData();
                     }
 
-                    XPathExpression familyNameExpr = xpath.compile("mods:namePart[@type='family']/text()");
-                    textNode = familyNameExpr.evaluate(item, XPathConstants.NODE);
-                    if (textNode != null) {
-                        familyName = ((Text)textNode).getData();
-                    }
-                    String author = (givenName != null ? givenName : "") +" "+(familyName != null ? familyName : "");
+                    String author = (name != null ? name : "");
                     if (!author.trim().equals("")) {
                         add(MODS_AUTHOR,author,map);
                     }
